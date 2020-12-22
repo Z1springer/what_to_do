@@ -27,3 +27,42 @@ function getRandomBoredEvent(callback, type = "education"){
 
     callback(bored);
 }
+
+function getRandomBoredEventApi(callback, type = "education"){
+
+    var url = "http://www.boredapi.com/api/activity/?type=" + type;
+    var bored = {};
+    
+    $.ajax({
+        url: url,
+        method: "GET"
+    }).then(function(response){
+        console.log("bored api event: ", response);
+        callback(response);
+    })
+
+    callback(bored);
+}
+
+
+function getQuoteApi(callback){
+
+    $.ajax({
+        url: "https://type.fit/api/quotes",
+        method: "GET"
+        }
+    ).then(function(response){
+        // console.log(response)
+        var quotes=JSON.parse(response);
+        
+        var quote = quotes[Math.floor(Math.random()*quotes.length)];
+
+        if(!quote.author){
+            quote.author = "Unknown";
+        }
+
+        console.log(quote);
+        callback(quote);
+    });
+
+}
