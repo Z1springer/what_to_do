@@ -1,3 +1,21 @@
 p {
     font-family: 'Times New Roman', Times, serif;
 }
+
+nav {
+    border: 3px;
+    border-style: dashed;
+    border-color: red;
+}
+
+#week {
+    border: 3px;
+    border-style: dashed;
+    border-color: red;
+}
+
+.day{
+    border: 3px;
+    border-style: dashed;
+    border-color: red;
+}
