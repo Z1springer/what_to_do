@@ -12,6 +12,19 @@ var week = $("#week")
 var save = $(".save")
 var bored = $(".bored")
 var textarea = $(".textSpace")
+var quoteBtn = $("#quoteBtn")
+var quoteText = $("#quoteText")
+
+// a function for clicking quote
+quoteBtn.on("click", function(){
+    console.log("pail")
+    getQuoteApi(setQuote);
+})
+
+function setQuote(textObj){
+    quoteText.text(textObj.text + " - " + textObj.author)
+
+};
 
 // a function for clicking save
 save.on("click", function(){
