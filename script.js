@@ -27,7 +27,7 @@ var currentDate = new Date();
 var eventsList;
 var yearViewed = currentDate.getFullYear();
 var monthViewed = currentDate.getMonth() + 1;
-// var weekViewed = "";
+var weekViewed = 0;
 
 
 // call on page load
@@ -97,7 +97,6 @@ quoteBtn.on("click", function () {
 
 function setQuote(textObj) {
     quoteText.text(textObj.text + " - " + textObj.author)
-
 };
 
 // a function for clicking save
