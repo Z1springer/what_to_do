@@ -14,6 +14,7 @@ var bored = $(".bored")
 var textarea = $(".textSpace")
 var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
+var quoteAuthor = $("#quoteAuthor")
 
 // create form variables
 
@@ -59,8 +60,8 @@ function getEventsList() {
     console.log("eventsList: ", eventsList);
 }
 
-function fillWeek() {
-
+function diplayPage() {
+    
 }
 
 
@@ -96,7 +97,8 @@ quoteBtn.on("click", function () {
 })
 
 function setQuote(textObj) {
-    quoteText.text(textObj.text + " - " + textObj.author)
+    quoteText.text(`${textObj.text}`)
+    quoteAuthor.text(` -${textObj.author}`)
 };
 
 // a function for clicking save
