@@ -16,11 +16,14 @@ var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
 var quoteAuthor = $("#quoteAuthor")
 
-var regButton = $("#goReg")
-var dayButton = $("#goDay")
+var dayButton = $(".goDay")
+var weekButton = $(".goWeek")
+var monthButton = $(".goMonth")
+var inputButton = $(".goInput")
+var weekView = $("#weekView")
 var dayView = $("#dayView")
-var regView = $("#regView")
-
+var monthView = $("#monthView")
+var inputView = $("#inputRequest")
 // create form variables
 
 var eventDate = $("#inputDate");
@@ -109,11 +112,27 @@ function setQuote(textObj) {
 // a function for clicking the change display button
 dayButton.on("click", function(){
     dayView.attr("class", "shown")
-    regView.attr("class", "gone")
+    weekView.attr("class", "gone")
+    monthView.attr("class", "gone")
+    inputView.attr("class", "gone")
 })
-regButton.on("click", function(){
-    regView.attr("class", "shown")
+weekButton.on("click", function(){
+    weekView.attr("class", "shown")
     dayView.attr("class", "gone")
+    monthView.attr("class", "gone")
+    inputView.attr("class", "gone")
+})
+monthButton.on("click", function(){
+    monthView.attr("class", "shown")
+    dayView.attr("class", "gone")
+    weekView.attr("class", "gone")
+    inputView.attr("class", "gone")
+})
+inputButton.on("click", function(){
+    inputView.attr("class", "shown")
+    dayView.attr("class", "gone")
+    weekView.attr("class", "gone")
+    monthView.attr("class", "gone")
 })
 
 // a function for clicking save
