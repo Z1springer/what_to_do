@@ -72,16 +72,18 @@ function fillMonth() {
     for (var i = 0; i < eventsList.length; i++) {
         if(eventsList[i].eventDate.getMonth+1 === monthViewed && eventsList[i].eventDate.getFullYear() == yearViewed){  
             // TODO get actual day container ID 
-            $(getFirstDayOfMonth() + 1 + eventsList[i].eventDate.getDate()).text(JSON.stringify(eventsList[i]));
+            $("#DAYID" + getFirstDayOfMonth() + 1 + eventsList[i].eventDate.getDate()).text(JSON.stringify(eventsList[i]));
         }
     }
 }
 
-
+// returns day of week as an integer for first day of month
+// sunday: 0 - saturday 6
+// needed to position all days in month view
 function getFirstDayOfMonth() {
     var year = currentDate.getFullYear();    
     var day = new Date(year + "-" + monthViewed + "-01").getDay();
-    // 6 - Saturday
+    
     console.log(day);
 
     return day;
