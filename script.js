@@ -27,7 +27,7 @@ var currentDate = new Date();
 var eventsList;
 var yearViewed = currentDate.getFullYear();
 var monthViewed = currentDate.getMonth() + 1;
-var weekViewed = ;
+// var weekViewed = "";
 
 
 // call on page load
