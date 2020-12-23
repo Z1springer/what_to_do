@@ -2,6 +2,10 @@ p {
     font-family: 'Times New Roman', Times, serif;
 }
 
+h1 {
+    color: black;
+}
+
 nav {
     border: 3px;
     border-style: dashed;
@@ -18,4 +22,8 @@ nav {
     border: 3px;
     border-style: dashed;
     border-color: red;
+}
+
+#quoteText {
+    font-size: 25px;
 }
