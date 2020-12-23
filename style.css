@@ -18,4 +18,5 @@ nav {
     border: 3px;
     border-style: dashed;
     border-color: red;
+    height: 100vh
 }
