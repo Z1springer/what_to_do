@@ -12,11 +12,13 @@ nav {
     border: 3px;
     border-style: dashed;
     border-color: red;
+    /* margin: 0 auto; */
 }
 
 .day{
+    /* display: inline; */
     border: 3px;
     border-style: dashed;
     border-color: red;
-    height: 100vh
+    /* height: 100vh; */
 }
