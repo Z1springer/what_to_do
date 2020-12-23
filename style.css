@@ -12,6 +12,20 @@ nav {
     border-color: red;
 }
 
+.s7ths,
+.m7ths,
+.l7ths,
+.xl7ths {
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.s7ths{
+    width: 14.28%;
+    height: 25vh;
+}
+
 #week {
     border: 3px;
     border-style: dashed;
