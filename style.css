@@ -43,4 +43,31 @@ nav {
 
 #quoteText {
     font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
+}
+#quoteAuthor {
+    font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
+}
+
+.btn {
+    background-color: rebeccapurple;
+}
+
+.float {
+    float: left;
+}
+
+.gone {
+    display: none;
+}
+
+.shown {
+    display: block;
+}
+
+.back {
+    background-color: saddlebrown;
 }

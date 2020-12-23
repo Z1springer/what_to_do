@@ -14,6 +14,12 @@ var bored = $(".bored")
 var textarea = $(".textSpace")
 var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
+var quoteAuthor = $("#quoteAuthor")
+
+var regButton = $("#goReg")
+var dayButton = $("#goDay")
+var dayView = $("#dayView")
+var regView = $("#regView")
 
 // create form variables
 
@@ -59,7 +65,7 @@ function getEventsList() {
     console.log("eventsList: ", eventsList);
 }
 
-function fillWeek() {
+function diplayPage() {
 
 }
 
@@ -96,8 +102,19 @@ quoteBtn.on("click", function () {
 })
 
 function setQuote(textObj) {
-    quoteText.text(textObj.text + " - " + textObj.author)
+    quoteText.text(`${textObj.text}`)
+    quoteAuthor.text(` -${textObj.author}`)
 };
+
+// a function for clicking the change display button
+dayButton.on("click", function(){
+    dayView.attr("class", "shown")
+    regView.attr("class", "gone")
+})
+regButton.on("click", function(){
+    regView.attr("class", "shown")
+    dayView.attr("class", "gone")
+})
 
 // a function for clicking save
 save.on("click", function () {
