@@ -27,3 +27,11 @@ nav {
 #quoteText {
     font-size: 25px;
 }
+
+
+.monthDay{
+    border: 2px solid black;
+    height: 75px;
+    width: 75px;
+    display: inline-block;
+}
