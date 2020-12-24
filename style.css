@@ -12,26 +12,71 @@ nav {
     border-color: red;
 }
 
+.s7ths,
+.m7ths,
+.l7ths,
+.xl7ths {
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.s7ths{
+    width: 14.28%;
+    height: 25vh;
+}
+
 #week {
     border: 3px;
     border-style: dashed;
     border-color: red;
+    /* margin: 0 auto; */
 }
 
 .day{
+    /* display: inline; */
     border: 3px;
     border-style: dashed;
     border-color: red;
+    /* height: 100vh; */
 }
 
 #quoteText {
     font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
+}
+#quoteAuthor {
+    font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
 }
 
+.btn {
+    background-color: rebeccapurple;
+}
+
+<<<<<<< HEAD
 
 .monthDay{
     border: 2px solid black;
     height: 75px;
     width: 75px;
     display: inline-block;
+=======
+.float {
+    float: left;
+}
+
+.gone {
+    display: none;
+}
+
+.shown {
+    display: block;
+}
+
+.back {
+    background-color: saddlebrown;
+>>>>>>> f98c1ea201857967748581afd48801859ea24d33
 }
