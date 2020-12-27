@@ -56,27 +56,26 @@ nav {
     background-color: rebeccapurple;
 }
 
-<<<<<<< HEAD
 
 .monthDay{
     border: 2px solid black;
     height: 75px;
     width: 75px;
     display: inline-block;
-=======
+}
+
 .float {
     float: left;
 }
 
-.gone {
+/* .gone {
     display: none;
 }
 
 .shown {
     display: block;
-}
+} */
 
 .back {
     background-color: saddlebrown;
->>>>>>> f98c1ea201857967748581afd48801859ea24d33
 }

@@ -42,80 +42,35 @@
                 <button class="btn goInput">Click me for Input view!</button>
             </div>
             <div id="week" class="row">
-                <div id="sunday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="sun" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="sun">save</button>
-                    <button class="bored">im bored!</button>
+                <h2 id="weekTitle"></h2>
+                <div id="weekDay0" class="day col s7ths s6">
+                    
                 </div>
-                <div id="monday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="mon" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="mon">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay1" class="day col s7ths s6">
+                    
                 </div>
-                <div id="tuesday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="tues" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="tues">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay2" class="day col s7ths s6">
+                    
                 </div>
-                <div id="wednesday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="wed" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="wed">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay3" class="day col s7ths s6">
+                    
                 </div>
-                <div id="thursday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="thurs" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="thurs">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay4" class="day col s7ths s6">
+                    
                 </div>
-                <div id="friday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="fri" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="fri">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay5" class="day col s7ths s6">
+                    
                 </div>
-                <div id="saturday" class="day col s7ths s6">
-                    <h2></h2>
-                    <textarea name="" class="textSpace" id="sat" cols="30" rows="10"></textarea>
-                    <button class="save" data-day="sat">save</button>
-                    <button class="bored">im bored!</button>
+                <div id="weekDay6" class="day col s7ths s6">
+                    
                 </div>
             </div>
         </div>
         <!-- month view card only shown when class changes-->
         <div id="monthView" class="gone">
 
-<<<<<<< HEAD
-        <div id="week1">
-            <div id="monthDay7" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay8" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay9" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay10" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay11" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay12" class="monthDay">
-                <h1></h1>
-            </div>
-            <div id="monthDay13" class="monthDay">
-                <h1></h1>
-            </div>
-=======
             <div id="month">
-                <div id="montTitle"></div>
->>>>>>> f98c1ea201857967748581afd48801859ea24d33
+                <h2 id="monthTitle"></h2>
 
                 <div id="week0">
                     <div id="monthDay0" class="monthDay">
@@ -142,7 +97,7 @@
                 </div>
 
                 <div id="week1">
-                    <div id="monthDay" 7 class="monthDay">
+                    <div id="monthDay7" class="monthDay">
                         <h1></h1>
                     </div>
                     <div id="monthDay8" class="monthDay">
@@ -278,34 +233,21 @@
 
 
 
-<<<<<<< HEAD
-    <label for="inputStartTime">Start Time</label>
-    <input type="text" class="timepicker" id="inputStartTime">
-
-    <label for="inputEndTime">End Time</label>
-    <input type="text" class="timepicker" id="inputEndTime">
-
-    <label for="textAreaEventDescription"></label>
-    <textarea id="textAreaEventDescription" cols="30" rows="10"></textarea>
-
-    <button id="addEventBtn">Add Event</button>
-=======
         <!-- TODO decide whether to use this or auto-fill based on day selected -->
         <div id=inputRequest class="gone">
             <label for="inputDate">Select Date</label>
         <input type="date" id="inputDate">
 
         <label for="inputStartTime">Start Time</label>
-        <input type="datetime" id="inputStartTime">
+        <input type="text" class="timepicker" id="inputStartTime">
 
         <label for="inputEndTime">End Time</label>
-        <input type="datetime" id="inputEndTime">
+        <input type="text" class="timepicker" id="inputEndTime">
 
-        <label for="textAreaEventBody"></label>
-        <textarea id="textAreaEventBody" cols="30" rows="10"></textarea>
+        <label for="textAreaEventDescription"></label>
+        <textarea id="textAreaEventDescription" cols="30" rows="10"></textarea>
 
-        <button id="btnAddEvent">Add Event</button>
->>>>>>> f98c1ea201857967748581afd48801859ea24d33
+        <button id="addEventBtn">Add Event</button>
 
         <div>
             <button class="btn goDay">Return to Day View</button>
