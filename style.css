@@ -4,6 +4,10 @@
 General settings
 ========================================================================*/
 
+body {
+    background-image: url("cork-board.png");
+}
+
 h1, h2, h3, h4 {
     color: black;
 }
@@ -16,7 +20,9 @@ h1, h2, h3, h4 {
 Title Date settings
 ========================================================================*/
 
-
+nav {
+    padding-left: 20px;
+}
 
 .displayAlongTitleSpace {
     margin: 4vh;
@@ -29,13 +35,29 @@ Title Date settings
     float: left;
 }
 
+
+/* ==============================================================
+Quote settings
+============================================================== */
+
+#quoteText {
+    font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
+}
+#quoteAuthor {
+    font-size: 25px;
+    color: white;
+    background-color: rebeccapurple;
+}
+
 /* =======================================================================
 Borders for style assistance
 ======================================================================= */
 
-nav {
+/* nav {
     border: 3px dashed red;
-}
+} */
 
 .displayAlongTitleSpace {
     border: 3px dashed red
@@ -52,8 +74,25 @@ nav {
     /* height: 100vh; */
 }
 
+#dayView {
+    border: 3px dashed red;
+}
+
 #month{
     border: 3px dashed red;
+}
+
+/* #addEventForm {
+    border: 3px dashed red;
+} */
+
+/* ===================================================================
+Day View settings
+====================================================================*/
+
+#dayView {
+    margin: 5vh;
+    /* text-align: center; */
 }
 
 /* ===================================================================
@@ -62,6 +101,7 @@ Week View settings
 
 
 #week{
+    font-family: 'Montserrat', sans-serif;
     margin: 5vh;
 }
 
@@ -81,33 +121,49 @@ Week View settings
 
 
 
+
 /* ==============================================================
 Month View settings
 ============================================================== */
 
+#month {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 5vh;
+}
+
+.weeksauce {
+    display:flex;
+    flex: right 5;
+}
+
 .monthDay{
     border: 2px solid black;
-    height: 75px;
-    width: 75px;
-    display: inline-block;
+    height: 20vh;
+    width: 20vh;
+    padding: 20px;
+    /* display: inline-block; */
 }
-
-
+/* Sunday Coloring */
+#monthDay0, #monthDay6, #monthDay7, #monthDay14, #monthDay21, #monthDay28, #monthDay35 {
+    background-color: lightgray;
+}
+/* Saturday Coloring */
+#monthDay13, #monthDay20, #monthDay27, #monthDay34, #monthDay41 {
+    background-color: lightgray;
+}
 
 /* ==============================================================
-Quote settings
-============================================================== */
+Event Form settings
+===============================================================*/
 
-#quoteText {
-    font-size: 25px;
-    color: white;
-    background-color: rebeccapurple;
+#addEventForm{
+    margin: 5vh;
+    border: 5px solid black;
+    padding: 20px;
 }
-#quoteAuthor {
-    font-size: 25px;
-    color: white;
-    background-color: rebeccapurple;
-}
+
+
+
 
 /* .gone {
     display: none;
@@ -117,6 +173,6 @@ Quote settings
     display: block;
 } */
 
-.back {
+/* .back {
     background-color: saddlebrown;
-}
+} */
