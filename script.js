@@ -3,6 +3,8 @@
 // =============================================================================
 
 // jQuery element varaibles
+var dayView = $("#dayView");
+
 var week = $("#week")
 var save = $(".save")
 var bored = $(".bored")
@@ -38,6 +40,7 @@ $(document).ready(function () {
 var yearViewed = currentDate.getUTCFullYear();
 var monthViewed = currentDate.getUTCMonth() + 1;
 var weekViewed = getWeekNumber();
+var dayViewed = currentDate.getUTCDate();
 
 // load event list from local storage
 function getEventsList() {
@@ -68,7 +71,7 @@ function fillMonth() {
         // if event belongs in current month - display on month grid
         if (tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
 
-            $("#monthDay" + (tempDate.getDate() + 1)).append(eventsList[i].eventDescription);
+            $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
         }
     }
 
@@ -97,20 +100,75 @@ function fillWeek() {
 fillWeek();
 
 // fill day view with current day data from eventList
-function fillDay() {
-    // TODO
+function fillDay() {    
+
+    for(var i=0; i<eventsList.length; i++){
+
+        var tempDate = new Date(eventsList[i].eventDate)
+        console.log(`${tempDate.getUTCDate()+1} === ${dayViewed}`, tempDate.getUTCDate()+1 === dayViewed);
+        console.log(`${tempDate.getUTCMonth()+1} === ${monthViewed}`, tempDate.getUTCMonth()+1 === monthViewed);
+        console.log(tempDate.getUTCFullYear() === yearViewed);
+
+        if(tempDate.getUTCDate()+1 === dayViewed && tempDate.getUTCMonth()+1 === monthViewed && tempDate.getUTCFullYear() === yearViewed){
+            dayView.append(dayViewElement(eventsList[i]));
+        }
+    }
 }
 
 // call on page load
 fillDay();
 
+function monthViewElement(eventObj){
+    console.log("attempting to add event to month", eventObj)
+
+    var span = $("<span>");
+    span.addClass("monthEvent");
+    span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
+    span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
+
+    return span;
+}
+
 function weekViewElement(eventObj) {
+
+    console.log("attempting to display event", eventObj)
+
+    var event = $("<div>");
+    event.addClass("event");    
+
+    event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
+    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+
+    event.text(eventObj.eventDescription.substring(0,20))
+    if(eventObj.eventDescription.length > 20){
+        event.append("...");
+    }
+    
+
+
+    return event;
+}
+
+function dayViewElement(eventObj){
+
+    console.log("attempting to display event", eventObj)
 
     var event = $("<div>");
     event.addClass("event");
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+
+    $("<h4>").text(eventObj.eventDescription).appendTo(event);
+
+    $("<strong>").text("Start Time: ").appendTo(event);
+    $("<span>").text(eventObj.startTime).appendTo(event);
+    $("<br>").appendTo(event);
+    $("<strong>").text("End Time: ").appendTo(event);
+    $("<span>").text(eventObj.endTime).appendTo(event);
+    $("<br>").appendTo(event);
+
+    
 
     return event;
 }
@@ -153,6 +211,7 @@ $("#addEventBtn").click(function () {
 
     fillMonth();
     fillWeek();
+    fillDay();
 })
 
 // event listner function for clicking quote
