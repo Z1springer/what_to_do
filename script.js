@@ -33,6 +33,16 @@ var currentDate = new Date();
 // user's master event list from localStorage
 var eventsList;
 
+function weekViewElement(eventObj){
+
+    var event = $("<div>");
+    event.addClass();
+
+
+
+
+}
+
 
 // =====================================================================================
 // Page setup
@@ -253,6 +263,16 @@ function getWeekNumber(date = currentDate){
 }
 
 getWeekNumber();
+
+function getDuration(eventObj){
+    var startTime = eventObj.startTime.replace(" ", ":");
+    var endTime = eventObj.endTime.replace(" ", ":");
+
+    var startTimeArr = startTime.split(":");
+    var endTimeArr = endTime.split(":");
+
+    
+}
 
 
 // ===================================================================================
