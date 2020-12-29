@@ -1,15 +1,68 @@
-p {
-    font-family: 'Times New Roman', Times, serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-h1 {
+/* =======================================================================
+General settings
+========================================================================*/
+
+h1, h2, h3, h4 {
     color: black;
 }
 
+.btn {
+    background-color: rebeccapurple;
+}
+
+/* =======================================================================
+Title Date settings
+========================================================================*/
+
+
+
+.displayAlongTitleSpace {
+    margin: 4vh;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.float {
+    float: left;
+}
+
+/* =======================================================================
+Borders for style assistance
+======================================================================= */
+
 nav {
-    border: 3px;
-    border-style: dashed;
-    border-color: red;
+    border: 3px dashed red;
+}
+
+.displayAlongTitleSpace {
+    border: 3px dashed red
+}
+
+#week {
+    border: 3px dashed red;
+    /* margin: 0 auto; */
+}
+
+.day{
+    /* display: inline; */
+    border: 3px dashed red;
+    /* height: 100vh; */
+}
+
+#month{
+    border: 3px dashed red;
+}
+
+/* ===================================================================
+Week View settings
+=================================================================== */
+
+
+#week{
+    margin: 5vh;
 }
 
 .s7ths,
@@ -26,20 +79,24 @@ nav {
     height: 25vh;
 }
 
-#week {
-    border: 3px;
-    border-style: dashed;
-    border-color: red;
-    /* margin: 0 auto; */
+
+
+/* ==============================================================
+Month View settings
+============================================================== */
+
+.monthDay{
+    border: 2px solid black;
+    height: 75px;
+    width: 75px;
+    display: inline-block;
 }
 
-.day{
-    /* display: inline; */
-    border: 3px;
-    border-style: dashed;
-    border-color: red;
-    /* height: 100vh; */
-}
+
+
+/* ==============================================================
+Quote settings
+============================================================== */
 
 #quoteText {
     font-size: 25px;
@@ -50,22 +107,6 @@ nav {
     font-size: 25px;
     color: white;
     background-color: rebeccapurple;
-}
-
-.btn {
-    background-color: rebeccapurple;
-}
-
-
-.monthDay{
-    border: 2px solid black;
-    height: 75px;
-    width: 75px;
-    display: inline-block;
-}
-
-.float {
-    float: left;
 }
 
 /* .gone {
