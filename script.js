@@ -3,14 +3,25 @@
 // =============================================================================
 
 // jQuery element varaibles
+<<<<<<< HEAD
+=======
 var dayViewEvent = $("#dayViewEvent");
+>>>>>>> 729d8edb285ef0007b1812aa5fb5f83d6e919bfe
 var timeInterval = $("#timeInterval");
-var week = $("#week")
+var day = $("#dayView");
+var front = $("#frontPage")
+var month = $("#month")
 var save = $(".save")
 var bored = $(".bored")
 var textarea = $(".textSpace")
 var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
+var quoteAuthor = $("#quoteAuthor")
+
+// buttons
+var dayButton = $(".goDay")
+var frontButton = $(".goWeek")
+var monthButton = $(".goMonth")
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -76,7 +87,6 @@ function fillMonth() {
             $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
         }
     }
-
 }
 
 // call on page load
@@ -239,9 +249,28 @@ bored.on("click", function () {
 
 // display quote on page
 function setQuote(textObj) {
-    quoteText.text(textObj.text + " - " + textObj.author)
+    quoteText.text(textObj.text)
+    quoteAuthor.text(" - " + textObj.author)
 };
 
+dayButton.on("click", function(){
+    console.log("day")
+    day.attr("style", "display: block;")
+    front.attr("style", "display: none;")
+    month.attr("style", "display: none;")
+})
+monthButton.on("click", function(){
+    console.log("month")
+    day.attr("style", "display: none;")
+    front.attr("style", "display: none;")
+    month.attr("style", "display: block;")
+})
+frontButton.on("click", function(){
+    console.log("front")
+    day.attr("style", "display: none;")
+    front.attr("style", "display: block;")
+    month.attr("style", "display: none;")
+})
 // =====================================================================================
 // Helper functions
 // =====================================================================================
