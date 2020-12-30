@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-/* =======================================================================
+/* 
+========================================================================
 General settings
-========================================================================*/
+========================================================================
+*/
+
+body {
+    background-image: url("cork-board.png");
+}
 
 h1, h2, h3, h4 {
     color: black;
@@ -12,16 +18,21 @@ h1, h2, h3, h4 {
     background-color: rebeccapurple;
 }
 
-/* =======================================================================
+/* 
+========================================================================
 Title Date settings
-========================================================================*/
+========================================================================
+*/
 
-
+nav {
+    padding-left: 20px;
+}
 
 .displayAlongTitleSpace {
     margin: 4vh;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+    background-color: white;
 }
 
 
@@ -29,54 +40,124 @@ Title Date settings
     float: left;
 }
 
-/* =======================================================================
-Borders for style assistance
-======================================================================= */
 
-nav {
-    border: 3px dashed red;
+/* 
+==============================================================
+Quote settings
+============================================================== 
+*/
+
+#quoteText {
+    font-size: 15vh;
+    color: white;
+    /* background-color: rebeccapurple; */
 }
+#quoteAuthor {
+    font-size: 15vh;
+    color: white;
+    /* background-color: rebeccapurple; */
+}
+
+/* 
+=======================================================================
+Borders for style assistance
+=======================================================================
+*/
+
+/* nav {
+    border: 3px dashed red;
+} */
 
 .displayAlongTitleSpace {
     border: 3px dashed red
 }
 
-#week {
-    border: 3px dashed red;
-    /* margin: 0 auto; */
-    height: 90vh;
-}
+/* #week {
+    border: 3px dashed red;    
+} */
 
-.day{
-    /* display: inline; */
+/* .day{
     border: 3px dashed red;
-    /* height: 100vh; */
-    position: relative;
-    padding: 0 !important;
-    height: 100%;
-}
+} */
+
+/* #dayView {
+    border: 3px dashed red;
+} */
 
 #month{
     border: 3px dashed red;
 }
+
+/* #addEventForm {
+    border: 3px dashed red;
+} */
+
 /* 
 =====================================================================
 Day View settings
 =====================================================================
 */
+
 #dayView{
     position: relative;
-    border: 2px dashed red;
     height: 100vh;
+    /* margin: 5vh; */
+    background-color: white;
+    padding: 15px 0;
 }
 
-/* ===================================================================
-Week View settings
-=================================================================== */
+#timeInterval{
+    background-color: #eeeeee;
+    height: 100vh;
+    padding: 15px 0;
+}
 
+/* 
+===================================================================
+Week View settings
+=================================================================== 
+*/
 
 #week{
-    margin: 5vh;
+    font-family: 'Montserrat', sans-serif;
+    margin: 2vh;
+    background-color: lightblue;
+    height: 90vh;
+    padding: 5 0 0 0;
+}
+
+#weekDay0{
+    background-color: pink;
+}
+
+#weekDay1{
+    background-color: peachpuff;
+}
+
+#weekDay2{
+    background-color: lightgoldenrodyellow;
+}
+
+#weekDay3{
+    background-color: palegreen;
+}
+
+#weekDay4{
+    background-color: paleturquoise;
+}
+
+#weekDay5{
+    background-color: lightsteelblue;
+}
+
+#weekDay6{
+    background-color: thistle;
+}
+
+.day {
+    position: relative;
+    padding: 0 !important;
+    height: 85vh;
 }
 
 .s7ths,
@@ -108,10 +189,17 @@ Week View settings
     border: 1px solid black;
 }
 
-
-/* ==============================================================
+/* 
+==============================================================
 Month View settings
-============================================================== */
+============================================================== 
+*/
+
+#month {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 5vh;
+    background-color: white;
+}
 
 .monthDay{
     border: 2px solid black;
@@ -121,31 +209,44 @@ Month View settings
     position: relative;
 }
 
-
-
-/* ==============================================================
-Quote settings
-============================================================== */
-
-#quoteText {
-    font-size: 25px;
-    color: white;
-    background-color: rebeccapurple;
+.weeksauce {
+    display:flex;
+    flex: right 5;
 }
-#quoteAuthor {
-    font-size: 25px;
-    color: white;
-    background-color: rebeccapurple;
+
+/* Sunday Coloring */
+#monthDay0, #monthDay6, #monthDay7, #monthDay14, #monthDay21, #monthDay28, #monthDay35 {
+    background-color: lightgray;
 }
+/* Saturday Coloring */
+#monthDay13, #monthDay20, #monthDay27, #monthDay34, #monthDay41 {
+    background-color: lightgray;
+}
+
+/* 
+==============================================================
+Event Form settings
+===============================================================
+*/
+
+#addEventForm{
+    margin: 5vh;
+    border: 5px double royalblue;
+    padding: 20px;
+    background-color: lightblue;
+}
+
+
+
 
 /* .gone {
     display: none;
-}
-
-.shown {
-    display: block;
 } */
 
-.back {
+/* .shown {
+    display: block;
+}  */
+
+ /* .back {
     background-color: saddlebrown;
-}
+}  */

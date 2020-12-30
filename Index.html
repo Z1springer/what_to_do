@@ -7,31 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Project 1</title>
-    <p>Date/Time: <span id="datetime"></span></p>
 </head>
 
 <body>
     <main>
 
         <nav>
-            <button class="btn" id="quoteBtn">MOTIVATE!</button>
-        </nav>
-        <div id="weekView" class="shown">
-            <div>
-                <h1 id="quoteText"></h1>
-                <h2 id="quoteAuthor"></h2>
-            </div>
-            <br>
-            <br>
-            <br>
-
-            <div class="displayAlongTitleSpace" class="float">
-                <h2 class="titleText">What To Do?</h2>
-                <h2 class="titleDate">Title Date Goes Here</h2>
-                <div class="dropdownDates">Some Drop Down List</div>
-
-            </div>
-            <!-- week view card -->
             <div>
                 <button class="btn goDay">Click me for day view!</button>
             </div>
@@ -41,218 +22,323 @@
             <div>
                 <button class="btn goInput">Click me for Input view!</button>
             </div>
+        </nav>
+        <div id="weekView" class="shown">
+            <div>
+                <h1 id="quoteText"></h1>
+                <h2 id="quoteAuthor"></h2>
+            </div>
 
-            <div id="week" class="row">
-                <h2 id="weekTitle"></h2>
-                <div id="weekDay0" class="day col s7ths s6">
-                    <div class="day-header">
-                        <h4 id="day0">Sunday</h4>
-                        <div class="currentDate">12/28/2020</div>
+            <br>
+            <br>
+            <br>
+
+            <div class="displayAlongTitleSpace" class="float">
+                <h2 class="titleText">Inspirational Calendar</h2>
+                <div class="dropdownDates">Some Drop Down List</div>
+
+
+
+                <div id="week" class="row">
+                    <h2 id="weekTitle"></h2>
+                    <div id="weekDay0" class="day col s7ths s6">
+                        <div class="day-header">
+                            <h4 id="day0">Sunday</h4>
+                            <div class="currentDate">12/28/2020</div>
+                        </div>
+                        <div class="display-flex">
+
+                        </div>
                     </div>
-                    <div class="display-flex">
+                    <div id="weekDay1" class="day col s7ths s6">
+
+                    </div>
+                    <div id="weekDay2" class="day col s7ths s6">
+
+                    </div>
+                    <div id="weekDay3" class="day col s7ths s6">
+
+                    </div>
+                    <div id="weekDay4" class="day col s7ths s6">
+
+                    </div>
+                    <div id="weekDay5" class="day col s7ths s6">
+
+                    </div>
+                    <div id="weekDay6" class="day col s7ths s6">
 
                     </div>
                 </div>
-                <div id="weekDay1" class="day col s7ths s6">
+            </div>
+            <!-- month view card only shown when class changes-->
+            <div id="monthView" class="gone">
 
-                </div>
-                <div id="weekDay2" class="day col s7ths s6">
+                <div id="month" class="flex-container">
+                    <h2 id="monthTitle"></h2>
 
-                </div>
-                <div id="weekDay3" class="day col s7ths s6">
+                    <div id="week0" class="weeksauce">
+                        <div id="monthDay0" class="monthDay">
+                            <div class="month-filler">
 
-                </div>
-                <div id="weekDay4" class="day col s7ths s6">
+                            </div>
+                        </div>
+                        <div id="monthDay1" class="monthDay">
+                            <div class="month-filler">
 
-                </div>
-                <div id="weekDay5" class="day col s7ths s6">
+                            </div>
+                        </div>
+                        <div id="monthDay2" class="monthDay">
+                            <div class="month-filler">
 
-                </div>
-                <div id="weekDay6" class="day col s7ths s6">
+                            </div>
+                        </div>
+                        <div id="monthDay3" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay4" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay5" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay6" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="week1" class="weeksauce">
+                        <div id="monthDay7" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay8" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay9" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay10" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay11" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay12" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay13" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="week2" class="weeksauce">
+                        <div id="monthDay14" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay15" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay16" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay17" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay18" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay19" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay20" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="week3" class="weeksauce">
+                        <div id="monthDay21" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay22" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay23" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay24" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay25" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay26" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay27" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="week4" class="weeksauce">
+                        <div id="monthDay28" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay29" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay30" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay31" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay32" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay33" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay34" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="week5" class="weeksauce">
+                        <div id="monthDay35" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay36" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay37" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay38" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay39" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay40" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                        <div id="monthDay41" class="monthDay">
+                            <div class="month-filler">
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-        </div>
-        <!-- month view card only shown when class changes-->
-        <div id="monthView" class="gone">
 
-            <div id="month">
-                <h2 id="monthTitle"></h2>
-
-                <div id="week0">
-                    <div id="monthDay0" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay1" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay2" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay3" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay4" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay5" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay6" class="monthDay">
-                        <h1></h1>
-                    </div>
-                </div>
-
-                <div id="week1">
-                    <div id="monthDay7" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay8" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay9" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay10" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay11" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay12" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay13" class="monthDay">
-                        <h1></h1>
-                    </div>
+            <!-- <div class="container"> -->
+            <div class="row">
+                <div class="col s2" id="timeInterval">
 
                 </div>
-
-                <div id="week2">
-                    <div id="monthDay14" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay15" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay16" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay17" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay18" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay19" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay20" class="monthDay">
-                        <h1></h1>
-                    </div>
+                <div class="col s10" id="dayView">
+                    <p>other words of other content</p>
                 </div>
 
-                <div id="week3">
-                    <div id="monthDay21" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay22" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay23" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay24" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay25" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay26" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay27" class="monthDay">
-                        <h1></h1>
-                    </div>
-                </div>
-
-                <div id="week4">
-                    <div id="monthDay28" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay29" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay30" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay31" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay32" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay33" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay34" class="monthDay">
-                        <h1></h1>
-                    </div>
-                </div>
-
-                <div id="week5">
-                    <div id="monthDay35" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay36" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay37" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay38" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay39" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay40" class="monthDay">
-                        <h1></h1>
-                    </div>
-                    <div id="monthDay41" class="monthDay">
-                        <h1></h1>
-                    </div>
-                </div>
 
             </div>
-        </div>
+            <!-- </div> -->
 
+            <!-- TODO decide whether to use this or auto-fill based on day selected -->
+            <div id="addEventForm">
+                <div id=inputRequest class="gone">
+                    <label for="inputDate">Select Date</label>
+                    <input type="date" id="inputDate">
 
-        <div id="dayView" class="gone">
-            
-            <h1>Day View</h1>
-            
-        </div>
+                    <label for="inputStartTime">Start Time</label>
+                    <input type="text" class="timepicker" id="inputStartTime">
 
+                    <label for="inputEndTime">End Time</label>
+                    <input type="text" class="timepicker" id="inputEndTime">
 
-        <!-- TODO decide whether to use this or auto-fill based on day selected -->
-        <div class="" id="addEventForm">
-            <div id=inputRequest class="gone">
-                <label for="inputDate">Select Date</label>
-                <input type="date" id="inputDate">
+                    <label for="textAreaEventDescription"></label>
+                    <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
 
-                <label for="inputStartTime">Start Time</label>
-                <input type="text" class="timepicker" id="inputStartTime">
-
-                <label for="inputEndTime">End Time</label>
-                <input type="text" class="timepicker" id="inputEndTime">
-
-                <label for="textAreaEventDescription"></label>
-                <textarea id="textAreaEventDescription" cols="30" rows="10"></textarea>
-
-                <button id="addEventBtn">Add Event</button>
+                    <button id="addEventBtn">Add Event</button>
+                </div>
             </div>
-        </div>
 
     </main>
 
