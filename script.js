@@ -4,7 +4,7 @@
 
 // jQuery element varaibles
 var dayView = $("#dayView");
-
+var timeInterval = $("#timeInterval");
 var week = $("#week")
 var save = $(".save")
 var bored = $(".bored")
@@ -20,6 +20,8 @@ var eventDate = $("#inputDate");
 var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
+
+
 
 // today's exact date and time
 var currentDate = new Date();
@@ -104,10 +106,7 @@ function fillDay() {
 
     for(var i=0; i<eventsList.length; i++){
 
-        var tempDate = new Date(eventsList[i].eventDate)
-        console.log(`${tempDate.getUTCDate()+1} === ${dayViewed}`, tempDate.getUTCDate()+1 === dayViewed);
-        console.log(`${tempDate.getUTCMonth()+1} === ${monthViewed}`, tempDate.getUTCMonth()+1 === monthViewed);
-        console.log(tempDate.getUTCFullYear() === yearViewed);
+        var tempDate = new Date(eventsList[i].eventDate)        
 
         if(tempDate.getUTCDate()+1 === dayViewed && tempDate.getUTCMonth()+1 === monthViewed && tempDate.getUTCFullYear() === yearViewed){
             dayView.append(dayViewElement(eventsList[i]));
@@ -172,6 +171,16 @@ function dayViewElement(eventObj){
 
     return event;
 }
+
+function setTimeScale(){
+    for(var i=0; i<=24; i++){
+        var divider = $("<div>").addClass("timeDivider").css("top", ((i/24)*100) + "%");
+        var label = $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
+        timeInterval.append(divider);
+    }
+}
+
+setTimeScale();
 
 // =====================================================================================
 // Page functions
@@ -319,6 +328,21 @@ function convertHours(str) {
 
 function getPercentOfDay(num){
     return (num/24) * 100;
+}
+
+function toTwelveHour(num){
+    var result = "";
+    if(num === 24 || num === 0){
+        result = "12:00 AM"
+    }else if(num>12){
+        num -= 12;
+        result += num + ":00 PM";        
+    }else if(num === 12){
+        result = "12:00 PM"
+    }else {
+        result += num + ":00 AM";        
+    }
+    return result;
 }
 
 // ===================================================================================
