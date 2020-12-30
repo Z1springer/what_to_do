@@ -12,65 +12,105 @@
 <body>
     <main>
 
+
         <nav>
-            <div>
-                <button class="btn goDay">Click me for day view!</button>
-            </div>
-            <div>
-                <button class="btn goMonth">Click me for Month view!</button>
-            </div>
-            <div>
-                <button class="btn goInput">Click me for Input view!</button>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Inspirational Calendar</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a class="goInput">Add Event</a>
+                    </li>
+                    <li>
+                        <a class="goMonth">Month View</a>
+                    </li>
+                    <li>
+                        <a class="goDay">Day View</a>
+                    </li>
+                </ul>
             </div>
         </nav>
+
         <div id="weekView" class="shown">
-            <div>
-                <h1 id="quoteText"></h1>
-                <h2 id="quoteAuthor"></h2>
+            <br>
+            <br>
+            <br>
+            <div class="displayAlongTitleSpace" class="">
+                <h2 class="titleText">Inspirational Calendar</h2>
+                <div class="dropdownDates">
+                    <div>
+                        <h1 id="quoteText">"Suffer not the witch"</h1>
+                        <h2 id="quoteAuthor">A Random Dude</h2>
+                    </div>
+                </div>
             </div>
 
-            <br>
-            <br>
-            <br>
-
-            <div class="displayAlongTitleSpace" class="float">
-                <h2 class="titleText">Inspirational Calendar</h2>
-                <div class="dropdownDates">Some Drop Down List</div>
-
-
-
-                <div id="week" class="row">
-                    <h2 id="weekTitle"></h2>
-                    <div id="weekDay0" class="day col s7ths s6">
-                        <div class="day-header">
-                            <h4 id="day0">Sunday</h4>
-                            <div class="currentDate">12/28/2020</div>
-                        </div>
-                        <div class="display-flex">
-
-                        </div>
+            <div id="week" class="row">
+                <h2 id="weekTitle"></h2>
+                <div id="weekDay0" class="day col s7ths s6">
+                    <div class="day-header weekDay0">
+                        <h4 id="day0">Sunday</h4>
+                        <div id="weekDate0">12/29/2020</div>
                     </div>
-                    <div id="weekDay1" class="day col s7ths s6">
+                    <div class="display-flex">
 
                     </div>
-                    <div id="weekDay2" class="day col s7ths s6">
+                </div>
+                <div id="weekDay1" class="day col s7ths s6">
+                    <div class="day-header weekDay1">
+                        <h4 id="day1">Monday</h4>
+                        <div id="weekDate1">12/30/2020</div>
+                    </div>
+                    <div class="display-flex">
 
                     </div>
-                    <div id="weekDay3" class="day col s7ths s6">
+                </div>
+                <div id="weekDay2" class="day col s7ths s6">
+                    <div class="day-header weekDay2">
+                        <h4 id="day2">Tuesday</h4>
+                        <div id="weekDate2">12/31/2020</div>
+                    </div>
+                    <div class="display-flex">
 
                     </div>
-                    <div id="weekDay4" class="day col s7ths s6">
+                </div>
+                <div id="weekDay3" class="day col s7ths s6">
+                    <div class="day-header weekDay3">
+                        <h4 id="day3">Wednesday</h4>
+                        <div id="weekDate3">01/01/2021</div>
+                    </div>
+                    <div class="display-flex">
 
                     </div>
-                    <div id="weekDay5" class="day col s7ths s6">
+                </div>
+                <div id="weekDay4" class="day col s7ths s6">
+                    <div class="day-header weekDay4">
+                        <h4 id="day4">Thursday</h4>
+                        <div id="weekDate4">01/02/2021</div>
+                    </div>
+                    <div class="display-flex">
 
                     </div>
-                    <div id="weekDay6" class="day col s7ths s6">
+                </div>
+                <div id="weekDay5" class="day col s7ths s6">
+                    <div class="day-header weekDay5">
+                        <h4 id="day5">Friday</h4>
+                        <div id="weekDate5">01/03/2021</div>
+                    </div>
+                    <div class="display-flex">
+
+                    </div>
+                </div>
+                <div id="weekDay6" class="day col s7ths s6">
+                    <div class="day-header weekDay6">
+                        <h4 id="day6">Saturday</h4>
+                        <div id="weekDate6">01/04/2021</div>
+                    </div>
+                    <div class="display-flex">
 
                     </div>
                 </div>
             </div>
-            <!-- month view card only shown when class changes-->
+
             <div id="monthView" class="gone">
 
                 <div id="month" class="flex-container">
@@ -321,7 +361,6 @@
             </div>
             <!-- </div> -->
 
-            <!-- TODO decide whether to use this or auto-fill based on day selected -->
             <div id="addEventForm">
                 <div id=inputRequest class="gone">
                     <label for="inputDate">Select Date</label>
