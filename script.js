@@ -3,7 +3,7 @@
 // =============================================================================
 
 // jQuery element varaibles
-var dayView = $("#dayView");
+var dayViewEvent = $("#dayViewEvent");
 var timeInterval = $("#timeInterval");
 var week = $("#week")
 var save = $(".save")
@@ -102,14 +102,16 @@ function fillWeek() {
 fillWeek();
 
 // fill day view with current day data from eventList
-function fillDay() {    
+function fillDay() {
 
-    for(var i=0; i<eventsList.length; i++){
+    for (var i = 0; i < eventsList.length; i++) {
 
-        var tempDate = new Date(eventsList[i].eventDate)        
-
-        if(tempDate.getUTCDate()+1 === dayViewed && tempDate.getUTCMonth()+1 === monthViewed && tempDate.getUTCFullYear() === yearViewed){
-            dayView.append(dayViewElement(eventsList[i]));
+        var tempDate = new Date(eventsList[i].eventDate)
+        console.log(`${tempDate.getUTCDate()} === ${dayViewed}`)
+        console.log(tempDate.getUTCMonth() + 1 === monthViewed)
+        console.log(tempDate.getUTCFullYear() === yearViewed)
+        if (tempDate.getUTCDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
+            dayViewEvent.append(dayViewElement(eventsList[i]));
         }
     }
 }
@@ -117,7 +119,7 @@ function fillDay() {
 // call on page load
 fillDay();
 
-function monthViewElement(eventObj){
+function monthViewElement(eventObj) {
     console.log("attempting to add event to month", eventObj)
 
     var span = $("<span>");
@@ -133,22 +135,22 @@ function weekViewElement(eventObj) {
     console.log("attempting to display event", eventObj)
 
     var event = $("<div>");
-    event.addClass("event");    
+    event.addClass("event");
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
 
-    event.text(eventObj.eventDescription.substring(0,20))
-    if(eventObj.eventDescription.length > 20){
+    event.text(eventObj.eventDescription.substring(0, 20))
+    if (eventObj.eventDescription.length > 20) {
         event.append("...");
     }
-    
+
 
 
     return event;
 }
 
-function dayViewElement(eventObj){
+function dayViewElement(eventObj) {
 
     console.log("attempting to display event", eventObj)
 
@@ -167,14 +169,14 @@ function dayViewElement(eventObj){
     $("<span>").text(eventObj.endTime).appendTo(event);
     $("<br>").appendTo(event);
 
-    
+
 
     return event;
 }
 
-function setTimeScale(){
-    for(var i=0; i<=24; i++){
-        var divider = $("<div>").addClass("timeDivider").css("top", ((i/24)*100) + "%");
+function setTimeScale() {
+    for (var i = 0; i <= 24; i++) {
+        var divider = $("<div>").addClass("timeDivider").css("top", ((i / 24) * 100) + "%");
         var label = $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
         timeInterval.append(divider);
     }
@@ -326,21 +328,21 @@ function convertHours(str) {
     return intTime;
 }
 
-function getPercentOfDay(num){
-    return (num/24) * 100;
+function getPercentOfDay(num) {
+    return (num / 24) * 100;
 }
 
-function toTwelveHour(num){
+function toTwelveHour(num) {
     var result = "";
-    if(num === 24 || num === 0){
+    if (num === 24 || num === 0) {
         result = "12:00 AM"
-    }else if(num>12){
+    } else if (num > 12) {
         num -= 12;
-        result += num + ":00 PM";        
-    }else if(num === 12){
+        result += num + ":00 PM";
+    } else if (num === 12) {
         result = "12:00 PM"
-    }else {
-        result += num + ":00 AM";        
+    } else {
+        result += num + ":00 AM";
     }
     return result;
 }
