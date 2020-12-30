@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
 
 /* 
 ========================================================================
@@ -18,6 +19,10 @@ h1, h2, h3, h4 {
     background-color: rebeccapurple;
 }
 
+a{
+    cursor: pointer;
+}
+
 /* 
 ========================================================================
 Title Date settings
@@ -25,20 +30,27 @@ Title Date settings
 */
 
 nav {
-    padding-left: 20px;
+    /* padding-left: 20px; */
+    background-color: rgba(64, 224, 208, 0.74);
+}
+
+#quoteText{
+    font-family: 'Covered By Your Grace', sans-serif;
+}
+
+#quoteAuthor{
+    font-family: 'Covered By Your Grace', sans-serif;
 }
 
 .displayAlongTitleSpace {
     margin: 4vh;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    background-color: white;
+    background-color: rgba(255, 255, 0, 0.726);
+    padding: 2vh 0 0 0;
 }
 
 
-.float {
-    float: left;
-}
 
 
 /* 
@@ -48,13 +60,13 @@ Quote settings
 */
 
 #quoteText {
-    font-size: 15vh;
-    color: white;
+    font-size: 50px;
+    color: #000077;
     /* background-color: rebeccapurple; */
 }
 #quoteAuthor {
-    font-size: 15vh;
-    color: white;
+    font-size: 20px;
+    color: #000077;
     /* background-color: rebeccapurple; */
 }
 
@@ -68,9 +80,9 @@ Borders for style assistance
     border: 3px dashed red;
 } */
 
-.displayAlongTitleSpace {
+/* .displayAlongTitleSpace {
     border: 3px dashed red
-}
+} */
 
 /* #week {
     border: 3px dashed red;    
@@ -102,12 +114,10 @@ Day View settings
     position: relative;
     height: 100vh;
     /* margin: 5vh; */
-    background-color: white;
     padding: 15px 0;
 }
 
 #timeInterval{
-    background-color: #eeeeee;
     height: 100vh;
     padding: 15px 0;
     position: relative;
@@ -124,13 +134,14 @@ Day View settings
 .dividerLabel{
     display: inline-block;
     position: relative;
-    top: -20px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    color: black;
-    font-size: 20pt;
+    top: -15px;
+    background-color: black;
+    border-radius: 15px;
+    color:white;
+    font-size: 12pt;
     text-align: center;
     overflow: visible;
+    padding: 5px 15px;
 }
 /* 
 ===================================================================
@@ -140,44 +151,51 @@ Week View settings
 
 #week{
     font-family: 'Montserrat', sans-serif;
-    margin: 2vh;
-    background-color: lightblue;
+    /* margin: 2vh; */
     height: 90vh;
-    padding: 5 0 0 0;
+    padding: .5vh 0 0 0;
+    width: 100%;
 }
 
-#weekDay0{
+#weekTitle{
+    background-color: lightblue;
+    padding: 50px 0;
+    margin: 0%;
+}
+
+.weekDay0{
     background-color: pink;
 }
 
-#weekDay1{
+.weekDay1{
     background-color: peachpuff;
 }
 
-#weekDay2{
+.weekDay2{
     background-color: lightgoldenrodyellow;
 }
 
-#weekDay3{
+.weekDay3{
     background-color: palegreen;
 }
 
-#weekDay4{
+.weekDay4{
     background-color: paleturquoise;
 }
 
-#weekDay5{
+.weekDay5{
     background-color: lightsteelblue;
 }
 
-#weekDay6{
+.weekDay6{
     background-color: thistle;
 }
 
 .day {
     position: relative;
     padding: 0 !important;
-    height: 85vh;
+    height: 79.8vh;
+    margin: 0%;
 }
 
 .s7ths,
@@ -199,14 +217,6 @@ Week View settings
     width: 100%;
     overflow-y: auto;
     background-color: salmon;    
-}
-
-.monthEvent{
-    height: 30px;
-    background-color: salmon;
-    position: absolute;
-    bottom: 0;
-    border: 1px solid black;
 }
 
 /* 
@@ -243,6 +253,14 @@ Month View settings
     background-color: lightgray;
 }
 
+.monthEvent{
+    height: 30px;
+    background-color: salmon;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid black;
+}
+
 /* 
 ==============================================================
 Event Form settings
@@ -251,7 +269,7 @@ Event Form settings
 
 #addEventForm{
     margin: 5vh;
-    border: 5px double royalblue;
+    border: 10px double royalblue;
     padding: 20px;
     background-color: lightblue;
 }
