@@ -11,6 +11,7 @@ var bored = $(".bored")
 var textarea = $(".textSpace")
 var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
+var quoteAuthor = $("#quoteAuthor")
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -237,7 +238,8 @@ bored.on("click", function () {
 
 // display quote on page
 function setQuote(textObj) {
-    quoteText.text(textObj.text + " - " + textObj.author)
+    quoteText.text(textObj.text)
+    quoteAuthor.text(" - " + textObj.author)
 };
 
 // =====================================================================================
