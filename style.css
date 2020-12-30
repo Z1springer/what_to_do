@@ -110,8 +110,28 @@ Day View settings
     background-color: #eeeeee;
     height: 100vh;
     padding: 15px 0;
+    position: relative;
 }
 
+.timeDivider{
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.dividerLabel{
+    display: inline-block;
+    position: relative;
+    top: -20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    color: black;
+    font-size: 20pt;
+    text-align: center;
+    overflow: visible;
+}
 /* 
 ===================================================================
 Week View settings
