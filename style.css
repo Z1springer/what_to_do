@@ -1,3 +1,303 @@
-p {
-    font-family: 'Times New Roman', Times, serif;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
+
+/* 
+========================================================================
+General settings
+========================================================================
+*/
+
+body {
+    background-image: url("cork-board.png");
 }
+
+h1, h2, h3, h4 {
+    color: black;
+}
+
+.btn {
+    background-color: rebeccapurple;
+}
+
+a{
+    cursor: pointer;
+}
+
+/* 
+========================================================================
+Title Date settings
+========================================================================
+*/
+
+nav {
+    /* padding-left: 20px; */
+    background-color: rgba(64, 224, 208, 0.74);
+}
+
+#quoteText{
+    font-family: 'Covered By Your Grace', sans-serif;
+}
+
+#quoteAuthor{
+    font-family: 'Covered By Your Grace', sans-serif;
+}
+
+.displayAlongTitleSpace {
+    margin: 4vh;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(255, 255, 0, 0.726);
+    padding: 2vh 0 0 0;
+}
+
+
+
+
+/* 
+==============================================================
+Quote settings
+============================================================== 
+*/
+
+#quoteText {
+    font-size: 50px;
+    color: #000077;
+    /* background-color: rebeccapurple; */
+}
+#quoteAuthor {
+    font-size: 20px;
+    color: #000077;
+    /* background-color: rebeccapurple; */
+}
+
+/* 
+=======================================================================
+Borders for style assistance
+=======================================================================
+*/
+
+/* nav {
+    border: 3px dashed red;
+} */
+
+/* .displayAlongTitleSpace {
+    border: 3px dashed red
+} */
+
+/* #week {
+    border: 3px dashed red;    
+} */
+
+/* .day{
+    border: 3px dashed red;
+} */
+
+/* #dayView {
+    border: 3px dashed red;
+} */
+
+/* #month{
+    border: 3px dashed red;
+} */
+
+/* #addEventForm {
+    border: 3px dashed red;
+} */
+
+/* 
+=====================================================================
+Day View settings
+=====================================================================
+*/
+
+#dayTitle{
+    text-align: center;
+    background-color: rgba(255, 255, 0, 0.726);
+}
+
+#dayViewEvent{
+    position: relative;
+    height: 100vh;
+    /* margin: 5vh; */
+    /* padding: 15px 0; */
+}
+
+#timeInterval{
+    height: 100vh;
+    padding: 15px 0;
+    position: relative;
+}
+
+.timeDivider{
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.dividerLabel{
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    background-color: black;
+    border-radius: 15px;
+    color:white;
+    font-size: 12pt;
+    text-align: center;
+    overflow: visible;
+    padding: 5px 15px;
+}
+
+/* 
+===================================================================
+Week View settings
+=================================================================== 
+*/
+
+#week{
+    font-family: 'Montserrat', sans-serif;
+    /* margin: 2vh; */
+    height: 90vh;
+    padding: .5vh 0 0 0;
+    width: 100%;
+}
+
+#weekTitle{
+    background-color: lightblue;
+    padding: 50px 0;
+    margin: 0%;
+}
+
+.weekDay0{
+    background-color: pink;
+}
+
+.weekDay1{
+    background-color: peachpuff;
+}
+
+.weekDay2{
+    background-color: lightgoldenrodyellow;
+}
+
+.weekDay3{
+    background-color: palegreen;
+}
+
+.weekDay4{
+    background-color: paleturquoise;
+}
+
+.weekDay5{
+    background-color: lightsteelblue;
+}
+
+.weekDay6{
+    background-color: thistle;
+}
+
+.day {
+    position: relative;
+    padding: 0 !important;
+    height: 79.8vh;
+    margin: 0%;
+}
+
+.day-header{
+    padding: 1vh 0;
+    text-align: center;
+}
+
+.day-header h4{
+    margin: 0%;
+}
+
+.s7ths,
+.m7ths,
+.l7ths,
+.xl7ths {
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.row .col.s7ths{
+    width: 14.28%;
+}
+
+.event{
+    border: 1px solid black;
+    position: absolute;
+    width: 100%;
+    overflow-y: auto;
+    background-color: salmon;    
+}
+
+/* 
+==============================================================
+Month View settings
+============================================================== 
+*/
+
+#month {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 5vh;
+    background-color: white;
+}
+
+.monthDay{
+    border: 2px solid black;
+    height: 75px;
+    width: 75px;
+    display: inline-block;
+    position: relative;
+}
+
+.weeksauce {
+    display:flex;
+    flex: right 5;
+}
+
+/* Sunday Coloring */
+#monthDay0, #monthDay6, #monthDay7, #monthDay14, #monthDay21, #monthDay28, #monthDay35 {
+    background-color: lightgray;
+}
+/* Saturday Coloring */
+#monthDay13, #monthDay20, #monthDay27, #monthDay34, #monthDay41 {
+    background-color: lightgray;
+}
+
+.monthEvent{
+    height: 30px;
+    background-color: salmon;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid black;
+}
+
+/* 
+==============================================================
+Event Form settings
+===============================================================
+*/
+
+#addEventForm{
+    margin: 5vh;
+    border: 10px double royalblue;
+    padding: 20px;
+    background-color: lightblue;
+}
+
+
+/* .gone {
+    display: none;
+} */
+
+/* .shown {
+    display: block;
+}  */
+
+ /* .back {
+    background-color: saddlebrown;
+}  */
