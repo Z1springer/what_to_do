@@ -96,9 +96,9 @@ Borders for style assistance
     border: 3px dashed red;
 } */
 
-#month{
+/* #month{
     border: 3px dashed red;
-}
+} */
 
 /* #addEventForm {
     border: 3px dashed red;
@@ -110,11 +110,16 @@ Day View settings
 =====================================================================
 */
 
-#dayView{
+#dayTitle{
+    text-align: center;
+    background-color: rgba(255, 255, 0, 0.726);
+}
+
+#dayViewEvent{
     position: relative;
     height: 100vh;
     /* margin: 5vh; */
-    padding: 15px 0;
+    /* padding: 15px 0; */
 }
 
 #timeInterval{
@@ -143,6 +148,7 @@ Day View settings
     overflow: visible;
     padding: 5px 15px;
 }
+
 /* 
 ===================================================================
 Week View settings
@@ -195,6 +201,15 @@ Week View settings
     position: relative;
     padding: 0 !important;
     height: 79.8vh;
+    margin: 0%;
+}
+
+.day-header{
+    padding: 1vh 0;
+    text-align: center;
+}
+
+.day-header h4{
     margin: 0%;
 }
 
@@ -275,4 +290,18 @@ Event Form settings
 }
 
 
+<<<<<<< HEAD
 /* Jonathon's Goofy CSS */
+=======
+/* .gone {
+    display: none;
+} */
+
+/* .shown {
+    display: block;
+}  */
+
+ /* .back {
+    background-color: saddlebrown;
+}  */
+>>>>>>> 729d8edb285ef0007b1812aa5fb5f83d6e919bfe
