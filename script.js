@@ -3,14 +3,22 @@
 // =============================================================================
 
 // jQuery element varaibles
-var dayViewEvent = $("#dayViewEvent");
 var timeInterval = $("#timeInterval");
-var week = $("#week")
+var day = $("#dayView");
+var dayViewEvent = $("#dayViewEvent");
+var front = $("#frontPage")
+var month = $("#monthView")
 var save = $(".save")
 var bored = $(".bored")
 var textarea = $(".textSpace")
 var quoteBtn = $("#quoteBtn")
 var quoteText = $("#quoteText")
+var quoteAuthor = $("#quoteAuthor")
+
+// buttons
+var dayButton = $(".goDay")
+var frontButton = $(".goWeek")
+var monthButton = $(".goMonth")
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -42,7 +50,7 @@ $(document).ready(function () {
 var yearViewed = currentDate.getUTCFullYear();
 var monthViewed = currentDate.getUTCMonth() + 1;
 var weekViewed = getWeekNumber();
-var dayViewed = currentDate.getUTCDate();
+var dayViewed = currentDate.getDate();
 
 // load event list from local storage
 function getEventsList() {
@@ -76,7 +84,6 @@ function fillMonth() {
             $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
         }
     }
-
 }
 
 // call on page load
@@ -107,11 +114,12 @@ function fillDay() {
     for (var i = 0; i < eventsList.length; i++) {
 
         var tempDate = new Date(eventsList[i].eventDate)
-        console.log(`${tempDate.getUTCDate()} === ${dayViewed}`)
-        console.log(tempDate.getUTCMonth() + 1 === monthViewed)
-        console.log(tempDate.getUTCFullYear() === yearViewed)
-        if (tempDate.getUTCDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
+        console.log(`${tempDate.getDate()} === ${dayViewed}`);
+        console.log(tempDate.getUTCMonth() + 1 === monthViewed);
+        console.log(tempDate.getUTCFullYear() === yearViewed);
+        if (tempDate.getDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
+            console.log("Attempting to add event to day view")
         }
     }
 }
@@ -239,9 +247,28 @@ bored.on("click", function () {
 
 // display quote on page
 function setQuote(textObj) {
-    quoteText.text(textObj.text + " - " + textObj.author)
+    quoteText.text(textObj.text)
+    quoteAuthor.text(" - " + textObj.author)
 };
 
+dayButton.on("click", function () {
+    console.log("day")
+    day.attr("style", "display: block;")
+    front.attr("style", "display: none;")
+    month.attr("style", "display: none;")
+})
+monthButton.on("click", function () {
+    console.log("month")
+    day.attr("style", "display: none;")
+    front.attr("style", "display: none;")
+    month.attr("style", "display: block;")
+})
+frontButton.on("click", function () {
+    console.log("front")
+    day.attr("style", "display: none;")
+    front.attr("style", "display: block;")
+    month.attr("style", "display: none;")
+})
 // =====================================================================================
 // Helper functions
 // =====================================================================================
