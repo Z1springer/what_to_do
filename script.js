@@ -21,8 +21,11 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
-
-
+// tool tips
+var instance = M.Tooltip.getInstance(elem);
+$(document).ready(function () {
+    $('.tooltipped').tooltip();
+});
 // today's exact date and time
 var currentDate = new Date();
 
