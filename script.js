@@ -29,7 +29,13 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
-
+// event color codes
+var color0 = "linear-gradient(to bottom right, hsl(350deg, 100%, 87.6%) 65%, hsl(350deg, 100%, 94.4%)";
+var color1 = "linear-gradient(to bottom right, hsl(28deg, 100%, 86.3%) 65%, hsl(28deg, 100%, 94.3%))";
+var color2 = "linear-gradient(to bottom right, hsl(60deg, 80%, 90.2%) 65%, hsl(60deg, 80%, 96.2%)";
+var color3 = "linear-gradient(to bottom right, hsl(120deg, 92.5%, 79%) 65%, hsl(120deg, 92.5%, 87%)";
+var color4 = "linear-gradient(to bottom right, hsl(180deg, 64.9%, 81%) 65%, hsl(180deg, 64.9%, 89%)";
+var color5 = "linear-gradient(to bottom right, hsl(214deg, 41.1%, 78%) 65%, hsl(214deg, 41.1%, 89%)";
 
 // today's exact date and time
 var currentDate = new Date();
@@ -47,8 +53,8 @@ $(document).ready(function () {
 });
 
 // current view settings
-var yearViewed = currentDate.getUTCFullYear();
-var monthViewed = currentDate.getUTCMonth() + 1;
+var yearViewed = currentDate.getFullYear();
+var monthViewed = currentDate.getMonth() + 1;
 var weekViewed = getWeekNumber();
 var dayViewed = currentDate.getDate();
 
@@ -69,7 +75,7 @@ function fillMonth() {
     monthTitle.text(`${getMonthName(monthViewed)} ${yearViewed}`);
 
     // put day number on each day of the month
-    for (var i = 0; i < getDaysInMonth(currentDate.getUTCMonth() + 1, currentDate.getUTCFullYear()); i++) {
+    for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
         $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
     }
 
@@ -79,7 +85,7 @@ function fillMonth() {
         var tempDate = new Date(eventsList[i].eventDate)
 
         // if event belongs in current month - display on month grid
-        if (tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
+        if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
 
             $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
         }
@@ -96,8 +102,8 @@ function fillWeek() {
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
-        if (eventDate.getUTCMonth() + 1 === monthViewed && eventDate.getUTCFullYear() === eventDate.getUTCFullYear() && getWeekNumber(eventDate) === weekViewed) {
-            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getUTCDate()) % 7) - 1));
+        if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getDate()) % 7) - 1));
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
@@ -114,10 +120,7 @@ function fillDay() {
     for (var i = 0; i < eventsList.length; i++) {
 
         var tempDate = new Date(eventsList[i].eventDate)
-        console.log(`${tempDate.getDate()} === ${dayViewed}`);
-        console.log(tempDate.getUTCMonth() + 1 === monthViewed);
-        console.log(tempDate.getUTCFullYear() === yearViewed);
-        if (tempDate.getDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
+        if (tempDate.getDate() === dayViewed && tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
             console.log("Attempting to add event to day view")
         }
@@ -128,12 +131,13 @@ function fillDay() {
 fillDay();
 
 function monthViewElement(eventObj) {
-    console.log("attempting to add event to month", eventObj)
+    // console.log("attempting to add event to month", eventObj)
 
     var span = $("<span>");
     span.addClass("monthEvent");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
+    span.css("background-image", getColor(eventObj.category));
 
     return span;
 }
@@ -145,15 +149,22 @@ function weekViewElement(eventObj) {
     var event = $("<div>");
     event.addClass("event");
 
-    event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
-    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
 
-    event.text(eventObj.eventDescription.substring(0, 20))
+    event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
+    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
+
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
+    textBox.css("padding", "0 5px")
+    textBox.text(eventObj.eventDescription.substring(0, 20))    
     if (eventObj.eventDescription.length > 20) {
-        event.append("...");
+        textBox.append("...");
     }
 
+    textBox.append(" - " + eventObj.category);    
 
+    event.append(textBox);
 
     return event;
 }
@@ -167,17 +178,21 @@ function dayViewElement(eventObj) {
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
 
-    $("<h4>").text(eventObj.eventDescription).appendTo(event);
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
 
-    $("<strong>").text("Start Time: ").appendTo(event);
-    $("<span>").text(eventObj.startTime).appendTo(event);
-    $("<br>").appendTo(event);
-    $("<strong>").text("End Time: ").appendTo(event);
-    $("<span>").text(eventObj.endTime).appendTo(event);
-    $("<br>").appendTo(event);
+    $("<h4>").text(eventObj.eventDescription).appendTo(textBox);
 
+    $("<strong>").text("Start Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.startTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
+    $("<strong>").text("End Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.endTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
 
+    textBox.appendTo(event);    
 
     return event;
 }
@@ -185,7 +200,7 @@ function dayViewElement(eventObj) {
 function setTimeScale() {
     for (var i = 0; i <= 24; i++) {
         var divider = $("<div>").addClass("timeDivider").css("top", ((i / 24) * 100) + "%");
-        var label = $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
+        $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
         timeInterval.append(divider);
     }
 }
@@ -206,13 +221,16 @@ $("#addEventBtn").click(function () {
     // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
     // console.log("newDate: ", newDate)
 
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
+
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,
         eventDate: newDate,
         startTime: startTime.val(),
         endTime: endTime.val(),
-        eventDescription: eventDescription.val()
+        eventDescription: eventDescription.val(),
+        category: selectedCategory
     }
 
 
@@ -324,7 +342,7 @@ function getMonthName(num) {
 // returns current week number 0-4
 function getWeekNumber(date = currentDate) {
     date = new Date(date);
-    var cellNumber = getFirstDayOfMonth() - 1 + date.getUTCDate();
+    var cellNumber = getFirstDayOfMonth() - 1 + date.getDate();
 
     var weekNumber = Math.floor(cellNumber / 7);
 
@@ -338,6 +356,9 @@ function getDuration(eventObj) {
 }
 
 function convertHours(str) {
+
+    console.log(`convertHours(${str}) fires`);
+
     var intTime = 0;
 
     var time = str.replace(" ", ":");
@@ -345,10 +366,9 @@ function convertHours(str) {
     var timeArr = time.split(":");
 
     intTime += parseInt(timeArr[0]);
-
     intTime += parseInt(timeArr[1]) / 60;
 
-    if (timeArr[2] === "PM") {
+    if (timeArr[2] === "PM" && timeArr[0] != 12) {
         intTime += 12;
     }
 
@@ -372,6 +392,24 @@ function toTwelveHour(num) {
         result += num + ":00 AM";
     }
     return result;
+}
+
+function getColor(str){
+    switch(str){
+        case "work" :
+            return color0;
+        case "school" :
+            return color1;
+        case "personal" :
+            return color2;
+        case "spiritual" :
+            return color3;
+        case "family" :
+            return color4;
+        case "chores" :
+            return color5;
+    }
+    return color0;
 }
 
 // ===================================================================================
