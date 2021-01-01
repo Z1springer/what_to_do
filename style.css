@@ -246,8 +246,6 @@ Week View settings
     position: absolute;
     width: 90%;
     font-family: 'Covered By Your Grace';
-    padding: 4px 15px;
-    overflow: hidden;
 }
 
 .event:before {
@@ -267,6 +265,13 @@ Week View settings
   .event h4{
       margin: 0 20px 5px 20px;
   }
+  
+  .eventTextBox{
+    padding: 4px 35px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 /* 
 ==============================================================
 Month View settings

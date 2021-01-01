@@ -53,8 +53,8 @@ $(document).ready(function () {
 });
 
 // current view settings
-var yearViewed = currentDate.getUTCFullYear();
-var monthViewed = currentDate.getUTCMonth() + 1;
+var yearViewed = currentDate.getFullYear();
+var monthViewed = currentDate.getMonth() + 1;
 var weekViewed = getWeekNumber();
 var dayViewed = currentDate.getDate();
 
@@ -75,7 +75,7 @@ function fillMonth() {
     monthTitle.text(`${getMonthName(monthViewed)} ${yearViewed}`);
 
     // put day number on each day of the month
-    for (var i = 0; i < getDaysInMonth(currentDate.getUTCMonth() + 1, currentDate.getUTCFullYear()); i++) {
+    for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
         $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
     }
 
@@ -85,7 +85,7 @@ function fillMonth() {
         var tempDate = new Date(eventsList[i].eventDate)
 
         // if event belongs in current month - display on month grid
-        if (tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
+        if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
 
             $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
         }
@@ -102,8 +102,8 @@ function fillWeek() {
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
-        if (eventDate.getUTCMonth() + 1 === monthViewed && eventDate.getUTCFullYear() === eventDate.getUTCFullYear() && getWeekNumber(eventDate) === weekViewed) {
-            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getUTCDate()) % 7) - 1));
+        if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getDate()) % 7) - 1));
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
@@ -120,10 +120,7 @@ function fillDay() {
     for (var i = 0; i < eventsList.length; i++) {
 
         var tempDate = new Date(eventsList[i].eventDate)
-        console.log(`${tempDate.getDate()} === ${dayViewed}`);
-        console.log(tempDate.getUTCMonth() + 1 === monthViewed);
-        console.log(tempDate.getUTCFullYear() === yearViewed);
-        if (tempDate.getDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
+        if (tempDate.getDate() === dayViewed && tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
             console.log("Attempting to add event to day view")
         }
@@ -156,16 +153,18 @@ function weekViewElement(eventObj) {
     event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
-    // event.css("zIndex", 24-convertHours(eventObj.startTime));
 
-    console.log(`startTime: ${eventObj.startTime}24-convertHours(eventObj.startTime): ${24-convertHours(eventObj.startTime)}`)
-
-    event.text(eventObj.eventDescription.substring(0, 20))    
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
+    textBox.css("padding", "0 5px")
+    textBox.text(eventObj.eventDescription.substring(0, 20))    
     if (eventObj.eventDescription.length > 20) {
-        event.append("...");
+        textBox.append("...");
     }
 
-    event.append(" - " + eventObj.category)
+    textBox.append(" - " + eventObj.category);    
+
+    event.append(textBox);
 
     return event;
 }
@@ -181,16 +180,19 @@ function dayViewElement(eventObj) {
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
 
-    $("<h4>").text(eventObj.eventDescription).appendTo(event);
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
 
-    $("<strong>").text("Start Time: ").appendTo(event);
-    $("<span>").text(eventObj.startTime).appendTo(event);
-    $("<br>").appendTo(event);
-    $("<strong>").text("End Time: ").appendTo(event);
-    $("<span>").text(eventObj.endTime).appendTo(event);
-    $("<br>").appendTo(event);
+    $("<h4>").text(eventObj.eventDescription).appendTo(textBox);
 
+    $("<strong>").text("Start Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.startTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
+    $("<strong>").text("End Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.endTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
 
+    textBox.appendTo(event);    
 
     return event;
 }
@@ -340,7 +342,7 @@ function getMonthName(num) {
 // returns current week number 0-4
 function getWeekNumber(date = currentDate) {
     date = new Date(date);
-    var cellNumber = getFirstDayOfMonth() - 1 + date.getUTCDate();
+    var cellNumber = getFirstDayOfMonth() - 1 + date.getDate();
 
     var weekNumber = Math.floor(cellNumber / 7);
 
@@ -354,6 +356,9 @@ function getDuration(eventObj) {
 }
 
 function convertHours(str) {
+
+    console.log(`convertHours(${str}) fires`);
+
     var intTime = 0;
 
     var time = str.replace(" ", ":");
@@ -361,10 +366,9 @@ function convertHours(str) {
     var timeArr = time.split(":");
 
     intTime += parseInt(timeArr[0]);
-
     intTime += parseInt(timeArr[1]) / 60;
 
-    if (timeArr[2] === "PM") {
+    if (timeArr[2] === "PM" && timeArr[0] != 12) {
         intTime += 12;
     }
 
