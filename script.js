@@ -87,7 +87,7 @@ function fillMonth() {
         // if event belongs in current month - display on month grid
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
 
-            $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
+            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate()-1)).append(monthViewElement(eventsList[i]));
         }
     }
 }
@@ -102,13 +102,18 @@ function fillWeek() {
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
-        if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
-            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getDate()) % 7) - 1));
+        var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
+
+          // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+        if(eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7) ){ 
+            // console.log(`attempting to add event to weekview ${getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed))}`);        
+
+            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)) );
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
 
-    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed}`);
+    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed+1}`);
 }
 
 // call on page load
@@ -122,7 +127,7 @@ function fillDay() {
         var tempDate = new Date(eventsList[i].eventDate)
         if (tempDate.getDate() === dayViewed && tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
-            console.log("Attempting to add event to day view")
+            // console.log("Attempting to add event to day view")
         }
     }
 }
@@ -171,7 +176,7 @@ function weekViewElement(eventObj) {
 
 function dayViewElement(eventObj) {
 
-    console.log("attempting to display event", eventObj)
+    // console.log("attempting to display event", eventObj)
 
     var event = $("<div>");
     event.addClass("event");
@@ -298,7 +303,12 @@ function getFirstDayOfMonth(date = currentDate) {
     var year = date.getFullYear();
     var day = new Date(year + "-" + monthViewed + "-01").getDay() + 1;
 
-    // console.log(`add ${day} days to first of month`);
+    return day;
+}
+
+function getFirstDayOfYear(date = currentDate) {
+    var year = date.getFullYear();
+    var day = new Date(year, 0, 1).getDay() + 1;
 
     return day;
 }
@@ -357,7 +367,7 @@ function getDuration(eventObj) {
 
 function convertHours(str) {
 
-    console.log(`convertHours(${str}) fires`);
+    // console.log(`convertHours(${str}) fires`);
 
     var intTime = 0;
 
@@ -411,6 +421,99 @@ function getColor(str){
     }
     return color0;
 }
+
+function addDay(num=1){
+
+    var tempDate = new Date(yearViewed, monthViewed, 0);
+
+    var maxDay = tempDate.getDate();
+    
+    dayViewed += num;
+
+    if(dayViewed > maxDay){
+        dayViewed = dayViewed - maxDay;
+        addMonth();
+    }
+    // console.log(`addDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
+}
+
+function subtractDay(num=1){
+    dayViewed -= num;
+    if(dayViewed <= 0){
+        subtractMonth()
+        var maxDay = new Date(yearViewed, monthViewed, 0).getDate();
+        dayViewed = maxDay + dayViewed;
+    }
+    // console.log(`subtractDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
+}
+
+function addWeek(){
+    addDay(7);
+}
+
+function subtractWeek(){
+    subtractDay(7)
+}
+
+function addMonth(){
+    monthViewed++;
+    if(monthViewed > 12){
+        monthViewed = 1
+        yearViewed++;
+    }
+}
+
+function subtractMonth(){
+    monthViewed--;
+    if(monthViewed < 1){
+        monthViewed = 12;
+        yearViewed --;
+    }
+}
+
+function getDayOfYear(date = currentDate){
+    var firstDayOfYear = new Date(date.getFullYear(), 0, 0);
+    // var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    // var timeSinceFirstDay = date - firstDayOfYear;
+    // var day = Math.floor(timeSinceFirstDay/millisecondsPerDay);
+
+    getDateDifferenceDays(date, firstDayOfYear);
+    // console.log(`getDayOfYear(${date}) fires: returning: ${day}`);
+
+    return day;
+
+}
+
+function getDateDifferenceDays(date1, date2){
+    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    var diff = date1 - date2
+    var days = Math.floor(diff/millisecondsPerDay)
+
+    return days;
+}
+
+function getFirstDayOfWeek(date = currentDate){
+    
+    // console.log(`getFirstDayOfWeek(${date}) fires`)   
+
+    var tempDate = new Date(date);
+
+    tempDate = addDays(tempDate, -1*tempDate.getDay())
+
+    // console.log(`tempDate: ${tempDate}`)
+
+    return tempDate;
+}
+
+function addDays(date, days){
+    var tempDate = new Date(date);
+    tempDate.setDate(tempDate.getDate() + days);
+
+    return tempDate;
+}
+
+getFirstDayOfWeek();
+
 
 // ===================================================================================
 // Old functions
