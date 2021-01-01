@@ -29,7 +29,13 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
-
+// event color codes
+var color0 = "linear-gradient(to bottom right, hsl(350deg, 100%, 87.6%) 65%, hsl(350deg, 100%, 94.4%)";
+var color1 = "linear-gradient(to bottom right, hsl(28deg, 100%, 86.3%) 65%, hsl(28deg, 100%, 94.3%))";
+var color2 = "linear-gradient(to bottom right, hsl(60deg, 80%, 90.2%) 65%, hsl(60deg, 80%, 96.2%)";
+var color3 = "linear-gradient(to bottom right, hsl(120deg, 92.5%, 79%) 65%, hsl(120deg, 92.5%, 87%)";
+var color4 = "linear-gradient(to bottom right, hsl(180deg, 64.9%, 81%) 65%, hsl(180deg, 64.9%, 89%)";
+var color5 = "linear-gradient(to bottom right, hsl(214deg, 41.1%, 78%) 65%, hsl(214deg, 41.1%, 89%)";
 
 // today's exact date and time
 var currentDate = new Date();
@@ -128,12 +134,13 @@ function fillDay() {
 fillDay();
 
 function monthViewElement(eventObj) {
-    console.log("attempting to add event to month", eventObj)
+    // console.log("attempting to add event to month", eventObj)
 
     var span = $("<span>");
     span.addClass("monthEvent");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
+    span.css("background-image", getColor(eventObj.category));
 
     return span;
 }
@@ -145,15 +152,20 @@ function weekViewElement(eventObj) {
     var event = $("<div>");
     event.addClass("event");
 
-    event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
-    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
 
-    event.text(eventObj.eventDescription.substring(0, 20))
+    event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
+    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
+    // event.css("zIndex", 24-convertHours(eventObj.startTime));
+
+    console.log(`startTime: ${eventObj.startTime}24-convertHours(eventObj.startTime): ${24-convertHours(eventObj.startTime)}`)
+
+    event.text(eventObj.eventDescription.substring(0, 20))    
     if (eventObj.eventDescription.length > 20) {
         event.append("...");
     }
 
-
+    event.append(" - " + eventObj.category)
 
     return event;
 }
@@ -167,6 +179,7 @@ function dayViewElement(eventObj) {
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
 
     $("<h4>").text(eventObj.eventDescription).appendTo(event);
 
@@ -185,7 +198,7 @@ function dayViewElement(eventObj) {
 function setTimeScale() {
     for (var i = 0; i <= 24; i++) {
         var divider = $("<div>").addClass("timeDivider").css("top", ((i / 24) * 100) + "%");
-        var label = $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
+        $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
         timeInterval.append(divider);
     }
 }
@@ -206,13 +219,16 @@ $("#addEventBtn").click(function () {
     // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
     // console.log("newDate: ", newDate)
 
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
+
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,
         eventDate: newDate,
         startTime: startTime.val(),
         endTime: endTime.val(),
-        eventDescription: eventDescription.val()
+        eventDescription: eventDescription.val(),
+        category: selectedCategory
     }
 
 
@@ -372,6 +388,24 @@ function toTwelveHour(num) {
         result += num + ":00 AM";
     }
     return result;
+}
+
+function getColor(str){
+    switch(str){
+        case "work" :
+            return color0;
+        case "school" :
+            return color1;
+        case "personal" :
+            return color2;
+        case "spiritual" :
+            return color3;
+        case "family" :
+            return color4;
+        case "chores" :
+            return color5;
+    }
+    return color0;
 }
 
 // ===================================================================================
