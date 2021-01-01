@@ -32,6 +32,8 @@ Title Date settings
 nav {
     /* padding-left: 20px; */
     background-color: rgba(64, 224, 208, 0.74);
+    border-bottom: 5px groove darkturquoise;
+    padding: 0 1.5vh;
 }
 
 #quoteText{
@@ -48,6 +50,7 @@ nav {
     font-family: 'Montserrat', sans-serif;
     background-color: rgba(255, 255, 0, 0.726);
     padding: 2vh 0 0 0;
+    border: 10px ridge gold
 }
 
 
@@ -113,6 +116,8 @@ Day View settings
 #dayTitle{
     text-align: center;
     background-color: rgba(255, 255, 0, 0.726);
+    padding: 3vh;
+    border: 10px ridge gold
 }
 
 #dayViewEvent{
@@ -167,34 +172,45 @@ Week View settings
     background-color: lightblue;
     padding: 50px 0;
     margin: 0%;
+    text-align: center;
+    border-top: 10px ridge royalblue;
+    border-right: 10px ridge royalblue;
+    border-left: 10px ridge royalblue;
 }
 
 .weekDay0{
     background-color: pink;
+    border: 5px groove palevioletred;
 }
 
 .weekDay1{
     background-color: peachpuff;
+    border: 5px groove moccasin;
 }
 
 .weekDay2{
     background-color: lightgoldenrodyellow;
+    border: 5px groove palegoldenrod;
 }
 
 .weekDay3{
     background-color: palegreen;
+    border: 5px groove lightgreen;
 }
 
 .weekDay4{
     background-color: paleturquoise;
+    border: 5px groove darkturquoise;
 }
 
 .weekDay5{
-    background-color: lightsteelblue;
+    background-color: skyblue;
+    border: 5px groove deepskyblue;
 }
 
 .weekDay6{
     background-color: thistle;
+    border: 5px groove plum;
 }
 
 .day {
@@ -231,7 +247,8 @@ Week View settings
     position: absolute;
     width: 100%;
     overflow-y: auto;
-    background-color: salmon;    
+    background-color: white;
+    padding: .5vh 1vh;
 }
 
 /* 
@@ -240,18 +257,28 @@ Month View settings
 ============================================================== 
 */
 
-#month {
+#monthView {
     font-family: 'Montserrat', sans-serif;
     margin: 0 5vh;
-    background-color: white;
+}
+
+#monthTitle{
+    text-align: center;
+    padding: 3vh;
+    margin-bottom: 0;
+    background-color: mediumaquamarine;
+    border-top: 10px groove lightseagreen;
+    border-right: 10px groove lightseagreen;
+    border-left: 10px groove lightseagreen;
 }
 
 .monthDay{
     border: 2px solid black;
-    height: 75px;
-    width: 75px;
+    height: 25vh;
+    width: 30vh;
     display: inline-block;
     position: relative;
+    padding: .5vh;
 }
 
 .weeksauce {
@@ -260,12 +287,41 @@ Month View settings
 }
 
 /* Sunday Coloring */
-#monthDay0, #monthDay6, #monthDay7, #monthDay14, #monthDay21, #monthDay28, #monthDay35 {
-    background-color: lightgray;
+#monthDay0,  #monthDay7, #monthDay14, #monthDay21, #monthDay28, #monthDay35 {
+    background-color: pink;
+}
+/* Monday Coloring */
+#monthDay1, #monthDay8, #monthDay15, #monthDay22, #monthDay29, #monthDay36 {
+    background-color: peachpuff;
+}
+/* Tuesday Coloring */
+#monthDay2, #monthDay9, #monthDay16, #monthDay23, #monthDay30, #monthDay37 {
+    background-color: lightgoldenrodyellow;
+}
+/* Wednesday Coloring */
+#monthDay3, #monthDay10, #monthDay17, #monthDay24, #monthDay31, #monthDay38 {
+    background-color: palegreen;
+}
+/* Thursday Coloring */
+#monthDay4, #monthDay11, #monthDay18, #monthDay25, #monthDay32, #monthDay39 {
+    background-color: paleturquoise;
+}
+/* Friday Coloring */
+#monthDay5, #monthDay12, #monthDay19, #monthDay26, #monthDay33, #monthDay40 {
+    background-color: lightsteelblue;
 }
 /* Saturday Coloring */
-#monthDay13, #monthDay20, #monthDay27, #monthDay34, #monthDay41 {
-    background-color: lightgray;
+#monthDay6, #monthDay13, #monthDay20, #monthDay27, #monthDay34, #monthDay41 {
+    background-color: thistle;
+}
+
+#week0, #week1, #week2, #week3, #week4, #week5{
+    border-left: 10px groove palevioletred;
+    border-right: 10px groove plum;
+}
+
+#week5{
+    border-bottom: 10px groove lightseagreen;
 }
 
 .monthEvent{
@@ -284,7 +340,7 @@ Event Form settings
 
 #addEventForm{
     margin: 5vh;
-    border: 10px double royalblue;
+    border: 10px ridge royalblue;
     padding: 20px;
     background-color: lightblue;
 }
