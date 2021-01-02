@@ -264,7 +264,7 @@ addButton.click(function () {
     // console.log("newDate: ", newDate)
 
     var selectedCategory = $("input:radio[name='group1']:checked").val();
-
+    
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,
