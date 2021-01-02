@@ -15,8 +15,8 @@ h1, h2, h3, h4 {
     color: black;
 }
 
-.btn {
-    background-color: rebeccapurple;
+label{
+    color: black;
 }
 
 a{
@@ -34,14 +34,6 @@ nav {
     background-color: rgba(64, 224, 208, 0.74);
     border-bottom: 5px groove darkturquoise;
     padding: 0 1.5vh;
-}
-
-#quoteText{
-    font-family: 'Covered By Your Grace', sans-serif;
-}
-
-#quoteAuthor{
-    font-family: 'Covered By Your Grace', sans-serif;
 }
 
 .displayAlongTitleSpace {
@@ -65,12 +57,17 @@ Quote settings
 #quoteText {
     font-size: 50px;
     color: #000077;
-    /* background-color: rebeccapurple; */
+    font-family: 'Covered By Your Grace', sans-serif;
 }
+
 #quoteAuthor {
     font-size: 20px;
     color: #000077;
-    /* background-color: rebeccapurple; */
+    font-family: 'Covered By Your Grace', sans-serif;
+}
+
+#quoteBtn {
+    background-color: palevioletred;
 }
 
 /* 
@@ -370,4 +367,6 @@ Event Form settings
 }
 
 
-/* Jonathon's Goofy CSS */
+#addEventBtn{
+    background-color: navy;
+}

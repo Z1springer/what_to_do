@@ -50,6 +50,7 @@ var eventsList;
 // setup time picker elements
 $(document).ready(function () {
     $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
 });
 
 // current view settings
@@ -150,19 +151,19 @@ function weekViewElement(eventObj) {
     event.addClass("event");
 
 
-    event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
+    event.css("height", (getPercentOfDay(getDuration(eventObj)) - 0.5) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
 
     var textBox = $("<div>");
     textBox.addClass("eventTextBox");
     textBox.css("padding", "0 5px")
-    textBox.text(eventObj.eventDescription.substring(0, 20))    
+    textBox.text(eventObj.eventDescription.substring(0, 20))
     if (eventObj.eventDescription.length > 20) {
         textBox.append("...");
     }
 
-    textBox.append(" - " + eventObj.category);    
+    textBox.append(" - " + eventObj.category);
 
     event.append(textBox);
 
@@ -192,7 +193,7 @@ function dayViewElement(eventObj) {
     $("<span>").text(eventObj.endTime).appendTo(textBox);
     $("<br>").appendTo(textBox);
 
-    textBox.appendTo(event);    
+    textBox.appendTo(event);
 
     return event;
 }
@@ -394,19 +395,19 @@ function toTwelveHour(num) {
     return result;
 }
 
-function getColor(str){
-    switch(str){
-        case "work" :
+function getColor(str) {
+    switch (str) {
+        case "work":
             return color0;
-        case "school" :
+        case "school":
             return color1;
-        case "personal" :
+        case "personal":
             return color2;
-        case "spiritual" :
+        case "spiritual":
             return color3;
-        case "family" :
+        case "family":
             return color4;
-        case "chores" :
+        case "chores":
             return color5;
     }
     return color0;

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Project 1</title>
 </head>
@@ -36,11 +37,13 @@
         <div id="frontPage">
 
             <div class="displayAlongTitleSpace" class="">
-                <button id="quoteBtn">Need A New Quote?</button>
+                <button id="quoteBtn" class="waves-effect waves-dark btn-large">Need A New Quote?
+                    <i class="large material-icons">create</i>
+                </button>
                 <div class="dropdownDates">
                     <div>
-                        <h1 id="quoteText">Quote</h1>
-                        <h2 id="quoteAuthor">Author</h2>
+                        <h1 id="quoteText"></h1>
+                        <h2 id="quoteAuthor"></h2>
                     </div>
                 </div>
             </div>
@@ -368,7 +371,7 @@
         <div id="addEventForm">
             <div id=inputRequest class="gone">
                 <label for="inputDate">Select Date</label>
-                <input type="date" id="inputDate">
+                <input type="text" class="datepicker" id="inputDate">
 
                 <label for="inputStartTime">Start Time</label>
                 <input type="text" class="timepicker" id="inputStartTime">
@@ -422,7 +425,9 @@
                     </label>
                 </p>
 
-                <button id="addEventBtn">Add Event</button>
+                <button id="addEventBtn" class="waves-effect waves-light btn-large btn-floating">
+                    <i class="large material-icons">done_all</i>
+                </button>
             </div>
         </div>
 
