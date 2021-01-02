@@ -29,7 +29,13 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
-
+// event color codes
+var color0 = "linear-gradient(to bottom right, hsl(350deg, 100%, 87.6%) 65%, hsl(350deg, 100%, 94.4%)";
+var color1 = "linear-gradient(to bottom right, hsl(28deg, 100%, 86.3%) 65%, hsl(28deg, 100%, 94.3%))";
+var color2 = "linear-gradient(to bottom right, hsl(60deg, 80%, 90.2%) 65%, hsl(60deg, 80%, 96.2%)";
+var color3 = "linear-gradient(to bottom right, hsl(120deg, 92.5%, 79%) 65%, hsl(120deg, 92.5%, 87%)";
+var color4 = "linear-gradient(to bottom right, hsl(180deg, 64.9%, 81%) 65%, hsl(180deg, 64.9%, 89%)";
+var color5 = "linear-gradient(to bottom right, hsl(214deg, 41.1%, 78%) 65%, hsl(214deg, 41.1%, 89%)";
 
 // today's exact date and time
 var currentDate = new Date();
@@ -47,8 +53,8 @@ $(document).ready(function () {
 });
 
 // current view settings
-var yearViewed = currentDate.getUTCFullYear();
-var monthViewed = currentDate.getUTCMonth() + 1;
+var yearViewed = currentDate.getFullYear();
+var monthViewed = currentDate.getMonth() + 1;
 var weekViewed = getWeekNumber();
 var dayViewed = currentDate.getDate();
 
@@ -69,7 +75,7 @@ function fillMonth() {
     monthTitle.text(`${getMonthName(monthViewed)} ${yearViewed}`);
 
     // put day number on each day of the month
-    for (var i = 0; i < getDaysInMonth(currentDate.getUTCMonth() + 1, currentDate.getUTCFullYear()); i++) {
+    for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
         $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
     }
 
@@ -79,9 +85,9 @@ function fillMonth() {
         var tempDate = new Date(eventsList[i].eventDate)
 
         // if event belongs in current month - display on month grid
-        if (tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
+        if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
 
-            $("#monthDay" + (tempDate.getDate() + 1)).append(monthViewElement(eventsList[i]));
+            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate()-1)).append(monthViewElement(eventsList[i]));
         }
     }
 }
@@ -93,16 +99,27 @@ fillMonth();
 function fillWeek() {
     // console.log("fillWeek() fires")
 
+    var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
+    
+    // fill week day headings
+    for(var i=0; i<7; i++){
+        $("#weekDate" + i).text( formatDate(addDays(getFirstDayOfWeek(dateViewed), i)) );
+    }
+
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
-        if (eventDate.getUTCMonth() + 1 === monthViewed && eventDate.getUTCFullYear() === eventDate.getUTCFullYear() && getWeekNumber(eventDate) === weekViewed) {
-            var weekDay = $("#weekDay" + (((getFirstDayOfMonth(eventDate) + eventDate.getUTCDate()) % 7) - 1));
+
+          // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+        if(eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7) ){ 
+            // console.log(`attempting to add event to weekview ${getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed))}`);        
+
+            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)) );
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
 
-    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed}`);
+    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed+1}`);
 }
 
 // call on page load
@@ -111,15 +128,14 @@ fillWeek();
 // fill day view with current day data from eventList
 function fillDay() {
 
+    $("#dayTitle").text(getDayName(new Date (yearViewed, monthViewed-1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
+
     for (var i = 0; i < eventsList.length; i++) {
 
         var tempDate = new Date(eventsList[i].eventDate)
-        console.log(`${tempDate.getDate()} === ${dayViewed}`);
-        console.log(tempDate.getUTCMonth() + 1 === monthViewed);
-        console.log(tempDate.getUTCFullYear() === yearViewed);
-        if (tempDate.getDate() === dayViewed && tempDate.getUTCMonth() + 1 === monthViewed && tempDate.getUTCFullYear() === yearViewed) {
+        if (tempDate.getDate() === dayViewed && tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
-            console.log("Attempting to add event to day view")
+            // console.log("Attempting to add event to day view")
         }
     }
 }
@@ -128,12 +144,13 @@ function fillDay() {
 fillDay();
 
 function monthViewElement(eventObj) {
-    console.log("attempting to add event to month", eventObj)
+    // console.log("attempting to add event to month", eventObj)
 
     var span = $("<span>");
     span.addClass("monthEvent");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
+    span.css("background-image", getColor(eventObj.category));
 
     return span;
 }
@@ -145,39 +162,50 @@ function weekViewElement(eventObj) {
     var event = $("<div>");
     event.addClass("event");
 
-    event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
-    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
 
-    event.text(eventObj.eventDescription.substring(0, 20))
+    event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
+    event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
+
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
+    textBox.css("padding", "0 5px")
+    textBox.text(eventObj.eventDescription.substring(0, 20))    
     if (eventObj.eventDescription.length > 20) {
-        event.append("...");
+        textBox.append("...");
     }
 
+    textBox.append(" - " + eventObj.category);    
 
+    event.append(textBox);
 
     return event;
 }
 
 function dayViewElement(eventObj) {
 
-    console.log("attempting to display event", eventObj)
+    // console.log("attempting to display event", eventObj)
 
     var event = $("<div>");
     event.addClass("event");
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
+    event.css("background-image", getColor(eventObj.category));
 
-    $("<h4>").text(eventObj.eventDescription).appendTo(event);
+    var textBox = $("<div>");
+    textBox.addClass("eventTextBox");
 
-    $("<strong>").text("Start Time: ").appendTo(event);
-    $("<span>").text(eventObj.startTime).appendTo(event);
-    $("<br>").appendTo(event);
-    $("<strong>").text("End Time: ").appendTo(event);
-    $("<span>").text(eventObj.endTime).appendTo(event);
-    $("<br>").appendTo(event);
+    $("<h4>").text(eventObj.eventDescription).appendTo(textBox);
 
+    $("<strong>").text("Start Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.startTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
+    $("<strong>").text("End Time: ").appendTo(textBox);
+    $("<span>").text(eventObj.endTime).appendTo(textBox);
+    $("<br>").appendTo(textBox);
 
+    textBox.appendTo(event);    
 
     return event;
 }
@@ -185,7 +213,7 @@ function dayViewElement(eventObj) {
 function setTimeScale() {
     for (var i = 0; i <= 24; i++) {
         var divider = $("<div>").addClass("timeDivider").css("top", ((i / 24) * 100) + "%");
-        var label = $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
+        $("<span>").addClass("dividerLabel").text(toTwelveHour(i)).appendTo(divider);
         timeInterval.append(divider);
     }
 }
@@ -206,13 +234,16 @@ $("#addEventBtn").click(function () {
     // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
     // console.log("newDate: ", newDate)
 
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
+
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,
         eventDate: newDate,
         startTime: startTime.val(),
         endTime: endTime.val(),
-        eventDescription: eventDescription.val()
+        eventDescription: eventDescription.val(),
+        category: selectedCategory
     }
 
 
@@ -269,6 +300,7 @@ frontButton.on("click", function () {
     front.attr("style", "display: block;")
     month.attr("style", "display: none;")
 })
+
 // =====================================================================================
 // Helper functions
 // =====================================================================================
@@ -280,7 +312,12 @@ function getFirstDayOfMonth(date = currentDate) {
     var year = date.getFullYear();
     var day = new Date(year + "-" + monthViewed + "-01").getDay() + 1;
 
-    // console.log(`add ${day} days to first of month`);
+    return day;
+}
+
+function getFirstDayOfYear(date = currentDate) {
+    var year = date.getFullYear();
+    var day = new Date(year, 0, 1).getDay() + 1;
 
     return day;
 }
@@ -289,9 +326,28 @@ function getFirstDayOfMonth(date = currentDate) {
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
+function getDayName(num){
+    switch (num) {
+        case 0:
+            return "Sunday"
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday"
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday"            
+    }
+    return "Oops!";
+}
 
 function getMonthName(num) {
-    console.log(num)
+    // console.log(num)
     switch (num) {
         case 1:
             return "January";
@@ -324,7 +380,7 @@ function getMonthName(num) {
 // returns current week number 0-4
 function getWeekNumber(date = currentDate) {
     date = new Date(date);
-    var cellNumber = getFirstDayOfMonth() - 1 + date.getUTCDate();
+    var cellNumber = getFirstDayOfMonth() - 1 + date.getDate();
 
     var weekNumber = Math.floor(cellNumber / 7);
 
@@ -338,6 +394,9 @@ function getDuration(eventObj) {
 }
 
 function convertHours(str) {
+
+    // console.log(`convertHours(${str}) fires`);
+
     var intTime = 0;
 
     var time = str.replace(" ", ":");
@@ -345,10 +404,9 @@ function convertHours(str) {
     var timeArr = time.split(":");
 
     intTime += parseInt(timeArr[0]);
-
     intTime += parseInt(timeArr[1]) / 60;
 
-    if (timeArr[2] === "PM") {
+    if (timeArr[2] === "PM" && timeArr[0] != 12) {
         intTime += 12;
     }
 
@@ -373,6 +431,119 @@ function toTwelveHour(num) {
     }
     return result;
 }
+
+function getColor(str){
+    switch(str){
+        case "work" :
+            return color0;
+        case "school" :
+            return color1;
+        case "personal" :
+            return color2;
+        case "spiritual" :
+            return color3;
+        case "family" :
+            return color4;
+        case "chores" :
+            return color5;
+    }
+    return color0;
+}
+
+function addDay(num=1){
+
+    var tempDate = new Date(yearViewed, monthViewed, 0);
+
+    var maxDay = tempDate.getDate();
+    
+    dayViewed += num;
+
+    if(dayViewed > maxDay){
+        dayViewed = dayViewed - maxDay;
+        addMonth();
+    }
+    // console.log(`addDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
+}
+
+function subtractDay(num=1){
+    dayViewed -= num;
+    if(dayViewed <= 0){
+        subtractMonth()
+        var maxDay = new Date(yearViewed, monthViewed, 0).getDate();
+        dayViewed = maxDay + dayViewed;
+    }
+    // console.log(`subtractDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
+}
+
+function addWeek(){
+    addDay(7);
+}
+
+function subtractWeek(){
+    subtractDay(7)
+}
+
+function addMonth(){
+    monthViewed++;
+    if(monthViewed > 12){
+        monthViewed = 1
+        yearViewed++;
+    }
+}
+
+function subtractMonth(){
+    monthViewed--;
+    if(monthViewed < 1){
+        monthViewed = 12;
+        yearViewed --;
+    }
+}
+
+function getDayOfYear(date = currentDate){
+    var firstDayOfYear = new Date(date.getFullYear(), 0, 0);
+    // var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    // var timeSinceFirstDay = date - firstDayOfYear;
+    // var day = Math.floor(timeSinceFirstDay/millisecondsPerDay);
+
+    getDateDifferenceDays(date, firstDayOfYear);
+    // console.log(`getDayOfYear(${date}) fires: returning: ${day}`);
+
+    return day;
+
+}
+
+function getDateDifferenceDays(date1, date2){
+    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+    var diff = date1 - date2
+    var days = Math.floor(diff/millisecondsPerDay)
+
+    return days;
+}
+
+function getFirstDayOfWeek(date = currentDate){
+    
+    // console.log(`getFirstDayOfWeek(${date}) fires`)   
+
+    var tempDate = new Date(date);
+
+    tempDate = addDays(tempDate, -1*tempDate.getDay())
+
+    // console.log(`tempDate: ${tempDate}`)
+
+    return tempDate;
+}
+
+function addDays(date, days){
+    var tempDate = new Date(date);
+    tempDate.setDate(tempDate.getDate() + days);
+
+    return tempDate;
+}
+
+function formatDate(date){
+    return (date.getMonth()+1) + " " + date.getDate() + "/" + date.getFullYear(); 
+}
+
 
 // ===================================================================================
 // Old functions
