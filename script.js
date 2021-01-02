@@ -19,6 +19,8 @@ var quoteAuthor = $("#quoteAuthor")
 var dayButton = $(".goDay")
 var frontButton = $(".goWeek")
 var monthButton = $(".goMonth")
+var addButton = $("#addEventBtn");
+var editButton = $("#editBtn")
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -50,6 +52,7 @@ var eventsList;
 // setup time picker elements
 $(document).ready(function () {
     $('.timepicker').timepicker();
+    editButton.toggle();
 });
 
 // current view settings
@@ -186,6 +189,10 @@ function dayViewElement(eventObj) {
 
     // console.log("attempting to display event", eventObj)
 
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
+    
     var event = $("<div>");
     event.addClass("event");
 
@@ -205,9 +212,11 @@ function dayViewElement(eventObj) {
     $("<span>").text(eventObj.endTime).appendTo(textBox);
     $("<br>").appendTo(textBox);
 
-    textBox.appendTo(event);    
+    textBox.appendTo(event); 
+    
+    event.appendTo(viewLink);
 
-    return event;
+    return viewLink;
 }
 
 function setTimeScale() {
@@ -225,7 +234,7 @@ setTimeScale();
 // =====================================================================================
 
 // event listener for adding event
-$("#addEventBtn").click(function () {
+addButton.click(function () {
 
     var oldDate = new Date(eventDate.val());
     var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
@@ -288,17 +297,83 @@ dayButton.on("click", function () {
     front.attr("style", "display: none;")
     month.attr("style", "display: none;")
 })
+
 monthButton.on("click", function () {
     console.log("month")
     day.attr("style", "display: none;")
     front.attr("style", "display: none;")
     month.attr("style", "display: block;")
 })
+
 frontButton.on("click", function () {
     console.log("front")
     day.attr("style", "display: none;")
     front.attr("style", "display: block;")
     month.attr("style", "display: none;")
+})
+
+$(document).on("click", ".viewLink", function(){
+
+    console.log(`.viewLink click(${$(this).data("id")}) fires!`)
+
+    var id = $(this).data("id");
+    var event = getEvent(id);
+
+    console.log(`event id: ${id}`, event );
+    var tempDate = new Date(event.eventDate);
+    eventDate.val(formatDateForInput(tempDate)); 
+    startTime.val(event.startTime) 
+    endTime.val(event.endTime) 
+    eventDescription.val(event.eventDescription) 
+    $("input[value='" + event.category + "']").prop("checked", true);
+
+    editButton.data("id", id)
+
+    addButton.toggle();
+    editButton.toggle();
+})
+
+editButton.click(function(){
+
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
+
+    var id = $(this).data("id");
+
+    var oldDate = new Date(eventDate.val());
+    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+
+    var newEvent = {
+        eventCreated: id,
+        eventDate: newDate,
+        startTime: startTime.val(),
+        endTime: endTime.val(),
+        eventDescription: eventDescription.val(),
+        category: selectedCategory
+    }
+
+    var indexFound = -1;
+
+    for(var i=0; i<eventsList.length; i++){
+        if(eventsList[i].eventCreated == id){
+            indexFound = i
+            break;
+        }
+    }
+
+    if(i>-1){
+        eventsList.splice(i, 1, newEvent);
+    }
+
+    localStorage.setItem("eventsList", JSON.stringify(eventsList));
+
+    eventDate.val("");
+    startTime.val("");
+    endTime.val("");
+    eventDescription.val("");
+
+    fillMonth();
+    fillWeek();
+    fillDay();
 })
 
 // =====================================================================================
@@ -544,6 +619,20 @@ function formatDate(date){
     return (date.getMonth()+1) + " " + date.getDate() + "/" + date.getFullYear(); 
 }
 
+function formatDateForInput(date){
+    var day = ("0" + date.getDate()).slice(-2);
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    return date.getFullYear() + "-" + month + "-" + day; 
+}
+
+function getEvent(id){
+    for(var i=0; i<eventsList.length; i++){
+        if(eventsList[i].eventCreated === id){
+            return eventsList[i]
+        }
+    }
+    return {};
+}
 
 // ===================================================================================
 // Old functions
