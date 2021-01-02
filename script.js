@@ -19,6 +19,9 @@ var quoteAuthor = $("#quoteAuthor")
 var dayButton = $(".goDay")
 var frontButton = $(".goWeek")
 var monthButton = $(".goMonth")
+var addButton = $("#addEventBtn");
+var editButton = $("#editBtn");
+var deleteButton = $("#deleteEventBtn");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -50,7 +53,8 @@ var eventsList;
 // setup time picker elements
 $(document).ready(function () {
     $('.timepicker').timepicker();
-    $('.datepicker').datepicker();
+    editButton.toggle();
+    deleteButton.toggle();
 });
 
 // current view settings
@@ -72,6 +76,7 @@ getEventsList();
 function fillMonth() {
 
     // console.log("fillMonth() fires")
+    $(".monthDay").empty();
 
     monthTitle.text(`${getMonthName(monthViewed)} ${yearViewed}`);
 
@@ -87,8 +92,9 @@ function fillMonth() {
 
         // if event belongs in current month - display on month grid
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
-
-            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate()-1)).append(monthViewElement(eventsList[i]));
+            console.log("what is going on here?=================================================")
+            console.log(`${getFirstDayOfMonth()} + ${tempDate.getDate()}`);
+            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate() - 1)).append(monthViewElement(eventsList[i]));
         }
     }
 }
@@ -100,27 +106,29 @@ fillMonth();
 function fillWeek() {
     // console.log("fillWeek() fires")
 
-    var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
-    
+    $(".weekDayData").empty();
+
+    var dateViewed = new Date(yearViewed, monthViewed - 1, dayViewed);
+
     // fill week day headings
-    for(var i=0; i<7; i++){
-        $("#weekDate" + i).text( formatDate(addDays(getFirstDayOfWeek(dateViewed), i)) );
+    for (var i = 0; i < 7; i++) {
+        $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
+
     }
 
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
 
-          // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
-        if(eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7) ){ 
-            // console.log(`attempting to add event to weekview ${getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed))}`);        
+        // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+        if (eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7)) {
 
-            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)) );
+            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)));
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
 
-    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed+1}`);
+    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed + 1}`);
 }
 
 // call on page load
@@ -129,7 +137,9 @@ fillWeek();
 // fill day view with current day data from eventList
 function fillDay() {
 
-    $("#dayTitle").text(getDayName(new Date (yearViewed, monthViewed-1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
+    dayViewEvent.empty();
+
+    $("#dayTitle").text(getDayName(new Date(yearViewed, monthViewed - 1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
 
     for (var i = 0; i < eventsList.length; i++) {
 
@@ -147,18 +157,28 @@ fillDay();
 function monthViewElement(eventObj) {
     // console.log("attempting to add event to month", eventObj)
 
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
+
     var span = $("<span>");
     span.addClass("monthEvent");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
     span.css("background-image", getColor(eventObj.category));
 
-    return span;
+    viewLink.append(span);
+
+    return viewLink;
 }
 
 function weekViewElement(eventObj) {
 
-    console.log("attempting to display event", eventObj)
+    // console.log("attempting to display event", eventObj)
+
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
 
     var event = $("<div>");
     event.addClass("event");
@@ -180,12 +200,18 @@ function weekViewElement(eventObj) {
 
     event.append(textBox);
 
-    return event;
+    viewLink.append(event);
+
+    return viewLink;
 }
 
 function dayViewElement(eventObj) {
 
     // console.log("attempting to display event", eventObj)
+
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
 
     var event = $("<div>");
     event.addClass("event");
@@ -208,7 +234,9 @@ function dayViewElement(eventObj) {
 
     textBox.appendTo(event);
 
-    return event;
+    event.appendTo(viewLink);
+
+    return viewLink;
 }
 
 function setTimeScale() {
@@ -226,7 +254,7 @@ setTimeScale();
 // =====================================================================================
 
 // event listener for adding event
-$("#addEventBtn").click(function () {
+addButton.click(function () {
 
     var oldDate = new Date(eventDate.val());
     var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
@@ -289,17 +317,116 @@ dayButton.on("click", function () {
     front.attr("style", "display: none;")
     month.attr("style", "display: none;")
 })
+
 monthButton.on("click", function () {
     console.log("month")
     day.attr("style", "display: none;")
     front.attr("style", "display: none;")
     month.attr("style", "display: block;")
 })
+
 frontButton.on("click", function () {
     console.log("front")
     day.attr("style", "display: none;")
     front.attr("style", "display: block;")
     month.attr("style", "display: none;")
+})
+
+$(document).on("click", ".viewLink", function () {
+
+    console.log(`.viewLink click(${$(this).data("id")}) fires!`)
+
+    var id = $(this).data("id");
+    var event = getEvent(id);
+
+    console.log(`event id: ${id}`, event);
+    var tempDate = new Date(event.eventDate);
+    eventDate.val(formatDateForInput(tempDate));
+    startTime.val(event.startTime)
+    endTime.val(event.endTime)
+    eventDescription.val(event.eventDescription)
+    $("input[value='" + event.category + "']").prop("checked", true);
+
+    editButton.data("id", id)
+    deleteButton.data("id", id)
+
+    addButton.toggle();
+    editButton.toggle();
+    deleteButton.toggle();
+})
+
+editButton.click(function () {
+
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
+
+    var id = $(this).data("id");
+
+    var oldDate = new Date(eventDate.val());
+    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+
+    var newEvent = {
+        eventCreated: id,
+        eventDate: newDate,
+        startTime: startTime.val(),
+        endTime: endTime.val(),
+        eventDescription: eventDescription.val(),
+        category: selectedCategory
+    }
+
+    var indexFound = -1;
+
+    for (var i = 0; i < eventsList.length; i++) {
+        if (eventsList[i].eventCreated == id) {
+            indexFound = i
+            break;
+        }
+    }
+
+    if (indexFound > -1) {
+        eventsList.splice(i, 1, newEvent);
+    }
+
+    localStorage.setItem("eventsList", JSON.stringify(eventsList));
+
+    eventDate.val("");
+    startTime.val("");
+    endTime.val("");
+    eventDescription.val("");
+
+    fillMonth();
+    fillWeek();
+    fillDay();
+})
+
+deleteButton.click(function () {
+
+    var id = $(this).data("id");
+
+    var indexFound = -1;
+
+    for (var i = 0; i < eventsList.length; i++) {
+        console.log(`${eventsList[i].eventCreated} == ${id}`)
+        if (eventsList[i].eventCreated == id) {
+            indexFound = i
+            break;
+            console.log(`index found!!!: ${i}`)
+        }
+    }
+
+    if (indexFound > -1) {
+        eventsList.splice(indexFound, 1);
+    }
+
+    localStorage.setItem("eventsList", JSON.stringify(eventsList));
+
+    eventDate.val("");
+    startTime.val("");
+    endTime.val("");
+    eventDescription.val("");
+
+    fillMonth();
+    fillWeek();
+    fillDay();
 })
 
 // =====================================================================================
@@ -311,7 +438,7 @@ frontButton.on("click", function () {
 // needed to position all days in month view
 function getFirstDayOfMonth(date = currentDate) {
     var year = date.getFullYear();
-    var day = new Date(year + "-" + monthViewed + "-01").getDay() + 1;
+    var day = new Date(year + "-" + monthViewed + "-01").getDay();
 
     return day;
 }
@@ -327,7 +454,7 @@ function getFirstDayOfYear(date = currentDate) {
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
-function getDayName(num){
+function getDayName(num) {
     switch (num) {
         case 0:
             return "Sunday"
@@ -342,7 +469,7 @@ function getDayName(num){
         case 5:
             return "Friday";
         case 6:
-            return "Saturday"            
+            return "Saturday"
     }
     return "Oops!";
 }
@@ -381,7 +508,7 @@ function getMonthName(num) {
 // returns current week number 0-4
 function getWeekNumber(date = currentDate) {
     date = new Date(date);
-    var cellNumber = getFirstDayOfMonth() - 1 + date.getDate();
+    var cellNumber = getFirstDayOfMonth() + date.getDate() - 1;
 
     var weekNumber = Math.floor(cellNumber / 7);
 
@@ -404,12 +531,33 @@ function convertHours(str) {
 
     var timeArr = time.split(":");
 
-    intTime += parseInt(timeArr[0]);
-    intTime += parseInt(timeArr[1]) / 60;
+    // if(timeArr[2] === "AM" && timeArr[0] == 12){
+    //     intTime = 0;
+    // } else if (timeArr[2] === "PM" && timeArr[0] != 12) {
+    //     intTime += 12;
+    // } else{
+    //     intTime += parseInt(timeArr[0]);
+    // }
 
-    if (timeArr[2] === "PM" && timeArr[0] != 12) {
-        intTime += 12;
+    // intTime += parseInt(timeArr[1]) / 60;
+
+    if (timeArr[2] == "AM") {
+        if (timeArr[0] == 12) {
+            intTime = 0;
+        } else {
+            intTime = parseInt(timeArr[0])
+        }
+    } else {
+        if (timeArr[0] == 12) {
+            intTime = 12
+        } else {
+            intTime = 12 + parseInt(timeArr[0])
+        }
     }
+
+    console.log(`convertHours(${str}) fires intTime: ${intTime}`);
+
+    intTime += parseInt(timeArr[1]) / 60;
 
     return intTime;
 }
@@ -451,24 +599,24 @@ function getColor(str) {
     return color0;
 }
 
-function addDay(num=1){
+function addDay(num = 1) {
 
     var tempDate = new Date(yearViewed, monthViewed, 0);
 
     var maxDay = tempDate.getDate();
-    
+
     dayViewed += num;
 
-    if(dayViewed > maxDay){
+    if (dayViewed > maxDay) {
         dayViewed = dayViewed - maxDay;
         addMonth();
     }
     // console.log(`addDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
 }
 
-function subtractDay(num=1){
+function subtractDay(num = 1) {
     dayViewed -= num;
-    if(dayViewed <= 0){
+    if (dayViewed <= 0) {
         subtractMonth()
         var maxDay = new Date(yearViewed, monthViewed, 0).getDate();
         dayViewed = maxDay + dayViewed;
@@ -476,31 +624,31 @@ function subtractDay(num=1){
     // console.log(`subtractDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
 }
 
-function addWeek(){
+function addWeek() {
     addDay(7);
 }
 
-function subtractWeek(){
+function subtractWeek() {
     subtractDay(7)
 }
 
-function addMonth(){
+function addMonth() {
     monthViewed++;
-    if(monthViewed > 12){
+    if (monthViewed > 12) {
         monthViewed = 1
         yearViewed++;
     }
 }
 
-function subtractMonth(){
+function subtractMonth() {
     monthViewed--;
-    if(monthViewed < 1){
+    if (monthViewed < 1) {
         monthViewed = 12;
-        yearViewed --;
+        yearViewed--;
     }
 }
 
-function getDayOfYear(date = currentDate){
+function getDayOfYear(date = currentDate) {
     var firstDayOfYear = new Date(date.getFullYear(), 0, 0);
     // var millisecondsPerDay = 1000 * 60 * 60 * 24;
     // var timeSinceFirstDay = date - firstDayOfYear;
@@ -513,38 +661,52 @@ function getDayOfYear(date = currentDate){
 
 }
 
-function getDateDifferenceDays(date1, date2){
+function getDateDifferenceDays(date1, date2) {
     var millisecondsPerDay = 1000 * 60 * 60 * 24;
     var diff = date1 - date2
-    var days = Math.floor(diff/millisecondsPerDay)
+    var days = Math.floor(diff / millisecondsPerDay)
 
     return days;
 }
 
-function getFirstDayOfWeek(date = currentDate){
-    
+function getFirstDayOfWeek(date = currentDate) {
+
     // console.log(`getFirstDayOfWeek(${date}) fires`)   
 
     var tempDate = new Date(date);
 
-    tempDate = addDays(tempDate, -1*tempDate.getDay())
+    tempDate = addDays(tempDate, -1 * tempDate.getDay())
 
     // console.log(`tempDate: ${tempDate}`)
 
     return tempDate;
 }
 
-function addDays(date, days){
+function addDays(date, days) {
     var tempDate = new Date(date);
     tempDate.setDate(tempDate.getDate() + days);
 
     return tempDate;
 }
 
-function formatDate(date){
-    return (date.getMonth()+1) + " " + date.getDate() + "/" + date.getFullYear(); 
+function formatDate(date) {
+    return (date.getMonth() + 1) + " " + date.getDate() + "/" + date.getFullYear();
 }
 
+function formatDateForInput(date) {
+    var day = ("0" + date.getDate()).slice(-2);
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    return date.getFullYear() + "-" + month + "-" + day;
+}
+
+function getEvent(id) {
+    for (var i = 0; i < eventsList.length; i++) {
+        if (eventsList[i].eventCreated === id) {
+            return eventsList[i]
+        }
+    }
+    return {};
+}
 
 // ===================================================================================
 // Old functions

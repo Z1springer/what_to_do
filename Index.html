@@ -51,66 +51,66 @@
 
         <div id="weekView" class="row" style="display: block;">
             <h2 id="weekTitle"></h2>
-            <div id="weekDay0" class="day col s7ths s6">
+            <div class="day col s7ths s6">
                 <div class="day-header weekDay0">
                     <h4 id="day0">Sunday</h4>
                     <div id="weekDate0">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay0" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay1" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay1">
                     <h4 id="day1">Monday</h4>
                     <div id="weekDate1">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay1" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay2" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay2">
                     <h4 id="day2">Tuesday</h4>
                     <div id="weekDate2">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay2" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay3" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay3">
                     <h4 id="day3">Wednesday</h4>
                     <div id="weekDate3">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay3" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay4" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay4">
                     <h4 id="day4">Thursday</h4>
                     <div id="weekDate4">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay4" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay5" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay5">
                     <h4 id="day5">Friday</h4>
                     <div id="weekDate5">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay5" class="weekDayData">
 
                 </div>
             </div>
-            <div id="weekDay6" class="day col s7ths">
+            <div class="day col s7ths">
                 <div class="day-header weekDay6">
                     <h4 id="day6">Saturday</h4>
                     <div id="weekDate6">MM/DD/YYYY</div>
                 </div>
-                <div class="display-flex">
+                <div id="weekDay6" class="weekDayData">
 
                 </div>
             </div>
@@ -370,138 +370,133 @@
 
         <div id="addEventForm">
             <div id=inputRequest class="gone">
-                <div class="row">
+                <label for="inputDate">Select Date</label>
+                <input type="date" id="inputDate">
 
-                    <label for="inputDate">Select Date</label>
-                    <input type="text" class="datepicker" id="inputDate">
+                <label for="inputStartTime">Start Time</label>
+                <input type="text" class="timepicker" id="inputStartTime">
 
-                    <label for="inputStartTime">Start Time</label>
-                    <input type="text" class="timepicker" id="inputStartTime">
+                <label for="inputEndTime">End Time</label>
+                <input type="text" class="timepicker" id="inputEndTime">
 
-                    <label for="inputEndTime">End Time</label>
-                    <input type="text" class="timepicker" id="inputEndTime">
+                <label for="textAreaEventDescription"></label>
+                <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
 
-                    <label for="textAreaEventDescription"></label>
-                    <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
-
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="work" checked />
-                            <span>work</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="school" />
-                            <span>school</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="personal" />
-                            <span>personal</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="spiritual" />
-                            <span>spiritual</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="chores" />
-                            <span>chores</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="family" />
-                            <span>family</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="medical" />
-                            <span>medical</span>
-                        </label>
-                    </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="work" checked />
+                        <span>work</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="school" />
+                        <span>school</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="personal" />
+                        <span>personal</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="spiritual" />
+                        <span>spiritual</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="chores" />
+                        <span>chores</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="family" />
+                        <span>family</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="medical" />
+                        <span>medical</span>
+                    </label>
+                </p>
+                <!-- 
 
 
-                    <!-- TODO: possibly make a drop down -->
-                    <!-- <p>
-                        <label>
-                            <input name="group1" type="radio" value="education" />
-                            <span>education</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="recreational" />
-                            <span>recreational</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="diy" />
-                            <span>diy</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="charity" />
-                            <span>charity</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="cooking" />
-                            <span>cooking</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="relaxation" />
-                            <span>relaxation</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="music" />
-                            <span>music</span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="busywork" />
-                            <spanbusywork< /span>
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            <input name="group1" type="radio" value="" checked />
-                            <span>surprise me!</span>
-                        </label>
-                    </p> -->
+<p>
+                    <label>
+                        <input name="group1" type="radio" value="education" />
+                        <span>education</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="recreational" />
+                        <span>recreational</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="diy" />
+                        <span>diy</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="charity" />
+                        <span>charity</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="cooking" />
+                        <span>cooking</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="relaxation" />
+                        <span>relaxation</span>
+                    </label>
+                </p><p>
+                    <label>
+                        <input name="group1" type="radio" value="music" />
+                        <span>music</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="busywork" />
+                        <spanbusywork</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="group1" type="radio" value="" checked/>
+                        <span>surprise me!</span>
+                    </label>
+                </p>
 
-                    <button id="getRandomActivity" class="btn-large waves-effect waves-light">Get Random
-                        Activity</button>
+                <button id="getRandomActivity">Get Random Activity</button>
+                
 
 
 
 
+=========================================================
 
-                    <!-- =========================================================
-
-                ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"] -->
-
+["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 
 
+ -->
 
-                    <button id="addEventBtn" class="waves-effect waves-light btn-large btn-floating">
-                        <i class="large material-icons">done_all</i>
-                    </button>
-                </div>
+                <button id="addEventBtn">Add Event</button>
+                <button id="editBtn">Edit Event</button>
+                <button id="deleteEventBtn">delete Event</button>
             </div>
         </div>
 

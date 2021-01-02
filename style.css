@@ -210,6 +210,12 @@ Week View settings
     border: 5px groove plum;
 }
 
+.weekDayData{
+    height: 100%;
+    width: 100;
+    position: relative;
+}
+
 .day {
     position: relative;
     padding: 0 !important;
@@ -260,9 +266,9 @@ Week View settings
   }
   
   .event h4{
-      margin: 0 20px 5px 20px;
+    margin: 0 20px 5px 20px;
   }
-  
+
   .eventTextBox{
     padding: 4px 35px;
     height: 100%;
