@@ -234,8 +234,8 @@ $("#addEventBtn").click(function () {
     // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
     // console.log("newDate: ", newDate)
 
-    var selectedCategory = $("input:radio[name='group1']:checked").val();
-
+    var selectedCategory = $("input:radio[name='group1']:checked").val(display: inline;)
+    }
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,
