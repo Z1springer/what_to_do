@@ -149,18 +149,28 @@ fillDay();
 function monthViewElement(eventObj) {
     // console.log("attempting to add event to month", eventObj)
 
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
+
     var span = $("<span>");
     span.addClass("monthEvent");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
     span.css("background-image", getColor(eventObj.category));
 
-    return span;
+    viewLink.append(span);
+
+    return viewLink;
 }
 
 function weekViewElement(eventObj) {
 
-    console.log("attempting to display event", eventObj)
+    // console.log("attempting to display event", eventObj)
+
+    var viewLink = $("<a>");
+    viewLink.attr("data-id", eventObj.eventCreated);
+    viewLink.addClass("viewLink");
 
     var event = $("<div>");
     event.addClass("event");
@@ -182,7 +192,9 @@ function weekViewElement(eventObj) {
 
     event.append(textBox);
 
-    return event;
+    viewLink.append(event);
+
+    return viewLink;
 }
 
 function dayViewElement(eventObj) {
