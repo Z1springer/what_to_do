@@ -99,10 +99,16 @@ fillMonth();
 function fillWeek() {
     // console.log("fillWeek() fires")
 
+    var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
+    
+    // fill week day headings
+    for(var i=0; i<7; i++){
+        $("#weekDate" + i).text( formatDate(addDays(getFirstDayOfWeek(dateViewed), i)) );
+    }
+
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
-        var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
 
           // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
         if(eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7) ){ 
@@ -121,6 +127,8 @@ fillWeek();
 
 // fill day view with current day data from eventList
 function fillDay() {
+
+    $("#dayTitle").text(getDayName(new Date (yearViewed, monthViewed-1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
 
     for (var i = 0; i < eventsList.length; i++) {
 
@@ -292,6 +300,7 @@ frontButton.on("click", function () {
     front.attr("style", "display: block;")
     month.attr("style", "display: none;")
 })
+
 // =====================================================================================
 // Helper functions
 // =====================================================================================
@@ -317,9 +326,28 @@ function getFirstDayOfYear(date = currentDate) {
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
+function getDayName(num){
+    switch (num) {
+        case 0:
+            return "Sunday"
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday"
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday"            
+    }
+    return "Oops!";
+}
 
 function getMonthName(num) {
-    console.log(num)
+    // console.log(num)
     switch (num) {
         case 1:
             return "January";
@@ -512,7 +540,9 @@ function addDays(date, days){
     return tempDate;
 }
 
-getFirstDayOfWeek();
+function formatDate(date){
+    return (date.getMonth()+1) + " " + date.getDate() + "/" + date.getFullYear(); 
+}
 
 
 // ===================================================================================
