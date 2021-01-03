@@ -103,7 +103,8 @@ function fillMonth() {
 
     // put day number on each day of the month
     for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
-        $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
+        // $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
+        $("#monthDay" + (i + getFirstDayOfMonth())).append(dayMonthElement(new Date(yearViewed, monthViewed-1, i + 1)))
     }
 
     // loop through each event
@@ -291,14 +292,14 @@ function addMonthShadow(eventObj){
     return shadow;
 }
 
-function dayButtonMonthElement(date){
+function dayMonthElement(date){
     var tempDate = new Date(date);
 
     var button = $("<a>");
     button.addClass("btn-floating btn-large waves-effect waves-light red dayLink");
     button.data("date", date);
 
-    $("<i>").addClass("material-icons").text(tempDate.getDate()).appendTo(button);
+    button.text(tempDate.getDate());
 
     return button;
 }
