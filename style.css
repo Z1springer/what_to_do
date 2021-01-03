@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
 
-/* 
+/*
 ========================================================================
 General settings
 ========================================================================
@@ -41,7 +41,7 @@ nav {
 }
 
 .displayAlongTitleSpace {
-    margin: 4vh;
+    margin: 4vh 15vh;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     background-color: rgba(255, 255, 0, 0.726);
@@ -330,9 +330,13 @@ Month View settings
     border-left: 10px groove lightseagreen;
 }
 
-/* 
-#monthTitle{
-} */
+#previousMonthButton{
+    background-color: firebrick;
+}
+
+#nextMonthButton{
+    background-color: green;
+}
 
 .monthDay{
     border: 2px solid black;
@@ -423,8 +427,12 @@ Event Form settings
 
 #radiohome{
     border-right: 10px groove royalblue;
-    padding: 0;
+    padding: 2vh 3vh 1vh 0;
 } 
+
+#texthome{
+    padding: 2vh 1vh 1vh;
+}
 
 #timehome{
     margin-bottom: 0;
