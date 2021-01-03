@@ -121,9 +121,13 @@ Day View settings
 
 }
 
-/* 
-#dayTitle{
-} */
+#previousDayButton{
+    background-color: firebrick;
+}
+
+#nextDayButton{
+    background-color: green;
+}
 
 #dayViewEvent{
     position: relative;
@@ -182,9 +186,14 @@ Week View settings
     border-right: 10px ridge royalblue;
     border-left: 10px ridge royalblue;
 }
-/* 
-#weekTitle{
-} */
+
+#previousWeekButton{
+    background-color: firebrick;
+}
+
+#nextWeekButton{
+    background-color: green;
+}
 
 .weekDay0{
     background-color: pink;
