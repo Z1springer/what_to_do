@@ -410,6 +410,8 @@ $(document).on("click", ".viewLink", function () {
     addButton.toggle();
     editButton.toggle();
     deleteButton.toggle();
+
+    $('#eventFormModal').modal("open");
 })
 
 editButton.click(function () {
@@ -602,6 +604,8 @@ $(document).on("click", ".dayLink", function(){
     dayViewed = date.getDate();
     monthViewed = date.getMonth()+1;
     yearViewed = date.getFullYear();
+
+    fillDay();
 
     hideViews();
     day.show();
