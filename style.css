@@ -15,8 +15,8 @@ h1, h2, h3, h4 {
     color: black;
 }
 
-.btn {
-    background-color: rebeccapurple;
+label{
+    color: black;
 }
 
 a{
@@ -34,14 +34,6 @@ nav {
     background-color: rgba(64, 224, 208, 0.74);
     border-bottom: 5px groove darkturquoise;
     padding: 0 1.5vh;
-}
-
-#quoteText{
-    font-family: 'Covered By Your Grace', sans-serif;
-}
-
-#quoteAuthor{
-    font-family: 'Covered By Your Grace', sans-serif;
 }
 
 .displayAlongTitleSpace {
@@ -65,12 +57,17 @@ Quote settings
 #quoteText {
     font-size: 50px;
     color: #000077;
-    /* background-color: rebeccapurple; */
+    font-family: 'Covered By Your Grace', sans-serif;
 }
+
 #quoteAuthor {
     font-size: 20px;
     color: #000077;
-    /* background-color: rebeccapurple; */
+    font-family: 'Covered By Your Grace', sans-serif;
+}
+
+#quoteBtn {
+    background-color: palevioletred;
 }
 
 /* 
@@ -145,7 +142,7 @@ Day View settings
     display: inline-block;
     position: relative;
     top: -15px;
-    background-color: black;
+    background-color: brown;
     border-radius: 15px;
     color:white;
     font-size: 12pt;
@@ -250,7 +247,7 @@ Week View settings
 
 .event{
     position: absolute;
-    width: 90%;
+    width: 95%;
     font-family: 'Covered By Your Grace';
 }
 /* 
@@ -283,9 +280,9 @@ Week View settings
   
 
   .event h4{
-      margin: 0 20px 5px 20px;
+    margin: 0 20px 5px 20px;
   }
-  
+
   .eventTextBox{
     padding: 4px 35px;
     height: 100%;
@@ -382,7 +379,7 @@ Event Form settings
 #addEventForm{
     margin: 5vh;
     border: 10px ridge royalblue;
-    padding: 20px;
+    padding: 0 0 0 20px;
     background-color: lightblue;
 }
 
@@ -392,4 +389,19 @@ Event Form settings
     display: none;
 }
 
-/* Jonathon's Goofy CSS */
+#randomActivityBtn, #addEventBtn, #editBtn, #deleteEventBtn{
+    background-color: dodgerblue;
+}
+
+.activitytypetitle{
+    font-size: 2vh;
+}
+
+#radiohome{
+    border-right: 10px groove royalblue;
+    padding: 0;
+} 
+
+#timehome{
+    margin-bottom: 0;
+}
