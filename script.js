@@ -32,6 +32,14 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
+// validation variables
+var dateMsg = $("#dateMsg");
+var startMsg = $("#startMsg");
+var endMsg = $("#endMsg");
+var descriptionMsg = $("#descriptionMsg");
+var validTimeMsg = $("#validTimeMsg");
+var categoryMsg = $("#categoryMsg");
+
 // event color codes
 var color0 = "linear-gradient(to bottom right, hsl(350deg, 100%, 87.6%) 65%, hsl(350deg, 100%, 94.4%)";
 var color1 = "linear-gradient(to bottom right, hsl(28deg, 100%, 86.3%) 65%, hsl(28deg, 100%, 94.3%))";
@@ -56,7 +64,6 @@ $(document).ready(function () {
     $('.datepicker').datepicker();
     editButton.toggle();
     deleteButton.toggle();
-
 
 });
 
@@ -95,8 +102,6 @@ function fillMonth() {
 
         // if event belongs in current month - display on month grid
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
-            console.log("what is going on here?=================================================")
-            console.log(`${getFirstDayOfMonth()} + ${tempDate.getDate()}`);
             $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate() - 1)).append(monthViewElement(eventsList[i]));
         }
     }
@@ -259,41 +264,42 @@ setTimeScale();
 // event listener for adding event
 addButton.click(function () {
 
-    var oldDate = new Date(eventDate.val());
-    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
-
-    // console.log("attempting to set new date")
-    // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
-    // console.log("newDate: ", newDate)
-
     var selectedCategory = $("input:radio[name='group1']:checked").val();
 
-    currentDate = new Date();
-    var eventObj = {
-        eventCreated: currentDate,
-        eventDate: newDate,
-        startTime: startTime.val(),
-        endTime: endTime.val(),
-        eventDescription: eventDescription.val(),
-        category: selectedCategory
+    if (validate()) {
+
+        var oldDate = new Date(eventDate.val());
+        var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+
+        currentDate = new Date();
+        var eventObj = {
+            eventCreated: currentDate,
+            eventDate: newDate,
+            startTime: startTime.val(),
+            endTime: endTime.val(),
+            eventDescription: eventDescription.val(),
+            category: selectedCategory
+        }
+
+
+        // console.log("addEventButton() fires ", eventObj)
+
+        eventsList.push(eventObj);
+
+        localStorage.setItem("eventsList", JSON.stringify(eventsList));
+        getEventsList();
+
+        eventDate.val("");
+        startTime.val("");
+        endTime.val("");
+        eventDescription.val("");
+
+        fillMonth();
+        fillWeek();
+        fillDay();
+
     }
 
-
-    // console.log("addEventButton() fires ", eventObj)
-
-    eventsList.push(eventObj);
-
-    localStorage.setItem("eventsList", JSON.stringify(eventsList));
-    getEventsList();
-
-    eventDate.val("");
-    startTime.val("");
-    endTime.val("");
-    eventDescription.val("");
-
-    fillMonth();
-    fillWeek();
-    fillDay();
 })
 
 // event listner function for clicking quote
@@ -360,45 +366,48 @@ $(document).on("click", ".viewLink", function () {
 
 editButton.click(function () {
 
-    var selectedCategory = $("input:radio[name='group1']:checked").val();
-
     var id = $(this).data("id");
 
-    var oldDate = new Date(eventDate.val());
-    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+    var selectedCategory = $("input:radio[name='group1']:checked");
 
-    var newEvent = {
-        eventCreated: id,
-        eventDate: newDate,
-        startTime: startTime.val(),
-        endTime: endTime.val(),
-        eventDescription: eventDescription.val(),
-        category: selectedCategory
-    }
+    if (validate()) {
 
-    var indexFound = -1;
+        var oldDate = new Date(eventDate.val());
+        var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
 
-    for (var i = 0; i < eventsList.length; i++) {
-        if (eventsList[i].eventCreated == id) {
-            indexFound = i
-            break;
+        var newEvent = {
+            eventCreated: id,
+            eventDate: newDate,
+            startTime: startTime.val(),
+            endTime: endTime.val(),
+            eventDescription: eventDescription.val(),
+            category: selectedCategory
         }
+
+        var indexFound = -1;
+
+        for (var i = 0; i < eventsList.length; i++) {
+            if (eventsList[i].eventCreated == id) {
+                indexFound = i
+                break;
+            }
+        }
+
+        if (indexFound > -1) {
+            eventsList.splice(i, 1, newEvent);
+        }
+
+        localStorage.setItem("eventsList", JSON.stringify(eventsList));
+
+        eventDate.val("");
+        startTime.val("");
+        endTime.val("");
+        eventDescription.val("");
+
+        fillMonth();
+        fillWeek();
+        fillDay();
     }
-
-    if (indexFound > -1) {
-        eventsList.splice(i, 1, newEvent);
-    }
-
-    localStorage.setItem("eventsList", JSON.stringify(eventsList));
-
-    eventDate.val("");
-    startTime.val("");
-    endTime.val("");
-    eventDescription.val("");
-
-    fillMonth();
-    fillWeek();
-    fillDay();
 })
 
 deleteButton.click(function () {
@@ -430,6 +439,38 @@ deleteButton.click(function () {
     fillMonth();
     fillWeek();
     fillDay();
+})
+
+eventDate.change(function () {
+    if (eventDate.val() != "") {
+        dateMsg.hide();
+    }
+})
+startTime.change(function () {
+    if (startTime.val() != "") {
+        startMsg.hide();
+        if (endTime.val() != "") {
+            if (convertHours(startTime.val()) < convertHours(endTime.val())) {
+                validTimeMsg.hide();
+            }
+        }
+    }
+
+})
+endTime.change(function () {
+    if (endTime.val() != "") {
+        endMsg.hide();
+        if (startTime.val() != "") {
+            if (convertHours(startTime.val()) < convertHours(endTime.val())) {
+                validTimeMsg.hide();
+            }
+        }
+    }
+})
+eventDescription.change(function () {
+    if (eventDescription.val() != "") {
+        descriptionMsg.hide();
+    }
 })
 
 // =====================================================================================
@@ -558,7 +599,7 @@ function convertHours(str) {
         }
     }
 
-    console.log(`convertHours(${str}) fires intTime: ${intTime}`);
+    // console.log(`convertHours(${str}) fires intTime: ${intTime}`);
 
     intTime += parseInt(timeArr[1]) / 60;
 
@@ -709,6 +750,39 @@ function getEvent(id) {
         }
     }
     return {};
+}
+
+function validate() {
+    var hasEventDate = eventDate.val() != "";
+    var hasStartTime = startTime.val() != "";
+    var hasEndTime = endTime.val() != "";
+    var hasDescription = eventDescription.val() != "";
+    var isValidTime = convertHours(startTime.val()) < convertHours(endTime.val());
+
+    var valid = false;
+
+    if (hasEventDate && hasStartTime && hasEndTime && hasDescription && isValidTime) {
+        valid = true
+    }
+    else {
+        if (!hasEventDate) {
+            dateMsg.show();
+        }
+        if (!hasStartTime) {
+            startMsg.show();
+        }
+        if (!hasEndTime) {
+            endMsg.show();
+        }
+        if (!hasDescription) {
+            descriptionMsg.show();
+        }
+        if (!isValidTime) {
+            validTimeMsg.show();
+        }
+    }
+
+    return valid;
 }
 
 // ===================================================================================

@@ -369,6 +369,11 @@ Event Form settings
     background-color: lightblue;
 }
 
+.validationError{
+    color: red;
+    font-weight: 900;
+    display: none;
+}
 
 #addEventBtn{
     background-color: navy;
