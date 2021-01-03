@@ -62,6 +62,7 @@ var eventsList;
 // setup time picker elements
 $(document).ready(function () {
     $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
     editButton.toggle();
     deleteButton.toggle();
 
@@ -102,7 +103,6 @@ function fillMonth() {
 
         // if event belongs in current month - display on month grid
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
-
             $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate() - 1)).append(monthViewElement(eventsList[i]));
         }
     }
@@ -474,14 +474,14 @@ eventDescription.change(function () {
     }
 })
 
-randomActivityButton.click(function(){
+randomActivityButton.click(function () {
     var selectedRandomType = $("input:radio[name='group2']:checked").val();
     getRandomBoredEventApi(fillActivity, selectedRandomType);
 })
 
-function fillActivity(response){
+function fillActivity(response) {
     var result = `${response.activity}. - Participants: ${response.participants}. - Type: ${response.type}.`;
-    if(response.link != ""){
+    if (response.link != "") {
         result += ` - Learn more at: ${response.link}`
     }
     eventDescription.val(result);
@@ -748,7 +748,7 @@ function addDays(date, days) {
 }
 
 function formatDate(date) {
-    return (date.getMonth() + 1) + " " + date.getDate() + "/" + date.getFullYear();
+    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 }
 
 function formatDateForInput(date) {
