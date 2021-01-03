@@ -517,14 +517,21 @@ function fillActivity(response) {
 
 showDayButton.click(function(){
     hideViews();
+    day.show();
+    $("#dayView").show()
+    console.log(`show day`);
 })
 
 showWeekButton.click(function(){
     hideViews();
+    week.show();
+    console.log(`show week`);
 })
 
 showMonthButton.click(function(){
     hideViews();
+    month.show();
+    console.log(`show month`);
 })
 
 function hideViews(){
