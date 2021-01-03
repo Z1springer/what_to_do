@@ -748,7 +748,7 @@ function addDays(date, days) {
 }
 
 function formatDate(date) {
-    return (date.getMonth() + 1) + " " + date.getDate() + "/" + date.getFullYear();
+    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 }
 
 function formatDateForInput(date) {
@@ -765,8 +765,6 @@ function getEvent(id) {
     }
     return {};
 }
-
-$('.dropdown-trigger').dropdown();
 
 function validate() {
     var hasEventDate = eventDate.val() != "";
