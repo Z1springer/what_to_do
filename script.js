@@ -131,8 +131,9 @@ function fillWeek() {
 
     // fill week day headings
     for (var i = 0; i < 7; i++) {
-        // $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
-        $("#weekDate" + i).text(dayButtonElement(addDays(getFirstDayOfWeek(dateViewed), i)));
+        $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
+
+        $(".weekDay" + i).attr("data-date", addDays(getFirstDayOfWeek(dateViewed), i));        
     }
 
     for (var i = 0; i < eventsList.length; i++) {
@@ -290,7 +291,7 @@ function addMonthShadow(eventObj){
     return shadow;
 }
 
-function dayButtonElement(date){
+function dayButtonMonthElement(date){
     var tempDate = new Date(date);
 
     var button = $("<a>");
