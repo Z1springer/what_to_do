@@ -31,6 +31,8 @@ var nextDayButton = $("#nextDayButton");
 var prevDayButton = $("#previousDayButton");
 var nextWeekButton = $("#nextWeekButton");
 var prevWeekButton = $("#previousWeekButton");
+var nextMonthButton = $("#nextWeekButton");
+var prevMonthButton = $("#previousWeekButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -172,8 +174,6 @@ function fillDay() {
 
 // call on page load
 fillDay();
-
-console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
 
 function monthViewElement(eventObj) {
     // console.log("attempting to add event to month", eventObj)
@@ -480,6 +480,7 @@ eventDate.change(function () {
         dateMsg.hide();
     }
 })
+
 startTime.change(function () {
     if (startTime.val() != "") {
         startMsg.hide();
@@ -491,6 +492,7 @@ startTime.change(function () {
     }
 
 })
+
 endTime.change(function () {
     if (endTime.val() != "") {
         endMsg.hide();
@@ -501,6 +503,7 @@ endTime.change(function () {
         }
     }
 })
+
 eventDescription.change(function () {
     if (eventDescription.val() != "") {
         descriptionMsg.hide();
@@ -552,7 +555,6 @@ prevDayButton.click(function(){
     fillDay();
 })
 
-
 prevWeekButton.click(function(){
     subtractWeek();
     getWeekNumber(new Date(yearViewed, monthViewed-1, dayViewed));
@@ -566,6 +568,15 @@ nextWeekButton.click(function(){
     console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
     fillWeek();
 })
+
+nextMonthButton.click(function(){
+
+})
+
+prevMonthButton.click(function(){
+
+})
+
 
 // =====================================================================================
 // Helper functions
