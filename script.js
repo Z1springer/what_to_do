@@ -104,7 +104,7 @@ function fillMonth() {
     // put day number on each day of the month
     for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
         // $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
-        $("#monthDay" + (i + getFirstDayOfMonth())).append(dayMonthElement(new Date(yearViewed, monthViewed-1, i + 1)))
+        $("#monthDay" + (i + getFirstDayOfMonth())).append(dayMonthElement(new Date(yearViewed, monthViewed - 1, i + 1)))
     }
 
     // loop through each event
@@ -134,7 +134,7 @@ function fillWeek() {
     for (var i = 0; i < 7; i++) {
         $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
 
-        $(".weekDay" + i).attr("data-date", addDays(getFirstDayOfWeek(dateViewed), i));        
+        $(".weekDay" + i).attr("data-date", addDays(getFirstDayOfWeek(dateViewed), i));
     }
 
     for (var i = 0; i < eventsList.length; i++) {
@@ -270,33 +270,33 @@ function setTimeScale() {
     }
 }
 
-function addWeekShadow(eventObj){
-    var shadow = $("<div>");
-    shadow.addClass("eventShadow");
-    shadow.css("height", (getPercentOfDay(getDuration(eventObj)) - 3) + "%");
-    shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime))+2) + "%");
-    shadow.css("left", (   shiftShadow(getPercentOfDay(getDuration(eventObj) * 3.0  ), 6)   ) + "%");
-
-    // console.log(`shiftShadow: `);
-    return shadow;
-}
-
-function addMonthShadow(eventObj){
+function addWeekShadow(eventObj) {
     var shadow = $("<div>");
     shadow.addClass("eventShadow");
     shadow.css("height", (getPercentOfDay(getDuration(eventObj)) - 3) + "%");
     shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime)) + 2) + "%");
-    shadow.css("left",    shiftShadow(getPercentOfDay(getDuration(eventObj))*1.2 ,6) + "%");
+    shadow.css("left", (shiftShadow(getPercentOfDay(getDuration(eventObj) * 3.0), 6)) + "%");
 
     // console.log(`shiftShadow: `);
     return shadow;
 }
 
-function dayMonthElement(date){
+function addMonthShadow(eventObj) {
+    var shadow = $("<div>");
+    shadow.addClass("eventShadow");
+    shadow.css("height", (getPercentOfDay(getDuration(eventObj)) - 3) + "%");
+    shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime)) + 2) + "%");
+    shadow.css("left", shiftShadow(getPercentOfDay(getDuration(eventObj)) * 1.2, 6) + "%");
+
+    // console.log(`shiftShadow: `);
+    return shadow;
+}
+
+function dayMonthElement(date) {
     var tempDate = new Date(date);
 
     var button = $("<a>");
-    button.addClass("btn-floating btn-large waves-effect waves-light red dayLink");
+    button.addClass("btn-floating btn-large waves-effect waves-light dayLink");
     button.attr("data-date", date);
 
     button.text(tempDate.getDate());
@@ -538,69 +538,69 @@ function fillActivity(response) {
     M.textareaAutoResize(eventDescription);
 }
 
-showDayButton.click(function(){
+showDayButton.click(function () {
     hideViews();
     day.show();
 })
 
-showWeekButton.click(function(){
+showWeekButton.click(function () {
     hideViews();
     week.show();
 })
 
-showMonthButton.click(function(){
+showMonthButton.click(function () {
     hideViews();
     month.show();
 })
 
-function hideViews(){
+function hideViews() {
     day.hide();
     week.hide();
     month.hide();
 }
 
-nextDayButton.click(function(){
+nextDayButton.click(function () {
     addDay();
     fillDay();
 })
 
-prevDayButton.click(function(){
+prevDayButton.click(function () {
     subtractDay();
     fillDay();
 })
 
-prevWeekButton.click(function(){
+prevWeekButton.click(function () {
     subtractWeek();
-    getWeekNumber(new Date(yearViewed, monthViewed-1, dayViewed));
+    getWeekNumber(new Date(yearViewed, monthViewed - 1, dayViewed));
     console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
     fillWeek();
 })
 
-nextWeekButton.click(function(){
+nextWeekButton.click(function () {
     addWeek();
-    getWeekNumber(new Date(yearViewed, monthViewed-1, dayViewed));
+    getWeekNumber(new Date(yearViewed, monthViewed - 1, dayViewed));
     console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
     fillWeek();
 })
 
-nextMonthButton.click(function(){
+nextMonthButton.click(function () {
     console.log(`next month button fires`);
     addMonth();
     fillMonth();
 })
 
-prevMonthButton.click(function(){
+prevMonthButton.click(function () {
     console.log(`prev month button fires`);
     subtractMonth();
     fillMonth();
 })
 
-$(document).on("click", ".dayLink", function(){
+$(document).on("click", ".dayLink", function () {
     var date = new Date($(this).data("date"));
     console.log(date);
 
     dayViewed = date.getDate();
-    monthViewed = date.getMonth()+1;
+    monthViewed = date.getMonth() + 1;
     yearViewed = date.getFullYear();
 
     hideViews();
@@ -921,11 +921,11 @@ function validate() {
     return valid;
 }
 
-function shiftShadow(height, deg){
+function shiftShadow(height, deg) {
     // console.log(`height: ${height} deg: ${deg}`);
     var amtToShift;
-    var radians = ((90-deg) * Math.PI) / 180;
-    amtToShift = height/(2* Math.tan(radians))
+    var radians = ((90 - deg) * Math.PI) / 180;
+    amtToShift = height / (2 * Math.tan(radians))
     return amtToShift;
 }
 
