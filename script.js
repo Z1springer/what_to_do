@@ -60,7 +60,7 @@ var eventsList;
 
 // setup time picker elements
 $(document).ready(function () {
-    // $('.timepicker').timepicker();
+    $('.timepicker').timepicker();
     $('.datepicker').datepicker();
     editButton.toggle();
     deleteButton.toggle();
