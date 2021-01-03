@@ -52,9 +52,12 @@ var eventsList;
 
 // setup time picker elements
 $(document).ready(function () {
-    $('.timepicker').timepicker();
+    // $('.timepicker').timepicker();
+    $('.datepicker').datepicker();
     editButton.toggle();
     deleteButton.toggle();
+
+
 });
 
 // current view settings
@@ -264,7 +267,7 @@ addButton.click(function () {
     // console.log("newDate: ", newDate)
 
     var selectedCategory = $("input:radio[name='group1']:checked").val();
-    
+
     currentDate = new Date();
     var eventObj = {
         eventCreated: currentDate,

@@ -370,124 +370,128 @@
 
         <div id="addEventForm">
             <div id=inputRequest class="gone">
-                <label for="inputDate">Select Date</label>
-                <input type="date" id="inputDate">
+                <div class="row">
+                    <label for="inputDate">Select Date</label>
+                    <input type="text" class="datepicker" id="inputDate">
 
-                <label for="inputStartTime">Start Time</label>
-                <input type="text" class="timepicker" id="inputStartTime">
+                    <label for="inputStartTime">Start Time</label>
+                    <input type="text" class="timepicker" id="inputStartTime">
 
-                <label for="inputEndTime">End Time</label>
-                <input type="text" class="timepicker" id="inputEndTime">
+                    <label for="inputEndTime">End Time</label>
+                    <input type="text" class="timepicker" id="inputEndTime">
 
-                <label for="textAreaEventDescription"></label>
-                <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
+                    <label for="textAreaEventDescription"></label>
+                    <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
 
-                <p>
-                    <label>
+                    <p>
+                        <label>
 
-                        <input name="group1" type="radio" value="work" checked />
-                        <span>work</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="school" />
-                        <span>school</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="personal" />
-                        <span>personal</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="spiritual" />
-                        <span>spiritual</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="chores" />
-                        <span>chores</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="family" />
-                        <span>family</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group1" type="radio" value="medical"><span>medical
-                        </span>
-                    </label>
-                </p>
+                            <input name="group1" type="radio" value="work" checked />
+                            <span>work</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="school" />
+                            <span>school</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="personal" />
+                            <span>personal</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="spiritual" />
+                            <span>spiritual</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="chores" />
+                            <span>chores</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="family" />
+                            <span>family</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" value="medical"><span>medical
+                            </span>
+                        </label>
+                    </p>
 
-                <label>
-                    <input name="group2" type="radio" value="education" />
-                    <span>education</span>
-                </label>
-                </p>
-                <p>
+                    <button id="addEventBtn" class="btn-large">Add Event</button>
+                    <button id="editBtn">Edit Event</button>
+                    <button id="deleteEventBtn">delete Event</button>
+                    <br>
                     <label>
-                        <input name="group2" type="radio" value="recreational" />
-                        <span>recreational</span>
+                        <input name="group2" type="radio" value="education" />
+                        <span>education</span>
                     </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="diy" />
-                        <span>diy</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="charity" />
-                        <span>charity</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="cooking" />
-                        <span>cooking</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="relaxation" />
-                        <span>relaxation</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="music" />
-                        <span>music</span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="busywork" />
-                        <spanbusywork< /span>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        <input name="group2" type="radio" value="" checked />
-                        <span>surprise me!</span>
-                    </label>
-                </p>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="recreational" />
+                            <span>recreational</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="diy" />
+                            <span>diy</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="charity" />
+                            <span>charity</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="cooking" />
+                            <span>cooking</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="relaxation" />
+                            <span>relaxation</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="music" />
+                            <span>music</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="busywork" />
+                            <spanbusywork< /span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input name="group2" type="radio" value="" checked />
+                            <span>surprise me!</span>
+                        </label>
+                    </p>
 
-                <button id="getRandomActivity">Get Random Activity</button>
+                    <button id="getRandomActivity">Get Random Activity</button>
 
-                <!-- ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"] -->
+                    <!-- ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"] -->
 
 
-                <button id="addEventBtn" class="btn-large">Add Event</button>
-                <button id="editBtn">Edit Event</button>
-                <button id="deleteEventBtn">delete Event</button>
+
+                </div>
             </div>
         </div>
 
