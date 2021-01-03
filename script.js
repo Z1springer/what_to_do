@@ -539,11 +539,13 @@ function hideViews(){
 }
 
 nextDayButton.click(function(){
-
+    addDay();
+    fillDay();
 })
 
 prevDayButton.click(function(){
-    
+    subtractDay();
+    fillDay();
 })
 // =====================================================================================
 // Helper functions
