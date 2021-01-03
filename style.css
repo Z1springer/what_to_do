@@ -142,7 +142,7 @@ Day View settings
     display: inline-block;
     position: relative;
     top: -15px;
-    background-color: black;
+    background-color: brown;
     border-radius: 15px;
     color:white;
     font-size: 12pt;
@@ -365,7 +365,7 @@ Event Form settings
 #addEventForm{
     margin: 5vh;
     border: 10px ridge royalblue;
-    padding: 20px;
+    padding: 0 0 0 20px;
     background-color: lightblue;
 }
 
@@ -375,6 +375,19 @@ Event Form settings
     display: none;
 }
 
-#addEventBtn{
-    background-color: navy;
+#randomActivityBtn, #addEventBtn, #editBtn, #deleteEventBtn{
+    background-color: dodgerblue;
+}
+
+.activitytypetitle{
+    font-size: 2vh;
+}
+
+#radiohome{
+    border-right: 10px groove royalblue;
+    padding: 0;
+} 
+
+#timehome{
+    margin-bottom: 0;
 }

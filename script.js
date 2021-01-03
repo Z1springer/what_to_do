@@ -474,14 +474,14 @@ eventDescription.change(function () {
     }
 })
 
-randomActivityButton.click(function(){
+randomActivityButton.click(function () {
     var selectedRandomType = $("input:radio[name='group2']:checked").val();
     getRandomBoredEventApi(fillActivity, selectedRandomType);
 })
 
-function fillActivity(response){
+function fillActivity(response) {
     var result = `${response.activity}. - Participants: ${response.participants}. - Type: ${response.type}.`;
-    if(response.link != ""){
+    if (response.link != "") {
         result += ` - Learn more at: ${response.link}`
     }
     eventDescription.val(result);
@@ -765,6 +765,8 @@ function getEvent(id) {
     }
     return {};
 }
+
+$('.dropdown-trigger').dropdown();
 
 function validate() {
     var hasEventDate = eventDate.val() != "";
