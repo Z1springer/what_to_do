@@ -516,12 +516,15 @@ function fillActivity(response) {
 }
 
 showDayButton.click(function(){
+    hideViews();
 })
 
 showWeekButton.click(function(){
+    hideViews();
 })
 
 showMonthButton.click(function(){
+    hideViews();
 })
 
 function hideViews(){
