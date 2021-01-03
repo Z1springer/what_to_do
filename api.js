@@ -28,7 +28,7 @@ function getRandomBoredEvent(callback, type = "education"){
     callback(bored);
 }
 
-function getRandomBoredEventApi(callback, type = "education"){
+function getRandomBoredEventApi(callback, type = ""){
 
     var url = "http://www.boredapi.com/api/activity/?type=" + type;
     var bored = {};
