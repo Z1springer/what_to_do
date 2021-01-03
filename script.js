@@ -29,6 +29,8 @@ var showWeekButton = $("#showWeekButton");
 var showDayButton = $("#showDayButton");
 var nextDayButton = $("#nextDayButton");
 var prevDayButton = $("#previousDayButton");
+var nextWeekButton = $("#nextWeekButton");
+var prevWeekButton = $("#previousWeekButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -547,6 +549,16 @@ prevDayButton.click(function(){
     subtractDay();
     fillDay();
 })
+
+
+nextWeekButton.click(function(){
+
+})
+
+prevWeekButtonnextWeekButton.click(function(){
+
+})
+
 // =====================================================================================
 // Helper functions
 // =====================================================================================
