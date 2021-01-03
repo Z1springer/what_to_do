@@ -27,6 +27,8 @@ var randomActivityButton = $("#randomActivityBtn")
 var showMonthButton = $("#showMonthButton");
 var showWeekButton = $("#showWeekButton");
 var showDayButton = $("#showDayButton");
+var nextDayButton = $("#nextDayButton");
+var prevDayButton = $("#previousDayButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -535,6 +537,14 @@ function hideViews(){
     week.hide();
     month.hide();
 }
+
+nextDayButton.click(function(){
+
+})
+
+prevDayButton.click(function(){
+    
+})
 // =====================================================================================
 // Helper functions
 // =====================================================================================
