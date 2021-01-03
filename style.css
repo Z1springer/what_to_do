@@ -113,13 +113,17 @@ Borders for style assistance
 Day View settings
 =====================================================================
 */
-
-#dayTitle{
+#dayView div h2{
     text-align: center;
     background-color: rgba(255, 255, 0, 0.726);
     padding: 3vh;
-    border: 10px ridge gold
+    border: 10px ridge gold;
+
 }
+
+/* 
+#dayTitle{
+} */
 
 #dayViewEvent{
     position: relative;
