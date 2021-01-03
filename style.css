@@ -269,7 +269,7 @@ Week View settings
    
 .eventShadow { 
     position: absolute;
-    width: 90%;  
+    width: 95%;  
     top: 10%;  
     z-index: -1 !important;
     border-radius: 5px; 
