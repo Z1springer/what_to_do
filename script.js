@@ -31,8 +31,8 @@ var nextDayButton = $("#nextDayButton");
 var prevDayButton = $("#previousDayButton");
 var nextWeekButton = $("#nextWeekButton");
 var prevWeekButton = $("#previousWeekButton");
-var nextMonthButton = $("#nextWeekButton");
-var prevMonthButton = $("#previousWeekButton");
+var nextMonthButton = $("#nextMonthButton");
+var prevMonthButton = $("#previousMonthButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -570,11 +570,15 @@ nextWeekButton.click(function(){
 })
 
 nextMonthButton.click(function(){
-
+    console.log(`next month button fires`);
+    addMonth();
+    fillMonth();
 })
 
 prevMonthButton.click(function(){
-
+    console.log(`prev month button fires`);
+    subtractMonth();
+    fillMonth();
 })
 
 
