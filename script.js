@@ -595,6 +595,17 @@ prevMonthButton.click(function(){
     fillMonth();
 })
 
+$(document).on("click", ".dayLink", function(){
+    var date = new Date($(this).data("date"));
+    console.log(date);
+
+    dayViewed = date.getDate();
+    monthViewed = date.getMonth()+1;
+    yearViewed = date.getFullYear();
+
+    hideViews();
+    day.show();
+})
 
 // =====================================================================================
 // Helper functions
