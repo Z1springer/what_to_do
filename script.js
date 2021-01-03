@@ -131,8 +131,8 @@ function fillWeek() {
 
     // fill week day headings
     for (var i = 0; i < 7; i++) {
-        $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
-
+        // $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
+        $("#weekDate" + i).text(dayButtonElement(addDays(getFirstDayOfWeek(dateViewed), i)));
     }
 
     for (var i = 0; i < eventsList.length; i++) {
@@ -288,6 +288,18 @@ function addMonthShadow(eventObj){
 
     // console.log(`shiftShadow: `);
     return shadow;
+}
+
+function dayButtonElement(date){
+    var tempDate = new Date(date);
+
+    var button = $("<a>");
+    button.addClass("btn-floating btn-large waves-effect waves-light red dayLink");
+    button.data("date", date);
+
+    $("<i>").addClass("material-icons").text(tempDate.getDate()).appendTo(button);
+
+    return button;
 }
 setTimeScale();
 
