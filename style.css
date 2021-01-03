@@ -250,7 +250,7 @@ Week View settings
     width: 95%;
     font-family: 'Covered By Your Grace';
 }
-
+/* 
 .event:before {
     content: ""; 
     position:absolute; 
@@ -264,7 +264,21 @@ Week View settings
     box-shadow:0 0 5px rgba(0,0,0,0.3); 
     transform: skewX(6deg);
   }
+   */
+
+   
+.eventShadow { 
+    position: absolute;
+    width: 95%;  
+    top: 10%;  
+    z-index: -1 !important;
+    border-radius: 5px; 
+    background-color: rgba(0,0,0,0.3);
+    box-shadow:0 0 5px rgba(0,0,0,0.3); 
+    transform: skewX(6deg);
+  }
   
+
   .event h4{
     margin: 0 20px 5px 20px;
   }
