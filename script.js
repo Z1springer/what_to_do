@@ -22,6 +22,7 @@ var monthButton = $(".goMonth")
 var addButton = $("#addEventBtn");
 var editButton = $("#editBtn");
 var deleteButton = $("#deleteEventBtn");
+var randomActivityButton = $("#randomActivityBtn")
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -473,6 +474,19 @@ eventDescription.change(function () {
     }
 })
 
+randomActivityButton.click(function(){
+    var selectedRandomType = $("input:radio[name='group2']:checked").val();
+    getRandomBoredEventApi(fillActivity, selectedRandomType);
+})
+
+function fillActivity(response){
+    var result = `${response.activity}. - Participants: ${response.participants}. - Type: ${response.type}.`;
+    if(response.link != ""){
+        result += ` - Learn more at: ${response.link}`
+    }
+    eventDescription.val(result);
+    M.textareaAutoResize(eventDescription);
+}
 // =====================================================================================
 // Helper functions
 // =====================================================================================
