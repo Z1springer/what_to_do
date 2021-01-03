@@ -154,7 +154,7 @@ Day View settings
     display: inline-block;
     position: relative;
     top: -15px;
-    background-color: brown;
+    background-color: firebrick;
     border-radius: 15px;
     color:white;
     font-size: 12pt;
@@ -422,13 +422,22 @@ Event Form settings
 }
 
 .activitytypetitle{
-    font-size: 2vh;
+    font-size: 1.5vh;
 }
 
 #radiohome{
     border-right: 10px groove royalblue;
     padding: 2vh 3vh 1vh 0;
 } 
+
+.randotype{
+    margin: .5vh;
+}
+
+#randotitle{
+    font-size: 2vh;
+    margin-top: 5vh;
+}
 
 #texthome{
     padding: 2vh 1vh 1vh;
