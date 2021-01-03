@@ -320,7 +320,7 @@ Month View settings
     margin: 0 5vh;
 }
 
-#monthTitle{
+#monthView h2{
     text-align: center;
     padding: 3vh;
     margin-bottom: 0;
@@ -329,6 +329,10 @@ Month View settings
     border-right: 10px groove lightseagreen;
     border-left: 10px groove lightseagreen;
 }
+
+/* 
+#monthTitle{
+} */
 
 .monthDay{
     border: 2px solid black;
