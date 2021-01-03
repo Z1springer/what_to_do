@@ -18,16 +18,16 @@
                 <a href="#" class="brand-logo">Inspirational Calendar</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
-                        <a class="goInput">Add Event</a>
+                        <a>Add Event</a>
                     </li>
                     <li>
-                        <a class="goMonth">Month View</a>
+                        <a id="showMonthButton">Month View</a>
                     </li>
                     <li>
-                        <a class="goDay">Day View</a>
+                        <a id="showDayButton">Day View</a>
                     </li>
                     <li>
-                        <a class="goWeek">Week View</a>
+                        <a id="showWeekButton">Week View</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div id="weekView" class="row" style="display: block;">
+        <div id="weekView" class="row">
             <h2 id="weekTitle"></h2>
             <div class="day col s7ths s6">
                 <div class="day-header weekDay0">
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div id="monthView" class="flex-container" style="display: none;">
+        <div id="monthView" class="flex-container mainView">
             <h2 id="monthTitle"></h2>
 
             <div id="week0" class="weeksauce">
@@ -349,7 +349,7 @@
 
         </div>
 
-        <div id="dayView">
+        <div id="dayView" class="mainView">
             <div class="row">
                 <h2 id="dayTitle">Today</h2>
             </div>

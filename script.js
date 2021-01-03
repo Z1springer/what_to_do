@@ -8,6 +8,7 @@ var day = $("#dayView");
 var dayViewEvent = $("#dayViewEvent");
 var front = $("#frontPage")
 var month = $("#monthView")
+var week = $("#weekView")
 var save = $(".save")
 var bored = $(".bored")
 var textarea = $(".textSpace")
@@ -23,6 +24,9 @@ var addButton = $("#addEventBtn");
 var editButton = $("#editBtn");
 var deleteButton = $("#deleteEventBtn");
 var randomActivityButton = $("#randomActivityBtn")
+var showMonthButton = $("#showMonthButton");
+var showWeekButton = $("#showWeekButton");
+var showDayButton = $("#showDayButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -509,6 +513,27 @@ function fillActivity(response) {
     }
     eventDescription.val(result);
     M.textareaAutoResize(eventDescription);
+}
+
+showDayButton.click(function(){
+    hideViews();
+    day.show();
+})
+
+showWeekButton.click(function(){
+    hideViews();
+    week.show();
+})
+
+showMonthButton.click(function(){
+    hideViews();
+    month.show();
+})
+
+function hideViews(){
+    day.hide();
+    week.hide();
+    month.hide();
 }
 // =====================================================================================
 // Helper functions
