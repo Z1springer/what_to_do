@@ -173,6 +173,8 @@ function fillDay() {
 // call on page load
 fillDay();
 
+console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
+
 function monthViewElement(eventObj) {
     // console.log("attempting to add event to month", eventObj)
 
@@ -273,7 +275,7 @@ function addWeekShadow(eventObj){
     shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime))+2) + "%");
     shadow.css("left", (   shiftShadow(getPercentOfDay(getDuration(eventObj) * 3.0  ), 6)   ) + "%");
 
-    console.log(`shiftShadow: `);
+    // console.log(`shiftShadow: `);
     return shadow;
 }
 
@@ -284,7 +286,7 @@ function addMonthShadow(eventObj){
     shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime)) + 2) + "%");
     shadow.css("left",    shiftShadow(getPercentOfDay(getDuration(eventObj))*1.2 ,6) + "%");
 
-    console.log(`shiftShadow: `);
+    // console.log(`shiftShadow: `);
     return shadow;
 }
 setTimeScale();
@@ -551,12 +553,18 @@ prevDayButton.click(function(){
 })
 
 
-nextWeekButton.click(function(){
-
+prevWeekButton.click(function(){
+    subtractWeek();
+    getWeekNumber(new Date(yearViewed, monthViewed-1, dayViewed));
+    console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
+    fillWeek();
 })
 
-prevWeekButtonnextWeekButton.click(function(){
-
+nextWeekButton.click(function(){
+    addWeek();
+    getWeekNumber(new Date(yearViewed, monthViewed-1, dayViewed));
+    console.log(`dayViewed: ${dayViewed} weekViewed: ${weekViewed} monthViewed: ${monthViewed}`);
+    fillWeek();
 })
 
 // =====================================================================================
@@ -641,6 +649,8 @@ function getWeekNumber(date = currentDate) {
     var cellNumber = getFirstDayOfMonth() + date.getDate() - 1;
 
     var weekNumber = Math.floor(cellNumber / 7);
+
+    weekViewed = weekNumber;
 
     return weekNumber;
 }
@@ -872,7 +882,7 @@ function validate() {
 }
 
 function shiftShadow(height, deg){
-    console.log(`height: ${height} deg: ${deg}`);
+    // console.log(`height: ${height} deg: ${deg}`);
     var amtToShift;
     var radians = ((90-deg) * Math.PI) / 180;
     amtToShift = height/(2* Math.tan(radians))
