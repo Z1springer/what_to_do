@@ -18,7 +18,7 @@
                 <a href="#" class="brand-logo">Inspirational Calendar</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
-                        <a>Add Event</a>
+                        <a class=" modal-trigger" href="#eventFormModal">Add Event</a>
                     </li>
                     <li>
                         <a id="showMonthButton">Month View</a>
@@ -387,148 +387,158 @@
             </div>
         </div>
 
-        <div id="addEventForm">
-            <div id=inputRequest class="gone">
+        <div id="eventFormModal" class="modal">
+            <div class="modal-content">
 
-                <div class="row" id="timehome">
+                <div id="addEventForm">
+                    <div id=inputRequest class="gone">
 
-                    <div class="col s3" id="radiohome">
-                        <label for="inputDate">Select Date</label>
-                        <input type="text" id="inputDate" class="datepicker">
-                        <div id="dateMsg" class="validationError">* Date is required.</div>
+                        <div class="row" id="timehome">
 
-                        <label for="inputStartTime">Start Time</label>
-                        <input type="text" class="timepicker" id="inputStartTime">
-                        <div id="startMsg" class="validationError">* Start time is required.</div>
+                            <div class="col s3" id="radiohome">
+                                <label for="inputDate">Select Date</label>
+                                <input type="text" id="inputDate" class="datepicker">
+                                <div id="dateMsg" class="validationError">* Date is required.</div>
 
-                        <label for="inputEndTime">End Time</label>
-                        <input type="text" class="timepicker" id="inputEndTime">
-                        <div id="endMsg" class="validationError">* End time is required.</div>
-                        <div id="validTimeMsg" class="validationError">* End time must be after start time.</div>
+                                <label for="inputStartTime">Start Time</label>
+                                <input type="text" class="timepicker" id="inputStartTime">
+                                <div id="startMsg" class="validationError">* Start time is required.</div>
 
-                        <p class="activitytypetitle">What Sort of Activity is it?</p>
-                        <div id="numberhome">
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="work" checked />
-                                    <span>Work</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="school" />
-                                    <span>School</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="personal" />
-                                    <span>Personal</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="spiritual" />
-                                    <span>Spiritual</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="chores" />
-                                    <span>Chores</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="family" />
-                                    <span>Family</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input name="group1" type="radio" value="medical">
-                                    <span>Medical</span>
-                                </label>
-                            </p>
+                                <label for="inputEndTime">End Time</label>
+                                <input type="text" class="timepicker" id="inputEndTime">
+                                <div id="endMsg" class="validationError">* End time is required.</div>
+                                <div id="validTimeMsg" class="validationError">* End time must be after start time.
+                                </div>
 
-                            <div id="categoryMsg" class="validationError">* Category is required</div>
+                                <p class="activitytypetitle">What Sort of Activity is it?</p>
+                                <div id="numberhome">
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="work" checked />
+                                            <span>Work</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="school" />
+                                            <span>School</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="personal" />
+                                            <span>Personal</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="spiritual" />
+                                            <span>Spiritual</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="chores" />
+                                            <span>Chores</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="family" />
+                                            <span>Family</span>
+                                        </label>
+                                    </p>
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" value="medical">
+                                            <span>Medical</span>
+                                        </label>
+                                    </p>
+
+                                    <div id="categoryMsg" class="validationError">* Category is required</div>
+                                </div>
+                                <button id="addEventBtn" class="btn-large">Add Event</button>
+                                <button id="editBtn" class="btn-large">Update Event</button>
+                                <button id="deleteEventBtn" class="btn-large">Delete Event</button>
+                            </div>
+
+                            <div class="col s9" id="texthome">
+                                <label for="textAreaEventDescription">Description</label>
+                                <textarea id="textAreaEventDescription" class="materialize-textarea"></textarea>
+                                <div id="descriptionMsg" class="validationError">* Description is required</div>
+
+                                <br>
+                                <p class="activitytypetitle">What Kind of Activity Would You Like?</p>
+
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="education">
+                                        <span>Education</span>
+                                    </label>
+
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="recreation">
+                                        <span>Recreation</span>
+                                    </label>
+
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="diy">
+                                        <span>DIY</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="charity">
+                                        <span>Charity</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="cooking">
+                                        <span>Cooking</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <input type="radio" name="group2" value="relaxation">
+                                    <span>Relaxation</span>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="music">
+                                        <span>Music</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="busy-work">
+                                        <span>Busy Work</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input type="radio" name="group2" value="random">
+                                        <span>Random</span>
+                                    </label>
+                                </p>
+
+                                <br>
+                                <button id="randomActivityBtn" class="btn-large">Get Random Activity</button>
+
+                            </div>
                         </div>
-                        <button id="addEventBtn" class="btn-large">Add Event</button>
-                        <button id="editBtn" class="btn-large">Update Event</button>
-                        <button id="deleteEventBtn" class="btn-large">Delete Event</button>
-                    </div>
-
-                    <div class="col s9" id="texthome">
-                        <label for="textAreaEventDescription">Description</label>
-                        <textarea id="textAreaEventDescription" class="materialize-textarea"></textarea>
-                        <div id="descriptionMsg" class="validationError">* Description is required</div>
-
-                        <br>
-                        <p class="activitytypetitle">What Kind of Activity Would You Like?</p>
-
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="education">
-                                <span>Education</span>
-                            </label>
-
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="recreation">
-                                <span>Recreation</span>
-                            </label>
-
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="diy">
-                                <span>DIY</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="charity">
-                                <span>Charity</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="cooking">
-                                <span>Cooking</span>
-                            </label>
-                        </p>
-                        <p>
-                            <input type="radio" name="group2" value="relaxation">
-                            <span>Relaxation</span>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="music">
-                                <span>Music</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="busy-work">
-                                <span>Busy Work</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input type="radio" name="group2" value="random">
-                                <span>Random</span>
-                            </label>
-                        </p>
-
-                        <br>
-                        <button id="randomActivityBtn" class="btn-large">Get Random Activity</button>
 
                     </div>
                 </div>
 
             </div>
         </div>
+
+
+
         </div>
 
     </main>

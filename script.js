@@ -73,9 +73,9 @@ var eventsList;
 $(document).ready(function () {
     $('.timepicker').timepicker();
     $('.datepicker').datepicker();
+    $('.modal').modal();
     editButton.toggle();
     deleteButton.toggle();
-
 });
 
 // current view settings
