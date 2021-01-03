@@ -297,7 +297,7 @@ function dayMonthElement(date){
 
     var button = $("<a>");
     button.addClass("btn-floating btn-large waves-effect waves-light red dayLink");
-    button.data("date", date);
+    button.attr("data-date", date);
 
     button.text(tempDate.getDate());
 
