@@ -12,7 +12,6 @@
 <body>
     <main>
 
-
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">Inspirational Calendar</a>
@@ -369,20 +368,25 @@
             <div id=inputRequest class="gone">
                 <label for="inputDate">Select Date</label>
                 <input type="date" id="inputDate">
+                <div id="dateMsg" class="validationError">* Date is required.</div>
 
                 <label for="inputStartTime">Start Time</label>
                 <input type="text" class="timepicker" id="inputStartTime">
+                <div id="startMsg" class="validationError">* Start time is required.</div>
 
                 <label for="inputEndTime">End Time</label>
                 <input type="text" class="timepicker" id="inputEndTime">
+                <div id="endMsg" class="validationError">* End time is required.</div>
+                <div id="validTimeMsg" class="validationError">* End time must be after start time.</div>
 
                 <label for="textAreaEventDescription"></label>
                 <textarea id="textAreaEventDescription" class="materialize-textarea" cols="30" rows="10"></textarea>
-                    
+                <div id="descriptionMsg" class="validationError">* Description is required</div>
+
                 <p>
                     <label>
 
-                    <input name="group1" type="radio" value="work" checked />
+                    <input name="group1" type="radio" value="work" checked/>
                         <span>work</span>
                     </label>
                 </p>
@@ -422,6 +426,9 @@
                             </span>
                     </label>
                 </p>
+                
+                <div id="categoryMsg" class="validationError">* Category is required</div>
+                
                 
                     <label>
                         <input name="group2" type="radio" value="education" />

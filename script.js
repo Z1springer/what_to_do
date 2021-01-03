@@ -32,6 +32,14 @@ var startTime = $("#inputStartTime");
 var endTime = $("#inputEndTime");
 var eventDescription = $("#textAreaEventDescription");
 
+// validation variables
+var dateMsg = $("#dateMsg");
+var startMsg = $("#startMsg");
+var endMsg = $("#endMsg");
+var descriptionMsg = $("#descriptionMsg");
+var validTimeMsg = $("#validTimeMsg");
+var categoryMsg = $("#categoryMsg");
+
 // event color codes
 var color0 = "linear-gradient(to bottom right, hsl(350deg, 100%, 87.6%) 65%, hsl(350deg, 100%, 94.4%)";
 var color1 = "linear-gradient(to bottom right, hsl(28deg, 100%, 86.3%) 65%, hsl(28deg, 100%, 94.3%))";
@@ -55,6 +63,7 @@ $(document).ready(function () {
     $('.timepicker').timepicker();
     editButton.toggle();
     deleteButton.toggle();
+
 });
 
 // current view settings
@@ -92,9 +101,8 @@ function fillMonth() {
 
         // if event belongs in current month - display on month grid
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
-            console.log("what is going on here?=================================================")
-            console.log(`${getFirstDayOfMonth()} + ${tempDate.getDate()}`);
-            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate()-1)).append(monthViewElement(eventsList[i]));
+
+            $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate() - 1)).append(monthViewElement(eventsList[i]));
         }
     }
 }
@@ -108,27 +116,27 @@ function fillWeek() {
 
     $(".weekDayData").empty();
 
-    var dateViewed = new Date(yearViewed, monthViewed -1, dayViewed);
-    
+    var dateViewed = new Date(yearViewed, monthViewed - 1, dayViewed);
+
     // fill week day headings
-    for(var i=0; i<7; i++){
-        $("#weekDate" + i).text( formatDate(addDays(getFirstDayOfWeek(dateViewed), i)) );
-        
+    for (var i = 0; i < 7; i++) {
+        $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
+
     }
 
     for (var i = 0; i < eventsList.length; i++) {
         var eventDate = new Date(eventsList[i].eventDate);
 
 
-          // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
-        if(eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7) ){ 
-            
-            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)) );
+        // if (eventDate.getMonth() + 1 === monthViewed && eventDate.getFullYear() === eventDate.getFullYear() && getWeekNumber(eventDate) === weekViewed) {
+        if (eventDate >= getFirstDayOfWeek(dateViewed) && eventDate < addDays(getFirstDayOfWeek(dateViewed), 7)) {
+
+            var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)));
             weekDay.append(weekViewElement(eventsList[i]));
         }
     }
 
-    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed+1}`);
+    weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed + 1}`);
 }
 
 // call on page load
@@ -139,7 +147,7 @@ function fillDay() {
 
     dayViewEvent.empty();
 
-    $("#dayTitle").text(getDayName(new Date (yearViewed, monthViewed-1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
+    $("#dayTitle").text(getDayName(new Date(yearViewed, monthViewed - 1, dayViewed).getDay()) + " " + monthViewed + "/" + dayViewed + "/" + yearViewed)
 
     for (var i = 0; i < eventsList.length; i++) {
 
@@ -184,19 +192,19 @@ function weekViewElement(eventObj) {
     event.addClass("event");
 
 
-    event.css("height", (getPercentOfDay(getDuration(eventObj))-0.5) + "%");
+    event.css("height", (getPercentOfDay(getDuration(eventObj)) - 0.5) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
 
     var textBox = $("<div>");
     textBox.addClass("eventTextBox");
     textBox.css("padding", "0 5px")
-    textBox.text(eventObj.eventDescription.substring(0, 20))    
+    textBox.text(eventObj.eventDescription.substring(0, 20))
     if (eventObj.eventDescription.length > 20) {
         textBox.append("...");
     }
 
-    textBox.append(" - " + eventObj.category);    
+    textBox.append(" - " + eventObj.category);
 
     event.append(textBox);
 
@@ -212,7 +220,7 @@ function dayViewElement(eventObj) {
     var viewLink = $("<a>");
     viewLink.attr("data-id", eventObj.eventCreated);
     viewLink.addClass("viewLink");
-    
+
     var event = $("<div>");
     event.addClass("event");
 
@@ -232,8 +240,8 @@ function dayViewElement(eventObj) {
     $("<span>").text(eventObj.endTime).appendTo(textBox);
     $("<br>").appendTo(textBox);
 
-    textBox.appendTo(event); 
-    
+    textBox.appendTo(event);
+
     event.appendTo(viewLink);
 
     return viewLink;
@@ -256,41 +264,42 @@ setTimeScale();
 // event listener for adding event
 addButton.click(function () {
 
-    var oldDate = new Date(eventDate.val());
-    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
-
-    // console.log("attempting to set new date")
-    // console.log(oldDate.getTime(), 60000, oldDate.getTimezoneOffset());
-    // console.log("newDate: ", newDate)
-
     var selectedCategory = $("input:radio[name='group1']:checked").val();
-    
-    currentDate = new Date();
-    var eventObj = {
-        eventCreated: currentDate,
-        eventDate: newDate,
-        startTime: startTime.val(),
-        endTime: endTime.val(),
-        eventDescription: eventDescription.val(),
-        category: selectedCategory
+
+    if (validate()) {
+
+        var oldDate = new Date(eventDate.val());
+        var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+
+        currentDate = new Date();
+        var eventObj = {
+            eventCreated: currentDate,
+            eventDate: newDate,
+            startTime: startTime.val(),
+            endTime: endTime.val(),
+            eventDescription: eventDescription.val(),
+            category: selectedCategory
+        }
+
+
+        // console.log("addEventButton() fires ", eventObj)
+
+        eventsList.push(eventObj);
+
+        localStorage.setItem("eventsList", JSON.stringify(eventsList));
+        getEventsList();
+
+        eventDate.val("");
+        startTime.val("");
+        endTime.val("");
+        eventDescription.val("");
+
+        fillMonth();
+        fillWeek();
+        fillDay();
+
     }
 
-
-    // console.log("addEventButton() fires ", eventObj)
-
-    eventsList.push(eventObj);
-
-    localStorage.setItem("eventsList", JSON.stringify(eventsList));
-    getEventsList();
-
-    eventDate.val("");
-    startTime.val("");
-    endTime.val("");
-    eventDescription.val("");
-
-    fillMonth();
-    fillWeek();
-    fillDay();
 })
 
 // event listner function for clicking quote
@@ -332,19 +341,19 @@ frontButton.on("click", function () {
     month.attr("style", "display: none;")
 })
 
-$(document).on("click", ".viewLink", function(){
+$(document).on("click", ".viewLink", function () {
 
     console.log(`.viewLink click(${$(this).data("id")}) fires!`)
 
     var id = $(this).data("id");
     var event = getEvent(id);
 
-    console.log(`event id: ${id}`, event );
+    console.log(`event id: ${id}`, event);
     var tempDate = new Date(event.eventDate);
-    eventDate.val(formatDateForInput(tempDate)); 
-    startTime.val(event.startTime) 
-    endTime.val(event.endTime) 
-    eventDescription.val(event.eventDescription) 
+    eventDate.val(formatDateForInput(tempDate));
+    startTime.val(event.startTime)
+    endTime.val(event.endTime)
+    eventDescription.val(event.eventDescription)
     $("input[value='" + event.category + "']").prop("checked", true);
 
     editButton.data("id", id)
@@ -355,65 +364,68 @@ $(document).on("click", ".viewLink", function(){
     deleteButton.toggle();
 })
 
-editButton.click(function(){
-
-    var selectedCategory = $("input:radio[name='group1']:checked").val();
+editButton.click(function () {
 
     var id = $(this).data("id");
 
-    var oldDate = new Date(eventDate.val());
-    var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
+    var selectedCategory = $("input:radio[name='group1']:checked");
 
-    var newEvent = {
-        eventCreated: id,
-        eventDate: newDate,
-        startTime: startTime.val(),
-        endTime: endTime.val(),
-        eventDescription: eventDescription.val(),
-        category: selectedCategory
-    }
+    if (validate()) {
 
-    var indexFound = -1;
+        var oldDate = new Date(eventDate.val());
+        var newDate = new Date(oldDate.getTime() + (60000 * oldDate.getTimezoneOffset()));
 
-    for(var i=0; i<eventsList.length; i++){
-        if(eventsList[i].eventCreated == id){
-            indexFound = i
-            break;
+        var newEvent = {
+            eventCreated: id,
+            eventDate: newDate,
+            startTime: startTime.val(),
+            endTime: endTime.val(),
+            eventDescription: eventDescription.val(),
+            category: selectedCategory
         }
+
+        var indexFound = -1;
+
+        for (var i = 0; i < eventsList.length; i++) {
+            if (eventsList[i].eventCreated == id) {
+                indexFound = i
+                break;
+            }
+        }
+
+        if (indexFound > -1) {
+            eventsList.splice(i, 1, newEvent);
+        }
+
+        localStorage.setItem("eventsList", JSON.stringify(eventsList));
+
+        eventDate.val("");
+        startTime.val("");
+        endTime.val("");
+        eventDescription.val("");
+
+        fillMonth();
+        fillWeek();
+        fillDay();
     }
-
-    if(indexFound>-1){
-        eventsList.splice(i, 1, newEvent);
-    }
-
-    localStorage.setItem("eventsList", JSON.stringify(eventsList));
-
-    eventDate.val("");
-    startTime.val("");
-    endTime.val("");
-    eventDescription.val("");
-
-    fillMonth();
-    fillWeek();
-    fillDay();
 })
 
-deleteButton.click(function(){
+deleteButton.click(function () {
 
     var id = $(this).data("id");
 
     var indexFound = -1;
 
-    for(var i=0; i<eventsList.length; i++){
+    for (var i = 0; i < eventsList.length; i++) {
         console.log(`${eventsList[i].eventCreated} == ${id}`)
-        if(eventsList[i].eventCreated == id){
+        if (eventsList[i].eventCreated == id) {
             indexFound = i
             break;
             console.log(`index found!!!: ${i}`)
         }
     }
 
-    if(indexFound>-1){
+    if (indexFound > -1) {
         eventsList.splice(indexFound, 1);
     }
 
@@ -427,6 +439,38 @@ deleteButton.click(function(){
     fillMonth();
     fillWeek();
     fillDay();
+})
+
+eventDate.change(function () {
+    if (eventDate.val() != "") {
+        dateMsg.hide();
+    }
+})
+startTime.change(function () {
+    if (startTime.val() != "") {
+        startMsg.hide();
+        if (endTime.val() != "") {
+            if (convertHours(startTime.val()) < convertHours(endTime.val())) {
+                validTimeMsg.hide();
+            }
+        }
+    }
+
+})
+endTime.change(function () {
+    if (endTime.val() != "") {
+        endMsg.hide();
+        if (startTime.val() != "") {
+            if (convertHours(startTime.val()) < convertHours(endTime.val())) {
+                validTimeMsg.hide();
+            }
+        }
+    }
+})
+eventDescription.change(function () {
+    if (eventDescription.val() != "") {
+        descriptionMsg.hide();
+    }
 })
 
 // =====================================================================================
@@ -454,7 +498,7 @@ function getFirstDayOfYear(date = currentDate) {
 function getDaysInMonth(month, year) {
     return new Date(year, month, 0).getDate();
 }
-function getDayName(num){
+function getDayName(num) {
     switch (num) {
         case 0:
             return "Sunday"
@@ -469,7 +513,7 @@ function getDayName(num){
         case 5:
             return "Friday";
         case 6:
-            return "Saturday"            
+            return "Saturday"
     }
     return "Oops!";
 }
@@ -508,7 +552,7 @@ function getMonthName(num) {
 // returns current week number 0-4
 function getWeekNumber(date = currentDate) {
     date = new Date(date);
-    var cellNumber = getFirstDayOfMonth() + date.getDate() -1;
+    var cellNumber = getFirstDayOfMonth() + date.getDate() - 1;
 
     var weekNumber = Math.floor(cellNumber / 7);
 
@@ -529,8 +573,8 @@ function convertHours(str) {
 
     var time = str.replace(" ", ":");
 
-    var timeArr = time.split(":");     
-    
+    var timeArr = time.split(":");
+
     // if(timeArr[2] === "AM" && timeArr[0] == 12){
     //     intTime = 0;
     // } else if (timeArr[2] === "PM" && timeArr[0] != 12) {
@@ -541,23 +585,23 @@ function convertHours(str) {
 
     // intTime += parseInt(timeArr[1]) / 60;
 
-    if(timeArr[2] == "AM"){
-        if(timeArr[0] == 12){
+    if (timeArr[2] == "AM") {
+        if (timeArr[0] == 12) {
             intTime = 0;
-        }else{
+        } else {
             intTime = parseInt(timeArr[0])
         }
     } else {
-        if(timeArr[0] == 12){
+        if (timeArr[0] == 12) {
             intTime = 12
-        }else{
+        } else {
             intTime = 12 + parseInt(timeArr[0])
         }
     }
 
-    console.log(`convertHours(${str}) fires intTime: ${intTime}`);
+    // console.log(`convertHours(${str}) fires intTime: ${intTime}`);
 
-    intTime += parseInt(timeArr[1])/60;
+    intTime += parseInt(timeArr[1]) / 60;
 
     return intTime;
 }
@@ -581,42 +625,42 @@ function toTwelveHour(num) {
     return result;
 }
 
-function getColor(str){
-    switch(str){
-        case "work" :
+function getColor(str) {
+    switch (str) {
+        case "work":
             return color0;
-        case "school" :
+        case "school":
             return color1;
-        case "personal" :
+        case "personal":
             return color2;
-        case "spiritual" :
+        case "spiritual":
             return color3;
-        case "family" :
+        case "family":
             return color4;
-        case "chores" :
+        case "chores":
             return color5;
     }
     return color0;
 }
 
-function addDay(num=1){
+function addDay(num = 1) {
 
     var tempDate = new Date(yearViewed, monthViewed, 0);
 
     var maxDay = tempDate.getDate();
-    
+
     dayViewed += num;
 
-    if(dayViewed > maxDay){
+    if (dayViewed > maxDay) {
         dayViewed = dayViewed - maxDay;
         addMonth();
     }
     // console.log(`addDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
 }
 
-function subtractDay(num=1){
+function subtractDay(num = 1) {
     dayViewed -= num;
-    if(dayViewed <= 0){
+    if (dayViewed <= 0) {
         subtractMonth()
         var maxDay = new Date(yearViewed, monthViewed, 0).getDate();
         dayViewed = maxDay + dayViewed;
@@ -624,31 +668,31 @@ function subtractDay(num=1){
     // console.log(`subtractDay() fires new - dayViewed: ${dayViewed}, monthViewed: ${monthViewed}, yearViewed: ${yearViewed}`)
 }
 
-function addWeek(){
+function addWeek() {
     addDay(7);
 }
 
-function subtractWeek(){
+function subtractWeek() {
     subtractDay(7)
 }
 
-function addMonth(){
+function addMonth() {
     monthViewed++;
-    if(monthViewed > 12){
+    if (monthViewed > 12) {
         monthViewed = 1
         yearViewed++;
     }
 }
 
-function subtractMonth(){
+function subtractMonth() {
     monthViewed--;
-    if(monthViewed < 1){
+    if (monthViewed < 1) {
         monthViewed = 12;
-        yearViewed --;
+        yearViewed--;
     }
 }
 
-function getDayOfYear(date = currentDate){
+function getDayOfYear(date = currentDate) {
     var firstDayOfYear = new Date(date.getFullYear(), 0, 0);
     // var millisecondsPerDay = 1000 * 60 * 60 * 24;
     // var timeSinceFirstDay = date - firstDayOfYear;
@@ -661,51 +705,84 @@ function getDayOfYear(date = currentDate){
 
 }
 
-function getDateDifferenceDays(date1, date2){
+function getDateDifferenceDays(date1, date2) {
     var millisecondsPerDay = 1000 * 60 * 60 * 24;
     var diff = date1 - date2
-    var days = Math.floor(diff/millisecondsPerDay)
+    var days = Math.floor(diff / millisecondsPerDay)
 
     return days;
 }
 
-function getFirstDayOfWeek(date = currentDate){
-    
+function getFirstDayOfWeek(date = currentDate) {
+
     // console.log(`getFirstDayOfWeek(${date}) fires`)   
 
     var tempDate = new Date(date);
 
-    tempDate = addDays(tempDate, -1*tempDate.getDay())
+    tempDate = addDays(tempDate, -1 * tempDate.getDay())
 
     // console.log(`tempDate: ${tempDate}`)
 
     return tempDate;
 }
 
-function addDays(date, days){
+function addDays(date, days) {
     var tempDate = new Date(date);
     tempDate.setDate(tempDate.getDate() + days);
 
     return tempDate;
 }
 
-function formatDate(date){
-    return (date.getMonth()+1) + " " + date.getDate() + "/" + date.getFullYear(); 
+function formatDate(date) {
+    return (date.getMonth() + 1) + " " + date.getDate() + "/" + date.getFullYear();
 }
 
-function formatDateForInput(date){
+function formatDateForInput(date) {
     var day = ("0" + date.getDate()).slice(-2);
     var month = ("0" + (date.getMonth() + 1)).slice(-2);
-    return date.getFullYear() + "-" + month + "-" + day; 
+    return date.getFullYear() + "-" + month + "-" + day;
 }
 
-function getEvent(id){
-    for(var i=0; i<eventsList.length; i++){
-        if(eventsList[i].eventCreated === id){
+function getEvent(id) {
+    for (var i = 0; i < eventsList.length; i++) {
+        if (eventsList[i].eventCreated === id) {
             return eventsList[i]
         }
     }
     return {};
+}
+
+function validate() {
+    var hasEventDate = eventDate.val() != "";
+    var hasStartTime = startTime.val() != "";
+    var hasEndTime = endTime.val() != "";
+    var hasDescription = eventDescription.val() != "";
+    var isValidTime = convertHours(startTime.val()) < convertHours(endTime.val());
+
+    var valid = false;
+
+    if (hasEventDate && hasStartTime && hasEndTime && hasDescription && isValidTime) {
+        valid = true
+    }
+    else {
+        if (!hasEventDate) {
+            dateMsg.show();
+        }
+        if (!hasStartTime) {
+            startMsg.show();
+        }
+        if (!hasEndTime) {
+            endMsg.show();
+        }
+        if (!hasDescription) {
+            descriptionMsg.show();
+        }
+        if (!isValidTime) {
+            validTimeMsg.show();
+        }
+    }
+
+    return valid;
 }
 
 // ===================================================================================
