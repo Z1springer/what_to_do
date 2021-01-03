@@ -103,7 +103,8 @@ function fillMonth() {
 
     // put day number on each day of the month
     for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
-        $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
+        // $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
+        $("#monthDay" + (i + getFirstDayOfMonth())).append(dayMonthElement(new Date(yearViewed, monthViewed-1, i + 1)))
     }
 
     // loop through each event
@@ -133,6 +134,7 @@ function fillWeek() {
     for (var i = 0; i < 7; i++) {
         $("#weekDate" + i).text(formatDate(addDays(getFirstDayOfWeek(dateViewed), i)));
 
+        $(".weekDay" + i).attr("data-date", addDays(getFirstDayOfWeek(dateViewed), i));        
     }
 
     for (var i = 0; i < eventsList.length; i++) {
@@ -288,6 +290,18 @@ function addMonthShadow(eventObj){
 
     // console.log(`shiftShadow: `);
     return shadow;
+}
+
+function dayMonthElement(date){
+    var tempDate = new Date(date);
+
+    var button = $("<a>");
+    button.addClass("btn-floating btn-large waves-effect waves-light red dayLink");
+    button.attr("data-date", date);
+
+    button.text(tempDate.getDate());
+
+    return button;
 }
 setTimeScale();
 
@@ -581,6 +595,17 @@ prevMonthButton.click(function(){
     fillMonth();
 })
 
+$(document).on("click", ".dayLink", function(){
+    var date = new Date($(this).data("date"));
+    console.log(date);
+
+    dayViewed = date.getDate();
+    monthViewed = date.getMonth()+1;
+    yearViewed = date.getFullYear();
+
+    hideViews();
+    day.show();
+})
 
 // =====================================================================================
 // Helper functions
