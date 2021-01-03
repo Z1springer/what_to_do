@@ -24,7 +24,9 @@ var addButton = $("#addEventBtn");
 var editButton = $("#editBtn");
 var deleteButton = $("#deleteEventBtn");
 var randomActivityButton = $("#randomActivityBtn")
-var showMonth = $()
+var showMonthButton = $("#showMonthButton");
+var showWeekButton = $("#showWeekButton");
+var showDayButton = $("#showDayButton");
 
 var weekTitle = $("#weekTitle");
 var monthTitle = $("#monthTitle");
@@ -512,6 +514,15 @@ function fillActivity(response) {
     eventDescription.val(result);
     M.textareaAutoResize(eventDescription);
 }
+
+showDayButton.click(function(){
+})
+
+showWeekButton.click(function(){
+})
+
+showMonthButton.click(function(){
+})
 
 function hideViews(){
     day.hide();
