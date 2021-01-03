@@ -134,6 +134,7 @@ function fillWeek() {
 
             var weekDay = $("#weekDay" + getDateDifferenceDays(eventDate, getFirstDayOfWeek(dateViewed)));
             weekDay.append(weekViewElement(eventsList[i]));
+            weekDay.append(addWeekShadow(eventsList[i]));
         }
     }
 
@@ -155,6 +156,7 @@ function fillDay() {
         var tempDate = new Date(eventsList[i].eventDate)
         if (tempDate.getDate() === dayViewed && tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() === yearViewed) {
             dayViewEvent.append(dayViewElement(eventsList[i]));
+            dayViewEvent.append(addMonthShadow(eventsList[i]));
             // console.log("Attempting to add event to day view")
         }
     }
@@ -256,6 +258,27 @@ function setTimeScale() {
     }
 }
 
+function addWeekShadow(eventObj){
+    var shadow = $("<div>");
+    shadow.addClass("eventShadow");
+    shadow.css("height", (getPercentOfDay(getDuration(eventObj)) - 3) + "%");
+    shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime))+2) + "%");
+    shadow.css("left", (   shiftShadow(getPercentOfDay(getDuration(eventObj) * 3.0  ), 6)   ) + "%");
+
+    console.log(`shiftShadow: `);
+    return shadow;
+}
+
+function addMonthShadow(eventObj){
+    var shadow = $("<div>");
+    shadow.addClass("eventShadow");
+    shadow.css("height", (getPercentOfDay(getDuration(eventObj)) - 3) + "%");
+    shadow.css("top", (getPercentOfDay(convertHours(eventObj.startTime)) + 2) + "%");
+    shadow.css("left",    shiftShadow(getPercentOfDay(getDuration(eventObj))*1.2 ,6) + "%");
+
+    console.log(`shiftShadow: `);
+    return shadow;
+}
 setTimeScale();
 
 // =====================================================================================
@@ -797,6 +820,14 @@ function validate() {
     }
 
     return valid;
+}
+
+function shiftShadow(height, deg){
+    console.log(`height: ${height} deg: ${deg}`);
+    var amtToShift;
+    var radians = ((90-deg) * Math.PI) / 180;
+    amtToShift = height/(2* Math.tan(radians))
+    return amtToShift;
 }
 
 // ===================================================================================
