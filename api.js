@@ -31,7 +31,6 @@ function getRandomBoredEvent(callback, type = "education"){
 function getRandomBoredEventApi(callback, type = ""){
 
     var url = "http://www.boredapi.com/api/activity/?type=" + type;
-    var bored = {};
     
     $.ajax({
         url: url,
@@ -41,7 +40,6 @@ function getRandomBoredEventApi(callback, type = ""){
         callback(response);
     })
 
-    callback(bored);
 }
 
 
@@ -61,7 +59,7 @@ function getQuoteApi(callback){
             quote.author = "Unknown";
         }
 
-        console.log(quote);
+        // console.log(quote);
         callback(quote);
     });
 
