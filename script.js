@@ -74,6 +74,7 @@ $(document).ready(function () {
     $('.timepicker').timepicker();
     $('.datepicker').datepicker();
     $('.modal').modal();
+    $('.tooltipped').tooltip();
     editButton.toggle();
     deleteButton.toggle();
 });
@@ -185,10 +186,11 @@ function monthViewElement(eventObj) {
     viewLink.addClass("viewLink");
 
     var span = $("<span>");
-    span.addClass("monthEvent");
+    span.addClass("monthEvent tooltipped");
     span.css("width", getPercentOfDay(getDuration(eventObj)) + "%")
     span.css("left", getPercentOfDay(convertHours(eventObj.startTime)) + "%")
     span.css("background-image", getColor(eventObj.category));
+    span.attr("data-tooltip", `${eventObj.eventDescription} Start Time: ${eventObj.startTime} End Time: ${eventObj.endTime}`)
 
     viewLink.append(span);
 
@@ -204,12 +206,13 @@ function weekViewElement(eventObj) {
     viewLink.addClass("viewLink");
 
     var event = $("<div>");
-    event.addClass("event");
+    event.addClass("event tooltipped");
 
 
     event.css("height", (getPercentOfDay(getDuration(eventObj)) - 0.5) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
+    event.attr("data-tooltip", `${eventObj.eventDescription} Start Time: ${eventObj.startTime} End Time: ${eventObj.endTime}`)
 
     var textBox = $("<div>");
     textBox.addClass("eventTextBox");
@@ -237,11 +240,12 @@ function dayViewElement(eventObj) {
     viewLink.addClass("viewLink");
 
     var event = $("<div>");
-    event.addClass("event");
+    event.addClass("event tooltipped");
 
     event.css("height", getPercentOfDay(getDuration(eventObj)) + "%");
     event.css("top", getPercentOfDay(convertHours(eventObj.startTime)) + "%");
     event.css("background-image", getColor(eventObj.category));
+    event.attr("data-tooltip", `${eventObj.eventDescription} Start Time: ${eventObj.startTime} End Time: ${eventObj.endTime}`)
 
     var textBox = $("<div>");
     textBox.addClass("eventTextBox");
