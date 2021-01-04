@@ -609,6 +609,7 @@ randomActivityButton.click(function () {
     // console.log(`randomActivityEventButton.click() fires.`);
 
     var selectedRandomType = $("input:radio[name='group2']:checked").val();
+    console.log(selectedRandomType);
     getRandomBoredEventApi(fillActivity, selectedRandomType);
 })
 
