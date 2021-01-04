@@ -24,9 +24,9 @@ var addButton = $("#addEventBtn");
 var editButton = $("#editBtn");
 var deleteButton = $("#deleteEventBtn");
 var randomActivityButton = $("#randomActivityBtn")
-var showMonthButton = $("#showMonthButton");
-var showWeekButton = $("#showWeekButton");
-var showDayButton = $("#showDayButton");
+var showMonthButton = $(".showMonthButton");
+var showWeekButton = $(".showWeekButton");
+var showDayButton = $(".showDayButton");
 var nextDayButton = $("#nextDayButton");
 var prevDayButton = $("#previousDayButton");
 var nextWeekButton = $("#nextWeekButton");
@@ -76,8 +76,8 @@ $(document).ready(function () {
     $('.modal').modal();
     $('.tooltipped').tooltip();
     $('.sidenav').sidenav();
-    editButton.toggle();
-    deleteButton.toggle();
+    editButton.hide();
+    deleteButton.hide();
 });
 
 // current view settings
@@ -94,6 +94,7 @@ function getEventsList() {
 
 // call on page load
 getEventsList();
+getQuoteApi(setQuote);
 
 // fill month view with current month data from eventList
 function fillMonth() {
@@ -351,6 +352,7 @@ addButton.click(function () {
         fillWeek();
         fillDay();
 
+        $('#eventFormModal').modal("close");
     }
 
 })
@@ -412,9 +414,9 @@ $(document).on("click", ".viewLink", function () {
     editButton.data("id", id)
     deleteButton.data("id", id)
 
-    addButton.toggle();
-    editButton.toggle();
-    deleteButton.toggle();
+    addButton.hide();
+    editButton.show();
+    deleteButton.show();
 
     $('#eventFormModal').modal("open");
 })
@@ -462,6 +464,12 @@ editButton.click(function () {
         fillMonth();
         fillWeek();
         fillDay();
+
+        $('#eventFormModal').modal("close");
+
+        addButton.show();
+        editButton.hide();
+        deleteButton.hide();
     }
 })
 
@@ -494,6 +502,12 @@ deleteButton.click(function () {
     fillMonth();
     fillWeek();
     fillDay();
+
+    $('#eventFormModal').modal("close");
+
+    addButton.show();
+    editButton.hide();
+    deleteButton.hide();
 })
 
 eventDate.change(function () {
