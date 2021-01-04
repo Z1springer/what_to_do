@@ -10,7 +10,8 @@ General settings
 */
 
 body {
-    background-image: url("cork-board.png");
+    background-image: url("../images/cork-board.png");
+    margin-bottom: 30px;
 }
 
 main {
@@ -45,7 +46,7 @@ Title Date settings
 nav {
     /* padding-left: 20px; */
     background-color: rgb(245, 245, 245, .726);
-    border-bottom: 5px groove darkturquoise;
+    border-bottom: 5px groove burlywood;
     padding: 0 1.5vh;
     font-family: 'Montserrat', sans-serif;
 }
