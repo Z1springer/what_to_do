@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
 
 /*
 ========================================================================
@@ -9,6 +11,10 @@ General settings
 
 body {
     background-image: url("cork-board.png");
+}
+
+main {
+    padding-top: 40px !important;
 }
 
 h1, h2, h3, h4 {
@@ -38,7 +44,7 @@ Title Date settings
 
 nav {
     /* padding-left: 20px; */
-    background-color: rgba(64, 224, 208, 0.74);
+    background-color: rgb(245, 245, 245, .726);
     border-bottom: 5px groove darkturquoise;
     padding: 0 1.5vh;
     font-family: 'Montserrat', sans-serif;
@@ -54,6 +60,28 @@ nav {
     cursor: pointer;
 }
 
+#title {
+    font-family: 'Calistoga', cursive;
+    color: rgb(241, 189, 44);
+}
+
+.nav-extended {
+    height: 95px !important;
+}
+
+.subtitle {
+    color: royalblue;
+    top: -30px !important;
+    left: 20px !important;
+    position: relative;
+}
+
+#nav-mobile li a{
+    font-size: 20px !important;
+    padding-top: 15px !important;
+    color: royalblue;
+    font-family: 'Boogaloo', cursive;
+}
 /* 
 ==============================================================
 Quote settings
