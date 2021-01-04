@@ -50,6 +50,7 @@ var color2 = "linear-gradient(to bottom right, hsl(60deg, 80%, 90.2%) 65%, hsl(6
 var color3 = "linear-gradient(to bottom right, hsl(120deg, 92.5%, 79%) 65%, hsl(120deg, 92.5%, 87%)";
 var color4 = "linear-gradient(to bottom right, hsl(180deg, 64.9%, 81%) 65%, hsl(180deg, 64.9%, 89%)";
 var color5 = "linear-gradient(to bottom right, hsl(214deg, 41.1%, 78%) 65%, hsl(214deg, 41.1%, 89%)";
+var color6 = "linear-gradient(to bottom right, hsl(300deg, 24.3%, 79.8%) 65%, hsl(300deg, 24.3%, 89.8%)";
 
 // today's exact date and time
 var currentDate = new Date();
@@ -75,13 +76,18 @@ $(document).ready(function () {
 // current date settings
 var yearViewed = currentDate.getFullYear();
 var monthViewed = currentDate.getMonth() + 1;
-var weekViewed = getWeekNumber();
 var dayViewed = currentDate.getDate();
+var weekViewed = getWeekNumber();
 
 // load event list from local storage
 function getEventsList() {
     eventsList = JSON.parse(localStorage.getItem("eventsList")) || [];
     // console.log("getEventsList() fires. eventsList: ", eventsList);
+
+    // cast created as date
+    for(var i=0; i<eventsList.length; i++){
+        eventsList[i].eventCreated = new Date(eventsList[i].eventCreated); 
+    }
 }
 
 // call on page load
@@ -91,6 +97,7 @@ fillMonth();
 fillWeek();
 fillDay();
 setTimeScale();
+getWeekNumber();
 
 // fill month view with current month data from eventList
 function fillMonth() {
@@ -179,6 +186,8 @@ function fillWeek() {
     }
 
     // set week title
+    getWeekNumber();
+
     weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed + 1}`);
 
     // initialize new event tooltips
@@ -402,6 +411,7 @@ addButton.click(function () {
             category: selectedCategory
         }
 
+        console.log(eventObj);
         // add event to global variable
         eventsList.push(eventObj);
 
@@ -416,6 +426,8 @@ addButton.click(function () {
 
         // close modal
         $('#eventFormModal').modal("close");
+
+        getEventsList();
     }
 
 })
@@ -434,11 +446,11 @@ function setQuote(textObj) {
 
 // show clicked event in event form
 $(document).on("click", ".viewLink", function () {
-    // console.log(`.viewLink click(${$(this).data("id")}) fires!`)
+     console.log(`.viewLink click(${$(this).data("id")}) fires!`)
 
     // get id of clicked event
     var id = $(this).data("id");
-
+    
     // get event object by id
     var event = getEvent(id);
 
@@ -605,6 +617,7 @@ randomActivityButton.click(function () {
     // console.log(`randomActivityEventButton.click() fires.`);
 
     var selectedRandomType = $("input:radio[name='group2']:checked").val();
+    console.log(selectedRandomType);
     getRandomBoredEventApi(fillActivity, selectedRandomType);
 })
 
@@ -663,12 +676,14 @@ prevDayButton.click(function () {
 // navigate to next week in week view
 prevWeekButton.click(function () {
     subtractWeek();
+    getWeekNumber();
     fillWeek();
 })
 
 // navigate to previous week in week view
 nextWeekButton.click(function () {
     addWeek();
+    getWeekNumber();
     fillWeek();
 })
 
@@ -833,11 +848,15 @@ function getMonthName(num) {
 }
 
 // returns current week number 0-5
-function getWeekNumber(date = currentDate) {
-    date = new Date(date);
+function getWeekNumber() {
+    // console.log(`date: ${date} yearViewed: ${yearViewed}, monthViewed: ${monthViewed}, dayViewed: ${dayViewed} weekNunber: ${weekNumber}`);
+
+    var date = new Date(yearViewed, monthViewed-1, dayViewed);
     var cellNumber = getFirstDayOfMonth() + date.getDate() - 1;
 
-    var weekNumber = Math.floor(cellNumber / 7);
+    weekNumber = Math.floor(cellNumber / 7);    
+
+    weekViewed = weekNumber;
 
     return weekNumber;
 }
@@ -914,6 +933,8 @@ function getColor(str) {
             return color4;
         case "chores":
             return color5;
+        case "medical":
+            return color6;
     }
     return color0;
 }
@@ -1034,10 +1055,12 @@ function formatDateForInput(date) {
 // returns event from eventsList by id or empty object if not found
 function getEvent(id) {
     for (var i = 0; i < eventsList.length; i++) {
-        if (eventsList[i].eventCreated === id) {
+        console.log(`${eventsList[i].eventCreated} ?== ${id}: ${eventsList[i].eventCreated === id} `);
+        if (eventsList[i].eventCreated == id) {
             return eventsList[i]
         }
     }
+    console.log(`getEvent(${id}) failed to find event.`);
     return {};
 }
 
