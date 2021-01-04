@@ -41,6 +41,7 @@ nav {
     background-color: rgba(64, 224, 208, 0.74);
     border-bottom: 5px groove darkturquoise;
     padding: 0 1.5vh;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .displayAlongTitleSpace {
@@ -121,7 +122,7 @@ Day View settings
     background-color: rgba(255, 255, 0, 0.726);
     padding: 3vh;
     border: 10px ridge gold;
-
+    font-family: 'Montserrat', sans-serif;
 }
 
 #previousDayButton{
@@ -135,8 +136,6 @@ Day View settings
 #dayViewEvent{
     position: relative;
     height: 150vh;
-    /* margin: 5vh; */
-    /* padding: 15px 0; */
 }
 
 #timeInterval{
@@ -273,21 +272,6 @@ Week View settings
     width: 95%;
     font-family: 'Covered By Your Grace';
 }
-/* 
-.event:before {
-    content: ""; 
-    position:absolute; 
-    width: 100%;  
-    top: 10%; 
-    height: 93%; 
-    left: 6px; 
-    z-index: -1 !important;
-    border-radius: 5px; 
-    background-color: rgba(0,0,0,0.3);
-    box-shadow:0 0 5px rgba(0,0,0,0.3); 
-    transform: skewX(6deg);
-  }
-   */
 
    
 .eventShadow { 
@@ -407,11 +391,15 @@ Event Form settings
 ===============================================================
 */
 
+.modal-content{
+    padding: 0 !important;
+}
+
 #addEventForm{
-    margin: 5vh;
     border: 10px ridge royalblue;
     padding: 0 0 0 20px;
     background-color: lightblue;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .validationError{
