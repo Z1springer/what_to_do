@@ -105,8 +105,8 @@ function fillMonth() {
     monthTitle.text(`${getMonthName(monthViewed)} ${yearViewed}`);
 
     // put day number on each day of the month
-    for (var i = 0; i < getDaysInMonth(currentDate.getMonth() + 1, currentDate.getFullYear()); i++) {
-        // $("#monthDay" + (i + getFirstDayOfMonth())).text(i + 1)
+    for (var i = 0; i < getDaysInMonth(monthViewed, yearViewed); i++) {
+        
         $("#monthDay" + (i + getFirstDayOfMonth())).append(dayMonthElement(new Date(yearViewed, monthViewed - 1, i + 1)))
     }
 
@@ -119,6 +119,21 @@ function fillMonth() {
         if (tempDate.getMonth() + 1 === monthViewed && tempDate.getFullYear() == yearViewed) {
             $("#monthDay" + (getFirstDayOfMonth() + tempDate.getDate() - 1)).append(monthViewElement(eventsList[i]));
         }
+    }
+
+    var firstDayOfMonth = getFirstDayOfMonth(new Date(yearViewed, monthViewed, 0)); 
+    var daysInMonth = getDaysInMonth(monthViewed, yearViewed)
+    var cellsNeeded = firstDayOfMonth + daysInMonth;
+    
+    if(cellsNeeded <= 35){
+        $("#week5").hide();
+        if(cellsNeeded <= 26){
+            $("#week4").hide();
+        }else{
+            $("#week4").show();
+        }
+    }else{
+        $("#week5").show();
     }
 }
 
@@ -637,9 +652,16 @@ $(document).on("click", ".dayLink", function () {
 // returns day of week as an integer for first day of month
 // sunday: 0 - saturday 6
 // needed to position all days in month view
-function getFirstDayOfMonth(date = currentDate) {
-    var year = date.getFullYear();
-    var day = new Date(year + "-" + monthViewed + "-01").getDay();
+function getFirstDayOfMonth() {
+    
+    // var year = date.getFullYear();
+    var day = new Date(yearViewed,monthViewed-1,1).getDay();
+
+    // console.log(`getFirstDayOfMonth(${new Date(yearViewed + "-" + monthViewed + "-01")}) fires calculating first day of month for: ${new Date(year + "-" + monthViewed + "-01").getDay()} `);
+
+    // console.log(`getFirstDayofMonth() fires. `);
+    // console.log(`date used: ${new Date(yearViewed,monthViewed-1,1)}`);
+    // console.log(`returning: ${day}`);
 
     return day;
 }
@@ -653,6 +675,7 @@ function getFirstDayOfYear(date = currentDate) {
 
 // returns number of days in selected month
 function getDaysInMonth(month, year) {
+    // console.log(`getDaysInMonth(${month},${year}) fires date: ${new Date(year, month, 0)} returning: ${new Date(year, month, 0).getDate()}`)
     return new Date(year, month, 0).getDate();
 }
 function getDayName(num) {
