@@ -15,7 +15,8 @@
 
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Inspirational Calendar</a>
+                <a href="#!" class="brand-logo ">Inspirational&nbsp;Calendar</a>
+                <a href="#" data-target="radiomenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <a class=" modal-trigger" href="#eventFormModal">Add Event</a>
@@ -32,6 +33,21 @@
                 </ul>
             </div>
         </nav>
+
+        <ul class="sidenav" id="radiomenu">
+            <li>
+                <a class=" modal-trigger" href="#eventFormModal">Add Event</a>
+            </li>
+            <li>
+                <a id="showMonthButton">Month View</a>
+            </li>
+            <li>
+                <a id="showDayButton">Day View</a>
+            </li>
+            <li>
+                <a id="showWeekButton">Week View</a>
+            </li>
+        </ul>
 
         <div id="frontPage">
 
