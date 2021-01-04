@@ -7,20 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Project 1</title>
+    <title>What To Do?</title>
 </head>
 
 <body>
-    <main>
+    <div class="navbar-fixed">
 
-        <!-- Nav Menu -->
-        <nav>
+        <nav class="nav-extended">
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo ">Inspirational&nbsp;Calendar</a>
+                <a href="#!" class="brand-logo" id="title">WHAT TO DO?<br><span class="subtitle">HERE'S A CLUE!</span> </a>
                 <a href="#" data-target="radiomenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
-                        <a class="modal-trigger" href="#eventFormModal">Add Event</a>
+                        <a id="" class="modal-trigger" href="#eventFormModal">Add Event</a>
                     </li>
                     <li>
                         <a class="showMonthButton">Month View</a>
@@ -33,7 +32,14 @@
                     </li>
                 </ul>
             </div>
+            <!-- <div class="nav-content">
+                <h2>&nbsp&nbsp&nbspHERE'S A CLUE</h2>
+            </div> -->
         </nav>
+    </div>
+    <main>
+
+        <!-- Nav Menu -->
 
         <ul class="sidenav" id="radiomenu">
             <li>
@@ -53,7 +59,7 @@
         <!-- quote section -->
         <div id="frontPage">
 
-            <div class="displayAlongTitleSpace" id="quoteBtn">
+            <div class="displayAlongTitleSpace tooltipped" data-tooltip="Click for new quote!" id="quoteBtn">
                 <div class="dropdownDates">
                     <div>
                         <h1 id="quoteText"></h1>
