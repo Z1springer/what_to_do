@@ -75,8 +75,8 @@ $(document).ready(function () {
 // current date settings
 var yearViewed = currentDate.getFullYear();
 var monthViewed = currentDate.getMonth() + 1;
-var weekViewed = getWeekNumber();
 var dayViewed = currentDate.getDate();
+var weekViewed = getWeekNumber();
 
 // load event list from local storage
 function getEventsList() {
@@ -91,6 +91,7 @@ fillMonth();
 fillWeek();
 fillDay();
 setTimeScale();
+getWeekNumber();
 
 // fill month view with current month data from eventList
 function fillMonth() {
@@ -179,6 +180,8 @@ function fillWeek() {
     }
 
     // set week title
+    getWeekNumber();
+
     weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed + 1}`);
 
     // initialize new event tooltips
@@ -402,6 +405,7 @@ addButton.click(function () {
             category: selectedCategory
         }
 
+        console.log(eventObj);
         // add event to global variable
         eventsList.push(eventObj);
 
@@ -663,12 +667,14 @@ prevDayButton.click(function () {
 // navigate to next week in week view
 prevWeekButton.click(function () {
     subtractWeek();
+    getWeekNumber();
     fillWeek();
 })
 
 // navigate to previous week in week view
 nextWeekButton.click(function () {
     addWeek();
+    getWeekNumber();
     fillWeek();
 })
 
@@ -833,11 +839,15 @@ function getMonthName(num) {
 }
 
 // returns current week number 0-5
-function getWeekNumber(date = currentDate) {
-    date = new Date(date);
+function getWeekNumber() {
+    // console.log(`date: ${date} yearViewed: ${yearViewed}, monthViewed: ${monthViewed}, dayViewed: ${dayViewed} weekNunber: ${weekNumber}`);
+
+    var date = new Date(yearViewed, monthViewed-1, dayViewed);
     var cellNumber = getFirstDayOfMonth() + date.getDate() - 1;
 
-    var weekNumber = Math.floor(cellNumber / 7);
+    weekNumber = Math.floor(cellNumber / 7);    
+
+    weekViewed = weekNumber;
 
     return weekNumber;
 }
