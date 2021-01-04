@@ -1,7 +1,11 @@
-# what_to_do Project 1
+# What To Do, Here's A Clue
+
+## Description
 
 
-## User Story
+
+
+### User Story
 
 ```
 AS A USER
@@ -9,7 +13,7 @@ I WANT to have a scheduler that will help me fill my days with activity
 SO THAT I can fill any open time in my schedule for new and exciting activites
 ```
 
-## User Interactivity
+### User Interactivity
 
 ```
 WHEN I open the page
@@ -90,11 +94,13 @@ WHEN I click on that number
 THEN I am taken to the Day View of the specified day
 ```
 
-## Technology Used
+### Technology Used
 
-
-
-========================================================
- This background pattern is downloaded from www.subtlepatterns.com 
- If you need more, that's where to get'em.
- ========================================================
+- QuoteAPI for the quote box that remains constant at the top of the screen *(https://type.fit/api/quotes)*
+- BoredAPI for the random activities *(http://www.boredapi.com)*
+- Materialize for the CSS *(https://materializecss.com/)*
+- Corkboard Background found at *(https://subtlepatterns.com)*
+- JavaScript
+- HTML-5
+- jQuery
+- CSS
