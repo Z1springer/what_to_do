@@ -135,6 +135,8 @@ function fillMonth() {
     }else{
         $("#week5").show();
     }
+    
+    $('.tooltipped').tooltip();
 }
 
 // call on page load
@@ -169,6 +171,7 @@ function fillWeek() {
     }
 
     weekTitle.text(`${getMonthName(monthViewed)} ${yearViewed} Week ${weekViewed + 1}`);
+    $('.tooltipped').tooltip();
 }
 
 // call on page load
@@ -190,6 +193,7 @@ function fillDay() {
             // console.log("Attempting to add event to day view")
         }
     }
+    $('.tooltipped').tooltip();
 }
 
 // call on page load
@@ -440,7 +444,7 @@ editButton.click(function () {
 
     var id = $(this).data("id");
 
-    var selectedCategory = $("input:radio[name='group1']:checked");
+    var selectedCategory = $("input:radio[name='group1']:checked").val();
 
     if (validate()) {
 
@@ -643,6 +647,17 @@ $(document).on("click", ".dayLink", function () {
 
     hideViews();
     day.show();
+})
+
+$(".modal-trigger").click(function(){
+    addButton.show();
+    editButton.hide();
+    deleteButton.hide();
+
+    eventDate.val("");
+    startTime.val("");
+    endTime.val("");
+    eventDescription.val("");
 })
 
 // =====================================================================================
