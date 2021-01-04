@@ -45,16 +45,14 @@ nav {
 }
 
 .displayAlongTitleSpace {
-    margin: 4vh 15vh;
+    margin: 1vh 5vh 1vh 5vh;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     background-color: rgba(255, 255, 0, 0.726);
-    padding: 2vh 0 0 0;
-    border: 10px ridge gold
+    padding: 0;
+    border: 10px ridge gold;
+    cursor: pointer;
 }
-
-
-
 
 /* 
 ==============================================================
@@ -63,19 +61,15 @@ Quote settings
 */
 
 #quoteText {
-    font-size: 50px;
+    font-size: 35px;
     color: #000077;
     font-family: 'Covered By Your Grace', sans-serif;
 }
 
 #quoteAuthor {
-    font-size: 20px;
+    font-size: 25px;
     color: #000077;
     font-family: 'Covered By Your Grace', sans-serif;
-}
-
-#quoteBtn {
-    background-color: palevioletred;
 }
 
 /* 
@@ -295,6 +289,24 @@ Week View settings
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+@media only screen and (max-width: 1080px){
+    .row .col.s7ths{
+        width: 33%;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .row .col.s7ths{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .row .col.s7ths{
+        width: 100%;
+    }
 }
 /* 
 ==============================================================
