@@ -74,6 +74,7 @@ $(document).ready(function () {
     $('.timepicker').timepicker();
     $('.datepicker').datepicker();
     $('.modal').modal();
+    $('.sidenav').sidenav();
     editButton.toggle();
     deleteButton.toggle();
 });
