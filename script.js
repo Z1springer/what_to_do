@@ -50,6 +50,7 @@ var color2 = "linear-gradient(to bottom right, hsl(60deg, 80%, 90.2%) 65%, hsl(6
 var color3 = "linear-gradient(to bottom right, hsl(120deg, 92.5%, 79%) 65%, hsl(120deg, 92.5%, 87%)";
 var color4 = "linear-gradient(to bottom right, hsl(180deg, 64.9%, 81%) 65%, hsl(180deg, 64.9%, 89%)";
 var color5 = "linear-gradient(to bottom right, hsl(214deg, 41.1%, 78%) 65%, hsl(214deg, 41.1%, 89%)";
+var color6 = "linear-gradient(to bottom right, hsl(300deg, 24.3%, 79.8%) 65%, hsl(300deg, 24.3%, 89.8%)";
 
 // today's exact date and time
 var currentDate = new Date();
@@ -925,6 +926,8 @@ function getColor(str) {
             return color4;
         case "chores":
             return color5;
+        case "medical":
+            return color6;
     }
     return color0;
 }
