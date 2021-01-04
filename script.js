@@ -83,6 +83,11 @@ var weekViewed = getWeekNumber();
 function getEventsList() {
     eventsList = JSON.parse(localStorage.getItem("eventsList")) || [];
     // console.log("getEventsList() fires. eventsList: ", eventsList);
+
+    // cast created as date
+    for(var i=0; i<eventsList.length; i++){
+        eventsList[i].eventCreated = new Date(eventsList[i].eventCreated); 
+    }
 }
 
 // call on page load
@@ -421,6 +426,8 @@ addButton.click(function () {
 
         // close modal
         $('#eventFormModal').modal("close");
+
+        getEventsList();
     }
 
 })
@@ -439,11 +446,11 @@ function setQuote(textObj) {
 
 // show clicked event in event form
 $(document).on("click", ".viewLink", function () {
-    // console.log(`.viewLink click(${$(this).data("id")}) fires!`)
+     console.log(`.viewLink click(${$(this).data("id")}) fires!`)
 
     // get id of clicked event
     var id = $(this).data("id");
-
+    
     // get event object by id
     var event = getEvent(id);
 
@@ -1048,10 +1055,12 @@ function formatDateForInput(date) {
 // returns event from eventsList by id or empty object if not found
 function getEvent(id) {
     for (var i = 0; i < eventsList.length; i++) {
-        if (eventsList[i].eventCreated === id) {
+        console.log(`${eventsList[i].eventCreated} ?== ${id}: ${eventsList[i].eventCreated === id} `);
+        if (eventsList[i].eventCreated == id) {
             return eventsList[i]
         }
     }
+    console.log(`getEvent(${id}) failed to find event.`);
     return {};
 }
 
