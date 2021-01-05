@@ -58,6 +58,9 @@ Day View
 Add Event Form
 ![Screenshot of add event view](./assets/images/screenshot4.png?raw=true "Event View")
 
+Skew shift problem and formula for custom shadows
+![Skew shift formula](./assets/images/skewshiftformula.png?raw=true "Shadow formula")
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 ## Detailed Information
 
