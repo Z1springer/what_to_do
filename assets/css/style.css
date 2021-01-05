@@ -12,6 +12,7 @@ General settings
 body {
     background-image: url("../images/cork-board.png");
     margin-bottom: 30px;
+    min-width: 400px;
 }
 
 main {
@@ -320,23 +321,7 @@ Week View settings
     overflow: hidden;
 }
 
-@media only screen and (max-width: 1080px){
-    .row .col.s7ths{
-        width: 33%;
-    }
-}
 
-@media only screen and (max-width: 768px){
-    .row .col.s7ths{
-        width: 50%;
-    }
-}
-
-@media only screen and (max-width: 400px){
-    .row .col.s7ths{
-        width: 100%;
-    }
-}
 /* 
 ==============================================================
 Month View settings
@@ -373,6 +358,7 @@ Month View settings
     display: inline-block;
     position: relative;
     padding: .5vh;
+    min-width: 100px;
 }
 
 .weeksauce {
@@ -477,4 +463,38 @@ Event Form settings
 
 #timehome{
     margin-bottom: 0;
+}
+
+
+/* 
+=====================================================================================
+Responsive Rules
+=====================================================================================
+*/
+
+@media only screen and (max-width: 1080px){
+    .row .col.s7ths{
+        width: 33%;
+    }
+
+    #radiohome, #textHome{
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .row .col.s7ths{
+        width: 50%;
+    }
+
+    .btn-floating{
+        display: block;
+        margin: 15px auto;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .row .col.s7ths{
+        width: 100%;
+    }
 }
