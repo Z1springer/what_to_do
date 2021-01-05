@@ -104,3 +104,14 @@ THEN I am taken to the Day View of the specified day
 - HTML-5
 - jQuery
 - CSS
+
+
+### Screenshots
+
+![Screenshot of week view](./assets/images/screenshot1.png?raw=true "Week View")
+
+![Screenshot of month view](./assets/images/screenshot2.png?raw=true "Week View")
+
+![Screenshot of day view](./assets/images/screenshot3.png?raw=true "Week View")
+
+![Screenshot of add event view](./assets/images/screenshot4.png?raw=true "Week View")
