@@ -2,8 +2,64 @@
 
 ## Description
 
+What To Do? Here's A Clue! is calendar application that provides suggestions to fill your time. It also shows a motivational quote to get you inspired to do something new. 
 
+- view application: https://z1springer.github.io/what_to_do/
+- github repository: https://github.com/Z1springer/what_to_do
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
+### Features
+
+ - View calendar by day, week, or month.
+ - Add custom categorized events.
+ - View and add suggested activities by type. 
+ - View and cycle through inspirational quotes.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+### Known Issues
+
+ - Single day only events supported.
+ - Shadows align incorrectly at certain sizes.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+### Future Plans
+
+ - Add multiple day spanning events.
+ - Add no-time events.
+ - Add desktop notifications.
+ - Add event reminders.
+ - Add repeating events.
+ - Share events.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+### Technology Used
+
+- QuoteAPI for the quote box that remains constant at the top of the screen *(https://type.fit/api/quotes)*
+- BoredAPI for the random activities *(http://www.boredapi.com)*
+- Materialize for the CSS *(https://materializecss.com/)*
+- Corkboard Background found at *(https://subtlepatterns.com)*
+- JavaScript
+- HTML-5
+- jQuery
+- CSS
+- Favicon generation from http://faviconit.com/en 
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+### Screenshots
+Week View
+![Screenshot of week view](./assets/images/screenshot1.png?raw=true "Week View")
+
+Month View
+![Screenshot of month view](./assets/images/screenshot2.png?raw=true "Month View")
+
+Day View
+![Screenshot of day view](./assets/images/screenshot3.png?raw=true "Day View")
+
+Add Event Form
+![Screenshot of add event view](./assets/images/screenshot4.png?raw=true "Event View")
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+## Detailed Information
 
 ### User Story
 
@@ -94,24 +150,3 @@ WHEN I click on that number
 THEN I am taken to the Day View of the specified day
 ```
 
-### Technology Used
-
-- QuoteAPI for the quote box that remains constant at the top of the screen *(https://type.fit/api/quotes)*
-- BoredAPI for the random activities *(http://www.boredapi.com)*
-- Materialize for the CSS *(https://materializecss.com/)*
-- Corkboard Background found at *(https://subtlepatterns.com)*
-- JavaScript
-- HTML-5
-- jQuery
-- CSS
-
-
-### Screenshots
-
-![Screenshot of week view](./assets/images/screenshot1.png?raw=true "Week View")
-
-![Screenshot of month view](./assets/images/screenshot2.png?raw=true "Week View")
-
-![Screenshot of day view](./assets/images/screenshot3.png?raw=true "Week View")
-
-![Screenshot of add event view](./assets/images/screenshot4.png?raw=true "Week View")
