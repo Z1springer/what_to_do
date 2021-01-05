@@ -4,7 +4,7 @@
 // get activity from bored api - call data setting callback function
 function getRandomBoredEventApi(callback, type = ""){
     
-    var boredUrl = "http://www.boredapi.com/api/activity/?type=";
+    var boredUrl = "https://www.boredapi.com/api/activity/?type=";
     boredUrl += type;
     
     // async call
